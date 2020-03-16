@@ -36,11 +36,13 @@ abstract class Page extends ContextCreator
 
 class ContextCreator
 {
-    private array $context = [];
+
+    //Tutaj nalezy sie zastanowic
+    private string  $context = '';
 
     protected function createContext($context)
     {
-        $this->context[] = $context;
+        $this->context .= $context;
     }
 
     public function getContext()

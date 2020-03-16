@@ -12,5 +12,8 @@ class serverMessage
 
             return json_encode($message);
     }
+    public static  function  errorMessage(){
+        return '⛔ You probably cannot use this ⛔';
+    }
 
 }

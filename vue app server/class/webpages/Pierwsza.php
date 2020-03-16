@@ -1,6 +1,7 @@
 <?php
 
 
+use ServerMNG\serverMessage;
 use WebpageMNG\EventsManager;
 
 class Pierwsza extends \WebpageMNG\Page
@@ -16,6 +17,6 @@ class Pierwsza extends \WebpageMNG\Page
 
     protected function pageContent()
     {
-            $this->createContext("<div> Siemaneczo swirki</div>");
+            $this->createContext("⚡ keep going ⚡");
     }
 }

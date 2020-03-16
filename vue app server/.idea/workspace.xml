@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e63cab0d-8c51-402d-a85a-8a1ea697d139" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/class/events.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/class/webpages/Pierwsza.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/class/middleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/middleware.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/class/page.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/page.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/class/serverMessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/serverMessage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/webpages/Pierwsza.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/webpages/Pierwsza.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,10 +74,10 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4737" y="61" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584384519617" />
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584384291689">
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584395125126">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584384291689" />
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584395125126" />
     <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584384765566">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>

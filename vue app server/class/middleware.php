@@ -81,7 +81,7 @@ namespace RoutesMNG {
 
         public function __construct(string $method, string $path, Page $page, callable $filter = null)
         {
-            $funct = (!is_null($filter)) ? $filter : fn()=>null;
+            $funct = (!is_null($filter)) ? $filter : fn() => null;
             parent::__construct($method, $path, $page);
             $this->setFilter($funct);
         }
@@ -94,15 +94,11 @@ namespace RoutesMNG {
 
         public function setPermission(RouteCollector $routeManager)
         {
-            $uniqID =uniqid("FILTERPRERMISSION:");
-            $routeManager->filter( $uniqID, $this->filter  );
-
-
-
-
+            $uniqID = uniqid("FILTERPRERMISSION:");
+            $routeManager->filter($uniqID, $this->filter);
             call_user_func_array(
                 array($routeManager, strtolower($this->getData()->method)),
-                array($this->getData()->path, [$this, 'action'], ['before' => $uniqID] ));
+                array($this->getData()->path, [$this, 'action'], ['before' => $uniqID]));
         }
     }
 
@@ -142,11 +138,11 @@ namespace RoutesMNG {
 
         public function mapRoute()
         {
-            echo "<pre>Allowed routes" . PHP_EOL;
+            echo "Allowed routes" . PHP_EOL;
             foreach ($this->routesList as $index) {
                 echo $index . PHP_EOL;
             }
-            echo "</pre>";
+            echo PHP_EOL;
         }
 
 
@@ -183,10 +179,10 @@ namespace RoutesMNG {
                 return $dispatcher->dispatch($requestMETHOD, parse_url($requestURI, PHP_URL_PATH));
             } catch (HttpRouteNotFoundException  $e) {
                 header($e->getMessage());
-                return ["Error" => "Sorry cannot search specific route"];
+                return serverMessage::errorMessage();
             } catch (HttpMethodNotAllowedException $e) {
                 header($e->getMessage());
-                return ["Error" => "Sorry cannot search specific method"];
+                return serverMessage::errorMessage();
 
             }
         }
