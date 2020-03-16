@@ -7,11 +7,18 @@ namespace Composer\Autoload;
 class ComposerStaticInit01c91c4387f738018d13d65db24ae3fd
 {
     public static $files = array (
+        '2b9d0f43f9552984cfa82fee95491826' => __DIR__ . '/..' . '/sabre/event/lib/coroutine.php',
+        'd81bab31d3feb45bfe2f283ea3c8fdf7' => __DIR__ . '/..' . '/sabre/event/lib/Loop/functions.php',
+        'a1cce3d26cc15c00fcd0b3354bd72c88' => __DIR__ . '/..' . '/sabre/event/lib/Promise/functions.php',
         'b0a53c04370b7a582e95268dd0e194c0' => __DIR__ . '/../..' . '/helper/Helper.php',
         '07f131b690bec6d9408001ef05c03ba4' => __DIR__ . '/../..' . '/test/test.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Sabre\\Event\\' => 12,
+        ),
         'P' => 
         array (
             'Phroute\\Phroute\\' => 16,
@@ -19,6 +26,10 @@ class ComposerStaticInit01c91c4387f738018d13d65db24ae3fd
     );
 
     public static $prefixDirsPsr4 = array (
+        'Sabre\\Event\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sabre/event/lib',
+        ),
         'Phroute\\Phroute\\' => 
         array (
             0 => __DIR__ . '/..' . '/phroute/phroute/src/Phroute',
@@ -26,12 +37,17 @@ class ComposerStaticInit01c91c4387f738018d13d65db24ae3fd
     );
 
     public static $classMap = array (
-        'RoutesMNG\\ManipulateRoute' => __DIR__ . '/../..' . '/class/middleware.php',
+        'Pierwsza' => __DIR__ . '/../..' . '/class/webpages/pierwsza.php',
+        'RoutesMNG\\NormalRoute' => __DIR__ . '/../..' . '/class/middleware.php',
+        'RoutesMNG\\PermissionRoute' => __DIR__ . '/../..' . '/class/middleware.php',
         'RoutesMNG\\Route' => __DIR__ . '/../..' . '/class/middleware.php',
         'RoutesMNG\\RouteAdministrator' => __DIR__ . '/../..' . '/class/middleware.php',
         'RoutesMNG\\RouteManager' => __DIR__ . '/../..' . '/class/middleware.php',
         'RoutesMNG\\SingleRoute' => __DIR__ . '/../..' . '/class/middleware.php',
         'ServerMNG\\serverMessage' => __DIR__ . '/../..' . '/class/serverMessage.php',
+        'WebpageMNG\\ContextCreator' => __DIR__ . '/../..' . '/class/page.php',
+        'WebpageMNG\\EventsManager' => __DIR__ . '/../..' . '/class/events.php',
+        'WebpageMNG\\Page' => __DIR__ . '/../..' . '/class/page.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

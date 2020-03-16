@@ -6,13 +6,18 @@
     "version": "0.0.3",
     "license": "",
     "autoload": {
-        "classmap": ["class//middleware.php","class//serverMessage.php"],
+        "classmap": ["class//middleware.php",
+            "class//serverMessage.php",
+            "class//page.php",
+            "class//webpages//pierwsza.php",
+            "class//events.php"],
         "files": ["helper/Helper.php","test/test.php"]
     },
     "include-path":  ["configuration/"],
 
     "scripts": {},
     "require": {
-        "phroute/phroute": "^2.1"
+        "phroute/phroute": "^2.1",
+        "sabre/event": "5"
     }
 }

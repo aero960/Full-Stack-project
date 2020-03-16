@@ -6,10 +6,15 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'RoutesMNG\\ManipulateRoute' => $baseDir . '/class/middleware.php',
+    'Pierwsza' => $baseDir . '/class/webpages/pierwsza.php',
+    'RoutesMNG\\NormalRoute' => $baseDir . '/class/middleware.php',
+    'RoutesMNG\\PermissionRoute' => $baseDir . '/class/middleware.php',
     'RoutesMNG\\Route' => $baseDir . '/class/middleware.php',
     'RoutesMNG\\RouteAdministrator' => $baseDir . '/class/middleware.php',
     'RoutesMNG\\RouteManager' => $baseDir . '/class/middleware.php',
     'RoutesMNG\\SingleRoute' => $baseDir . '/class/middleware.php',
     'ServerMNG\\serverMessage' => $baseDir . '/class/serverMessage.php',
+    'WebpageMNG\\ContextCreator' => $baseDir . '/class/page.php',
+    'WebpageMNG\\EventsManager' => $baseDir . '/class/events.php',
+    'WebpageMNG\\Page' => $baseDir . '/class/page.php',
 );

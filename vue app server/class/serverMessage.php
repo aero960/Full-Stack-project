@@ -6,9 +6,9 @@ namespace ServerMNG;
 
 class serverMessage
 {
-    public static function send($msg)
+    public static function send($name , $msg)
     {
-            $message = ["message"=> $msg];
+            $message = [$name=> $msg];
 
             return json_encode($message);
     }

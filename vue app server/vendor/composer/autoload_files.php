@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    '2b9d0f43f9552984cfa82fee95491826' => $vendorDir . '/sabre/event/lib/coroutine.php',
+    'd81bab31d3feb45bfe2f283ea3c8fdf7' => $vendorDir . '/sabre/event/lib/Loop/functions.php',
+    'a1cce3d26cc15c00fcd0b3354bd72c88' => $vendorDir . '/sabre/event/lib/Promise/functions.php',
     'b0a53c04370b7a582e95268dd0e194c0' => $baseDir . '/helper/Helper.php',
     '07f131b690bec6d9408001ef05c03ba4' => $baseDir . '/test/test.php',
 );

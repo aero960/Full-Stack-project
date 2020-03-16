@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Sabre\\Event\\' => array($vendorDir . '/sabre/event/lib'),
     'Phroute\\Phroute\\' => array($vendorDir . '/phroute/phroute/src/Phroute'),
 );

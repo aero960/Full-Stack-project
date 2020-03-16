@@ -2,23 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e63cab0d-8c51-402d-a85a-8a1ea697d139" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/class/middleware.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/class/page.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/class/serverMessage.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/events.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/webpages/Pierwsza.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/middleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/middleware.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/page.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/serverMessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/serverMessage.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/autoload.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/autoload.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/ClassLoader.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/LICENSE" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_files.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_files.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_namespaces.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_real.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_real.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendor/composer/include_paths.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/include_paths.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,17 +69,29 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="4575" y="181" key="#Inspections" timestamp="1584387153354">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4575" y="181" key="#Inspections/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584387153354" />
     <state x="4668" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584361985874">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4668" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584361985874" />
-    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584380254019">
+    <state x="4737" y="61" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584384519617">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584380254019" />
-    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1584372813681">
+    <state x="4737" y="61" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584384519617" />
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584384291689">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584372813681" />
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584384291689" />
+    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584384765566">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584384765566" />
+    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1584383367666">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584383367666" />
   </component>
 </project>

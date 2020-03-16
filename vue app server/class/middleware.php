@@ -4,9 +4,11 @@ namespace RoutesMNG {
 
     use http\Exception as ExceptionAlias;
     use Phroute\Phroute\Dispatcher;
+    use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
     use Phroute\Phroute\Exception\HttpRouteNotFoundException;
     use Phroute\Phroute\RouteCollector;
     use ServerMNG\serverMessage;
+    use WebpageMNG\EventsManager;
     use WebpageMNG\Page;
     use WebpageMNG\View;
 
@@ -15,36 +17,47 @@ namespace RoutesMNG {
         function action();
     }
 
-     class Route implements SingleRoute
+    class Route implements SingleRoute
     {
         private string $method;
         private string $path;
-        private RouteCollector $routeManager;
+        protected int $premmission = 0;
+
         public function __construct(string $method, string $path)
         {
             $this->method = $method;
             $this->path = $path;
+
         }
+
+        public function setPermission(RouteCollector $routeManager)
+        {
+            call_user_func_array(
+                array($routeManager, strtolower($this->method)),
+                array($this->path, [$this, 'action']));
+        }
+
         // wyswietlanie czynnosci zachodzacych w danym rout
         public function action()
         {
             return $this->getData();
         }
+
         public function getData()
         {
-        return (object)["method"=>$this->method,"path"=>$this->path];
+            return (object)["method" => $this->method, "path" => $this->path];
         }
+
         public function __toString()
         {
             return "{$this->method}:{$this->path}";
         }
+
     }
 
-    class ManipulateRoute extends Route
+    class NormalRoute extends Route
     {
-
         private Page $page;
-        private array $params;
 
         public function __construct(string $method, string $path, Page $page)
         {
@@ -55,9 +68,41 @@ namespace RoutesMNG {
         public function action()
         {
             parent::action();
-            $this->params = func_get_args();
+            $this->page->activeClass();
+            $params = func_get_args();
+            EventsManager::getInstance()->emit('contextGet', [$params]);
             return $this->page->getContext();
+        }
+    }
 
+    class PermissionRoute extends NormalRoute
+    {
+        private $filter = null;
+
+        public function __construct(string $method, string $path, Page $page, callable $filter = null)
+        {
+            $funct = (!is_null($filter)) ? $filter : fn()=>null;
+            parent::__construct($method, $path, $page);
+            $this->setFilter($funct);
+        }
+
+
+        public function setFilter(callable $method)
+        {
+            $this->filter = $method;
+        }
+
+        public function setPermission(RouteCollector $routeManager)
+        {
+            $uniqID =uniqid("FILTERPRERMISSION:");
+            $routeManager->filter( $uniqID, $this->filter  );
+
+
+
+
+            call_user_func_array(
+                array($routeManager, strtolower($this->getData()->method)),
+                array($this->getData()->path, [$this, 'action'], ['before' => $uniqID] ));
         }
     }
 
@@ -67,7 +112,6 @@ namespace RoutesMNG {
         private SingleRoute $activeRoute;
         private static ?RouteManager $instance = null;
         protected array $routesList = [];
-
 
 
         public function setRoute(string $routeName)
@@ -98,47 +142,54 @@ namespace RoutesMNG {
 
         public function mapRoute()
         {
-            echo "<pre>";
+            echo "<pre>Allowed routes" . PHP_EOL;
             foreach ($this->routesList as $index) {
-                echo $index;
+                echo $index . PHP_EOL;
             }
             echo "</pre>";
         }
 
 
-
     }
-   final class RouteAdministrator extends RouteManager{
+
+    final class RouteAdministrator extends RouteManager
+    {
 
         private RouteCollector $routeManager;
 
         public function __construct()
         {
             $this->routeManager = new RouteCollector();
+
         }
 
         public function initializeRoute(array $array)
         {
             parent::initializeRoute($array);
 
-            foreach ($this->routesList as $index ){
-                call_user_func_array(
-                    array($this->routeManager, strtolower($index->getData()->method)),
-                    array( $index->getData()->path, [$index, 'action']));
+            foreach ($this->routesList as $index) {
+                if ($index instanceof Route)
+                    $index->setPermission($this->routeManager);
             };
 
-           //
         }
-       public function executeRoute(string $requestMETHOD, string $requestURI)
-       {
-           try{
-              $dispatcher =  new Dispatcher($this->routeManager->getData());
-              return  serverMessage::send($dispatcher->dispatch($requestMETHOD,parse_url($requestURI, PHP_URL_PATH)));
-           }catch(HttpRouteNotFoundException  $e){
-               header($e->getMessage());
-               return serverMessage::send("Sorry cannot search specific route");
-           }
-       }
 
-   }
+        public function executeRoute(string $requestMETHOD, string $requestURI)
+        {
+
+            try {
+
+                $dispatcher = new Dispatcher($this->routeManager->getData());
+                return $dispatcher->dispatch($requestMETHOD, parse_url($requestURI, PHP_URL_PATH));
+            } catch (HttpRouteNotFoundException  $e) {
+                header($e->getMessage());
+                return ["Error" => "Sorry cannot search specific route"];
+            } catch (HttpMethodNotAllowedException $e) {
+                header($e->getMessage());
+                return ["Error" => "Sorry cannot search specific method"];
+
+            }
+        }
+
+    }
 }

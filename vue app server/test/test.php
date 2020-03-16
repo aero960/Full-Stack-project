@@ -5,14 +5,15 @@ use RoutesMNG\RouteAdministrator;
 
 function functionToTest(){
 
+        $perRoute = new \RoutesMNG\PermissionRoute("GET","example",new Pierwsza());
 
     RouteAdministrator::getInstance()->initializeRoute(
-        ["main" => new \RoutesMNG\ManipulateRoute("GET","example",new \WebpageMNG\Page()),
-            "adminSection" => new \RoutesMNG\ManipulateRoute("GET","test/{item}",new \WebpageMNG\Page())
+        ["main" => $perRoute,
+            "adminSection" => new \RoutesMNG\NormalRoute("DELETE","test/{item}",new Pierwsza())
         ]);
     RouteAdministrator::getInstance()->mapRoute();
 
-echo RouteAdministrator::getInstance()->executeRoute($_SERVER['REQUEST_METHOD'],$_SERVER['REQUEST_URI']);
 
+    print_r(RouteAdministrator::getInstance()->executeRoute($_SERVER['REQUEST_METHOD'],$_SERVER['REQUEST_URI']));
 }
 
