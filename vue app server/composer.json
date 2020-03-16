@@ -1,0 +1,16 @@
+{
+    "name":"composer/test",
+    "description": "composer test app",
+    "keywords": ["test"],
+    "type": "project",
+    "version": "0.0.3",
+    "license": "",
+    "autoload": {
+        "classmap": [],
+        "files": ["helper/Helper.php","test/test.php"]
+    },
+    "include-path":  ["configuration/"],
+
+    "scripts": {}
+
+}
