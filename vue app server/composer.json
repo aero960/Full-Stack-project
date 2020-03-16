@@ -6,11 +6,13 @@
     "version": "0.0.3",
     "license": "",
     "autoload": {
-        "classmap": [],
+        "classmap": ["class//middleware.php","class//serverMessage.php"],
         "files": ["helper/Helper.php","test/test.php"]
     },
     "include-path":  ["configuration/"],
 
-    "scripts": {}
-
+    "scripts": {},
+    "require": {
+        "phroute/phroute": "^2.1"
+    }
 }
