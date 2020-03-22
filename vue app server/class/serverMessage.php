@@ -10,7 +10,7 @@ class serverMessage
     {
         $message = [$name => $msg];
 
-        print_r(json_encode($message,  JSON_PRETTY_PRINT, 512));
+       return json_encode($message,  JSON_PRETTY_PRINT, 512);
     }
 
     public static function errorMessage(): string

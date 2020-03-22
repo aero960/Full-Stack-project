@@ -19,11 +19,11 @@ abstract class Page extends ContextCreator
 
    public function getParameters()
    {
-       if($this->parameters === null && !empty($this->parameters))
+
+       if($this->parameters !== null && !empty($this->parameters))
            return $this->parameters;
-       throw new Exception("Parameters doesn't initalize in this page");
-
-
+       else
+           return "Something goes wrong with parameters";
    }
 
 

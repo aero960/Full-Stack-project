@@ -35,6 +35,18 @@ namespace Helper {
 
     class Helper
     {
+        public static function randomId(){
+
+            $Faker  =\Faker\Factory::create();
+               $number =  $Faker->randomNumber();
+               $letter = [];
+                    for($i =0; $i< 5;$i++ ){
+                         $letter[] = $Faker->randomLetter;
+                    }
+                    $letter = implode('',$letter);
+            return  "$letter$number";
+        }
+
 
         public static function searchValue($searchedItem,array $array){
             function search($searchedItem,$array,$low,$high,$map = array()){

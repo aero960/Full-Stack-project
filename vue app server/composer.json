@@ -11,6 +11,7 @@
             "class//serverMessage.php",
              "class//routes//parameters.php",
             "class//page.php",
+             "class//authentication/userschema.php",
             "class//webpages//register.php",
              "class//webpages//404_page.php",
             "class//events.php",

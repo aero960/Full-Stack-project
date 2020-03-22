@@ -115,7 +115,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:MySQL - rWKlUeAAgN@remotemysql.com" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@9fd2520" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@1818bddf" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -142,7 +142,7 @@
       <workItem from="1584711267124" duration="24469000" />
       <workItem from="1584831178318" duration="955000" />
       <workItem from="1584832631512" duration="3572000" />
-      <workItem from="1584877980943" duration="17610000" />
+      <workItem from="1584877980943" duration="33485000" />
     </task>
     <servers />
   </component>
@@ -162,10 +162,10 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4668" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461229835" />
-    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1584889688128">
+    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1584918043857">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584889688128" />
+    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584918043857" />
     <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584894014184">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
@@ -186,34 +186,34 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4580" y="274" key="FileChooserDialogImpl/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584712038465" />
-    <state width="1293" height="209" key="GridCell.Tab.0.bottom" timestamp="1584461419872">
+    <state width="1293" height="201" key="GridCell.Tab.0.bottom" timestamp="1584916565503">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="209" key="GridCell.Tab.0.bottom/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461419872" />
-    <state width="1293" height="209" key="GridCell.Tab.0.center" timestamp="1584461419872">
+    <state width="1293" height="201" key="GridCell.Tab.0.bottom/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584916565503" />
+    <state width="1293" height="201" key="GridCell.Tab.0.center" timestamp="1584916565503">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="209" key="GridCell.Tab.0.center/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461419872" />
-    <state width="1293" height="209" key="GridCell.Tab.0.left" timestamp="1584461419871">
+    <state width="1293" height="201" key="GridCell.Tab.0.center/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584916565503" />
+    <state width="1293" height="201" key="GridCell.Tab.0.left" timestamp="1584916565503">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="209" key="GridCell.Tab.0.left/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461419871" />
-    <state width="1293" height="209" key="GridCell.Tab.0.right" timestamp="1584461419872">
+    <state width="1293" height="201" key="GridCell.Tab.0.left/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584916565503" />
+    <state width="1293" height="201" key="GridCell.Tab.0.right" timestamp="1584916565503">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="209" key="GridCell.Tab.0.right/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461419872" />
+    <state width="1293" height="201" key="GridCell.Tab.0.right/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584916565503" />
     <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1584461390546">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state width="196" height="457" key="HiddenNamespacesPopup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461390546" />
-    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584891215206">
+    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584917560143">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584891215206" />
-    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1584890360002">
+    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584917560143" />
+    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1584917718786">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584890360002" />
+    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584917718786" />
     <state x="4354" y="146" key="SettingsEditor" timestamp="1584878984539">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
@@ -222,14 +222,18 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4699" y="409" width="326" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584885642329" />
-    <state x="4105" y="52" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1584887425714">
+    <state x="4105" y="52" width="851" height="704" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1584899475988">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4105" y="52" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584887425714" />
+    <state x="4105" y="52" width="851" height="704" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584899475988" />
     <state x="5153" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1584878132827">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="5153" y="343" key="com.intellij.ide.util.TipDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584878132827" />
+    <state x="4519" y="214" key="com.jetbrains.php.test.PhpNewTestDialog" timestamp="1584918010711">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4519" y="214" key="com.jetbrains.php.test.PhpNewTestDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584918010711" />
     <state x="4541" y="153" key="refactoring.ChangeSignatureDialog" timestamp="1584895790948">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>

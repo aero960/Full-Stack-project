@@ -10,21 +10,27 @@ use WebpageMNG\Page;
 
 class RegisterPage extends Page
 {
+    private QueryGenerator $userRegisterManagment;
     public function __construct(Parameters $parameters = null)
     {
         parent::__construct($parameters);
-     //   new DataBase();
+        $username  = $this->getParameters()->getRequestParameters()["username"];
+        $password = $this->getParameters()->getRequestParameters()["password"];
+        $email = $this->getParameters()->getRequestParameters()["email"];
+        $this->userRegisterManagment =  new QueryGenerator($username,$password,$email);
     }
 
     private function registerUser(){
-
+        $this->userRegisterManagment->createUserAccount();
     }
-
-
-
 
     protected function pageContent()
     {
-        return "there is resgister new user";
+       // var_dump($this->userRegisterManagment->ge);
+        $this->registerUser();
+        http_response_code(200);
+
+        return (object)["info"=>"Create user",
+                        "User data"=>[$this->userRegisterManagment->getData()[0]]];
     }
 }
