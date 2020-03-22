@@ -2,26 +2,86 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e63cab0d-8c51-402d-a85a-8a1ea697d139" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vue app server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vue app server.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/middleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/middleware.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/middleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/routes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/class/page.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/serverMessage.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/serverMessage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/webpages/Pierwsza.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/webpages/Pierwsza.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue app/configuration/loaders.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue app/configuration/loaders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../vue app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue app/vueapp/application/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue app/vueapp/application/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue app/vueapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../vue app/vueapp/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue app/vueapp/object/helloworldvue.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue app/vueapp/object/test.pug" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
     </execution>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="rWKlUeAAgN: schema" type="76f4a085:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="rWKlUeAAgN: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="posts: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="rWKlUeAAgN: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="users: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="PhpDebugGeneral" listening_started="true" />
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/sabre/event" />
+      <path value="$PROJECT_DIR$/vendor/phroute/phroute" />
+    </include_path>
   </component>
   <component name="ProjectId" id="1ZD5f9Bk4opkWd7VEOqLHMVNZnw" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -31,18 +91,43 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Full Stack\vue app server\class\routes" />
+      <recent name="E:\Full Stack\vue app server" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\Full Stack\vue app server" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\Full Stack\vue app server" />
-    </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:MySQL - rWKlUeAAgN@remotemysql.com" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="root:MySQL - rWKlUeAAgN@remotemysql.com" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@9fd2520" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+            </expand>
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -55,6 +140,14 @@
       <option name="presentableId" value="Default" />
       <updated>1584360924492</updated>
       <workItem from="1584360925708" duration="1171000" />
+      <workItem from="1584452114278" duration="1019000" />
+      <workItem from="1584455516096" duration="6528000" />
+      <workItem from="1584462066913" duration="45000" />
+      <workItem from="1584462129634" duration="4764000" />
+      <workItem from="1584711267124" duration="24469000" />
+      <workItem from="1584831178318" duration="955000" />
+      <workItem from="1584832631512" duration="3572000" />
+      <workItem from="1584877980943" duration="5124000" />
     </task>
     <servers />
   </component>
@@ -62,29 +155,81 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="4575" y="181" key="#Inspections" timestamp="1584387153354">
+    <state x="4575" y="181" key="#Inspections" timestamp="1584729203192">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4575" y="181" key="#Inspections/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584387153354" />
-    <state x="4668" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584361985874">
+    <state x="4575" y="181" key="#Inspections/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584729203192" />
+    <state x="4392" y="178" key="#SQL_Dialects" timestamp="1584461159936">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4668" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584361985874" />
+    <state x="4392" y="178" key="#SQL_Dialects/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461159936" />
+    <state x="4668" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584461229835">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4668" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461229835" />
     <state x="4737" y="61" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584384519617">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4737" y="61" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584384519617" />
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584395125126">
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584716792535">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584395125126" />
-    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584384765566">
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584716792535" />
+    <state x="4601" y="386" key="#com.jetbrains.php.refactoring.move.PhpMoveClassDialog#0" timestamp="1584712039657">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584384765566" />
-    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1584383367666">
+    <state x="4601" y="386" key="#com.jetbrains.php.refactoring.move.PhpMoveClassDialog#0/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584712039657" />
+    <state x="4579" y="261" key="#com.jetbrains.php.refactoring.pullPush.pullUp.PhpPullUpDialog#0" timestamp="1584716151663">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584383367666" />
+    <state x="4579" y="261" key="#com.jetbrains.php.refactoring.pullPush.pullUp.PhpPullUpDialog#0/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584716151663" />
+    <state x="4580" y="274" key="FileChooserDialogImpl" timestamp="1584712038465">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4580" y="274" key="FileChooserDialogImpl/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584712038465" />
+    <state width="1293" height="209" key="GridCell.Tab.0.bottom" timestamp="1584461419872">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="209" key="GridCell.Tab.0.bottom/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461419872" />
+    <state width="1293" height="209" key="GridCell.Tab.0.center" timestamp="1584461419872">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="209" key="GridCell.Tab.0.center/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461419872" />
+    <state width="1293" height="209" key="GridCell.Tab.0.left" timestamp="1584461419871">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="209" key="GridCell.Tab.0.left/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461419871" />
+    <state width="1293" height="209" key="GridCell.Tab.0.right" timestamp="1584461419872">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1293" height="209" key="GridCell.Tab.0.right/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461419872" />
+    <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1584461390546">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state width="196" height="457" key="HiddenNamespacesPopup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461390546" />
+    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584884142578">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584884142578" />
+    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1584884149485">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584884149485" />
+    <state x="4354" y="146" key="SettingsEditor" timestamp="1584878984539">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4354" y="146" key="SettingsEditor/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584878984539" />
+    <state x="4516" y="161" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1584461786295">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4516" y="161" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461786295" />
+    <state x="5153" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1584878132827">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="5153" y="343" key="com.intellij.ide.util.TipDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584878132827" />
+    <state x="4463" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1584728231267">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4463" y="225" width="672" height="678" key="search.everywhere.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584728231267" />
   </component>
 </project>

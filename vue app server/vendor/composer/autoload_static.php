@@ -37,17 +37,23 @@ class ComposerStaticInit01c91c4387f738018d13d65db24ae3fd
     );
 
     public static $classMap = array (
-        'Pierwsza' => __DIR__ . '/../..' . '/class/webpages/pierwsza.php',
-        'RoutesMNG\\NormalRoute' => __DIR__ . '/../..' . '/class/middleware.php',
-        'RoutesMNG\\PermissionRoute' => __DIR__ . '/../..' . '/class/middleware.php',
-        'RoutesMNG\\Route' => __DIR__ . '/../..' . '/class/middleware.php',
-        'RoutesMNG\\RouteAdministrator' => __DIR__ . '/../..' . '/class/middleware.php',
-        'RoutesMNG\\RouteManager' => __DIR__ . '/../..' . '/class/middleware.php',
-        'RoutesMNG\\SingleRoute' => __DIR__ . '/../..' . '/class/middleware.php',
+        'Register' => __DIR__ . '/../..' . '/class/webpages/register.php',
+        'RoutesMNG\\NormalRoute' => __DIR__ . '/../..' . '/class/routes/concentrate.php',
+        'RoutesMNG\\Parameters' => __DIR__ . '/../..' . '/class/routes/parameters.php',
+        'RoutesMNG\\PermissionRoute' => __DIR__ . '/../..' . '/class/routes/concentrate.php',
+        'RoutesMNG\\RouteManager' => __DIR__ . '/../..' . '/class/routes/routes.php',
         'ServerMNG\\serverMessage' => __DIR__ . '/../..' . '/class/serverMessage.php',
         'WebpageMNG\\ContextCreator' => __DIR__ . '/../..' . '/class/page.php',
         'WebpageMNG\\EventsManager' => __DIR__ . '/../..' . '/class/events.php',
         'WebpageMNG\\Page' => __DIR__ . '/../..' . '/class/page.php',
+        'converter\\contentConverter' => __DIR__ . '/../..' . '/class/contentconverter.php',
+        'page_error' => __DIR__ . '/../..' . '/class/webpages/404_page.php',
+        'routesComposite\\NormalRouteComposite' => __DIR__ . '/../..' . '/class/routes/routescomposite.php',
+        'routesComposite\\PermissionRouteComposite' => __DIR__ . '/../..' . '/class/routes/routescomposite.php',
+        'routesComposite\\Route' => __DIR__ . '/../..' . '/class/routes/routescomposite.php',
+        'routesComposite\\RouteActionBuilder' => __DIR__ . '/../..' . '/class/routes/routescomposite.php',
+        'routesComposite\\RouteType' => __DIR__ . '/../..' . '/class/routes/routescomposite.php',
+        'routesComposite\\SingleRoute' => __DIR__ . '/../..' . '/class/routes/routescomposite.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

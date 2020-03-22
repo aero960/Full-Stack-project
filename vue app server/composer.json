@@ -6,11 +6,18 @@
     "version": "0.0.3",
     "license": "",
     "autoload": {
-        "classmap": ["class//middleware.php",
+        "classmap":
+           ["class//routes//routescomposite.php",
             "class//serverMessage.php",
+             "class//routes//parameters.php",
             "class//page.php",
-            "class//webpages//pierwsza.php",
-            "class//events.php"],
+            "class//webpages//register.php",
+             "class//webpages//404_page.php",
+            "class//events.php",
+            "class//contentconverter.php",
+            "class//routes//routes.php",
+            "class//routes//concentrate.php"],
+
         "files": ["helper/Helper.php","test/test.php"]
     },
     "include-path":  ["configuration/"],
@@ -18,6 +25,7 @@
     "scripts": {},
     "require": {
         "phroute/phroute": "^2.1",
-        "sabre/event": "5"
+        "sabre/event": "5",
+        "ext-json": "*"
     }
 }

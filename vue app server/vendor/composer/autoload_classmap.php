@@ -6,15 +6,21 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Pierwsza' => $baseDir . '/class/webpages/pierwsza.php',
-    'RoutesMNG\\NormalRoute' => $baseDir . '/class/middleware.php',
-    'RoutesMNG\\PermissionRoute' => $baseDir . '/class/middleware.php',
-    'RoutesMNG\\Route' => $baseDir . '/class/middleware.php',
-    'RoutesMNG\\RouteAdministrator' => $baseDir . '/class/middleware.php',
-    'RoutesMNG\\RouteManager' => $baseDir . '/class/middleware.php',
-    'RoutesMNG\\SingleRoute' => $baseDir . '/class/middleware.php',
+    'Register' => $baseDir . '/class/webpages/register.php',
+    'RoutesMNG\\NormalRoute' => $baseDir . '/class/routes/concentrate.php',
+    'RoutesMNG\\Parameters' => $baseDir . '/class/routes/parameters.php',
+    'RoutesMNG\\PermissionRoute' => $baseDir . '/class/routes/concentrate.php',
+    'RoutesMNG\\RouteManager' => $baseDir . '/class/routes/routes.php',
     'ServerMNG\\serverMessage' => $baseDir . '/class/serverMessage.php',
     'WebpageMNG\\ContextCreator' => $baseDir . '/class/page.php',
     'WebpageMNG\\EventsManager' => $baseDir . '/class/events.php',
     'WebpageMNG\\Page' => $baseDir . '/class/page.php',
+    'converter\\contentConverter' => $baseDir . '/class/contentconverter.php',
+    'page_error' => $baseDir . '/class/webpages/404_page.php',
+    'routesComposite\\NormalRouteComposite' => $baseDir . '/class/routes/routescomposite.php',
+    'routesComposite\\PermissionRouteComposite' => $baseDir . '/class/routes/routescomposite.php',
+    'routesComposite\\Route' => $baseDir . '/class/routes/routescomposite.php',
+    'routesComposite\\RouteActionBuilder' => $baseDir . '/class/routes/routescomposite.php',
+    'routesComposite\\RouteType' => $baseDir . '/class/routes/routescomposite.php',
+    'routesComposite\\SingleRoute' => $baseDir . '/class/routes/routescomposite.php',
 );

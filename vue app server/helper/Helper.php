@@ -61,15 +61,16 @@ namespace Helper {
         //and last element will be new item
         public static function addElementToArray(\SplFixedArray $array,$element){
             $length = $array->getSize();
-            $array->setSize($length );
+            $array->setSize($length);
             $array[$length -1] = $element;
 
         }
         //!NOTE!
         //need configure composer included path or set include paths
-        public static function getIniConfiguration($name)
+        public static function getIniConfiguration($name,$obj = false)
         {
-            return parse_ini_file(stream_resolve_include_path($name));
+            $iniData = parse_ini_file(stream_resolve_include_path($name . ".ini"));
+            return ($obj) ? (object)$iniData : $iniData;
 
         }
         //get easier way allowed property
