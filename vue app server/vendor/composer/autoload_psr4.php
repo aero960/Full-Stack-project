@@ -8,4 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'Sabre\\Event\\' => array($vendorDir . '/sabre/event/lib'),
     'Phroute\\Phroute\\' => array($vendorDir . '/phroute/phroute/src/Phroute'),
+    'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
+    'Faker\\' => array($vendorDir . '/fzaninotto/faker/src/Faker'),
 );

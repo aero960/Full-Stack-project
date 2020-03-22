@@ -60,13 +60,6 @@
         <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="rWKlUeAAgN: schema" type="76f4a085:MysqlImplModel$Schema" />
-        <item name="posts: table" type="285a2a93:MysqlImplModel$Table" />
-      </path>
-      <path>
-        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
-        <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
-        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
-        <item name="rWKlUeAAgN: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="users: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
@@ -81,6 +74,8 @@
       <path value="$PROJECT_DIR$/vendor/composer" />
       <path value="$PROJECT_DIR$/vendor/sabre/event" />
       <path value="$PROJECT_DIR$/vendor/phroute/phroute" />
+      <path value="$PROJECT_DIR$/vendor/firebase/php-jwt" />
+      <path value="$PROJECT_DIR$/vendor/fzaninotto/faker" />
     </include_path>
   </component>
   <component name="ProjectId" id="1ZD5f9Bk4opkWd7VEOqLHMVNZnw" />
@@ -147,7 +142,7 @@
       <workItem from="1584711267124" duration="24469000" />
       <workItem from="1584831178318" duration="955000" />
       <workItem from="1584832631512" duration="3572000" />
-      <workItem from="1584877980943" duration="5124000" />
+      <workItem from="1584877980943" duration="17610000" />
     </task>
     <servers />
   </component>
@@ -155,10 +150,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="4575" y="181" key="#Inspections" timestamp="1584729203192">
+    <state x="4575" y="181" key="#Inspections" timestamp="1584895094894">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4575" y="181" key="#Inspections/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584729203192" />
+    <state x="4575" y="181" key="#Inspections/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584895094894" />
     <state x="4392" y="178" key="#SQL_Dialects" timestamp="1584461159936">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
@@ -167,14 +162,18 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4668" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461229835" />
-    <state x="4737" y="61" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584384519617">
+    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1584889688128">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4737" y="61" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584384519617" />
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584716792535">
+    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584889688128" />
+    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584894014184">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584716792535" />
+    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584894014184" />
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584893219386">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584893219386" />
     <state x="4601" y="386" key="#com.jetbrains.php.refactoring.move.PhpMoveClassDialog#0" timestamp="1584712039657">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
@@ -207,29 +206,37 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state width="196" height="457" key="HiddenNamespacesPopup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461390546" />
-    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584884142578">
+    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584891215206">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584884142578" />
-    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1584884149485">
+    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584891215206" />
+    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1584890360002">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584884149485" />
+    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584890360002" />
     <state x="4354" y="146" key="SettingsEditor" timestamp="1584878984539">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4354" y="146" key="SettingsEditor/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584878984539" />
-    <state x="4516" y="161" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1584461786295">
+    <state x="4699" y="409" width="326" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1584885642329">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4516" y="161" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461786295" />
+    <state x="4699" y="409" width="326" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584885642329" />
+    <state x="4105" y="52" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1584887425714">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4105" y="52" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584887425714" />
     <state x="5153" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1584878132827">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="5153" y="343" key="com.intellij.ide.util.TipDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584878132827" />
-    <state x="4463" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1584728231267">
+    <state x="4541" y="153" key="refactoring.ChangeSignatureDialog" timestamp="1584895790948">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4463" y="225" width="672" height="678" key="search.everywhere.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584728231267" />
+    <state x="4541" y="153" key="refactoring.ChangeSignatureDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584895790948" />
+    <state x="4463" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1584890929305">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4463" y="225" width="672" height="678" key="search.everywhere.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584890929305" />
   </component>
 </project>

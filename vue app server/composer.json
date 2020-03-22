@@ -14,9 +14,12 @@
             "class//webpages//register.php",
              "class//webpages//404_page.php",
             "class//events.php",
+             "class//database//tableManager.php",
             "class//contentconverter.php",
             "class//routes//routes.php",
-            "class//routes//concentrate.php"],
+            "class//routes//concentrate.php",
+             "class//database//database.php",
+            "class//database//tableBuilder.php"],
 
         "files": ["helper/Helper.php","test/test.php"]
     },
@@ -26,6 +29,9 @@
     "require": {
         "phroute/phroute": "^2.1",
         "sabre/event": "5",
-        "ext-json": "*"
+        "ext-json": "*",
+        "firebase/php-jwt": "^5.1",
+      "ext-pdo": "*",
+        "fzaninotto/faker": "^1.9"
     }
 }

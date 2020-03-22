@@ -23,6 +23,11 @@ class ComposerStaticInit01c91c4387f738018d13d65db24ae3fd
         array (
             'Phroute\\Phroute\\' => 16,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+            'Faker\\' => 6,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -34,20 +39,35 @@ class ComposerStaticInit01c91c4387f738018d13d65db24ae3fd
         array (
             0 => __DIR__ . '/..' . '/phroute/phroute/src/Phroute',
         ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
+        ),
     );
 
     public static $classMap = array (
-        'Register' => __DIR__ . '/../..' . '/class/webpages/register.php',
+        'Database' => __DIR__ . '/../..' . '/class/database/database.php',
+        'QueryComposer' => __DIR__ . '/../..' . '/class/database/database.php',
+        'QueryComposite' => __DIR__ . '/../..' . '/class/database/database.php',
+        'QueryGenerator' => __DIR__ . '/../..' . '/class/database/database.php',
+        'RegisterPage' => __DIR__ . '/../..' . '/class/webpages/register.php',
         'RoutesMNG\\NormalRoute' => __DIR__ . '/../..' . '/class/routes/concentrate.php',
         'RoutesMNG\\Parameters' => __DIR__ . '/../..' . '/class/routes/parameters.php',
         'RoutesMNG\\PermissionRoute' => __DIR__ . '/../..' . '/class/routes/concentrate.php',
         'RoutesMNG\\RouteManager' => __DIR__ . '/../..' . '/class/routes/routes.php',
         'ServerMNG\\serverMessage' => __DIR__ . '/../..' . '/class/serverMessage.php',
+        'TableBuilder' => __DIR__ . '/../..' . '/class/database/tableBuilder.php',
+        'TableManager' => __DIR__ . '/../..' . '/class/database/tableManager.php',
         'WebpageMNG\\ContextCreator' => __DIR__ . '/../..' . '/class/page.php',
         'WebpageMNG\\EventsManager' => __DIR__ . '/../..' . '/class/events.php',
         'WebpageMNG\\Page' => __DIR__ . '/../..' . '/class/page.php',
         'converter\\contentConverter' => __DIR__ . '/../..' . '/class/contentconverter.php',
         'page_error' => __DIR__ . '/../..' . '/class/webpages/404_page.php',
+        'registerComposite' => __DIR__ . '/../..' . '/class/database/database.php',
         'routesComposite\\NormalRouteComposite' => __DIR__ . '/../..' . '/class/routes/routescomposite.php',
         'routesComposite\\PermissionRouteComposite' => __DIR__ . '/../..' . '/class/routes/routescomposite.php',
         'routesComposite\\Route' => __DIR__ . '/../..' . '/class/routes/routescomposite.php',
