@@ -3,6 +3,7 @@
 
 namespace RoutesMNG{
 
+    use language\Serverlanguage;
     use routesComposite\NormalRouteComposite;
     use routesComposite\PermissionRouteComposite;
     use routesComposite\Route;
@@ -15,7 +16,6 @@ namespace RoutesMNG{
         {
             parent::__construct($method, $path, $page,$parametersHandler);
             $this->compositeType = new NormalRouteComposite($this);
-            $this->page = $page;
         }
     }
 
@@ -25,7 +25,8 @@ namespace RoutesMNG{
         public function __construct(string $method, string $path, Page $page,Parameters $parametersHandler, callable $filter = null)
         {
             parent::__construct($method, $path,$page,$parametersHandler);
-            $this->compositeType = new PermissionRouteComposite($this, $filter ? $filter : fn()=>  "Define route filter!");
+            $this->compositeType = new PermissionRouteComposite($this, $filter ? $filter :
+                function(){ });
         }
     }
 }

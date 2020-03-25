@@ -22,7 +22,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" doNotAsk="true">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="DONT_SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -65,6 +65,9 @@
     </expand>
     <select />
   </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/../vue app server\exportToHTML" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -91,7 +94,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -115,7 +118,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:MySQL - rWKlUeAAgN@remotemysql.com" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@1818bddf" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@3df5c029" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -142,7 +145,16 @@
       <workItem from="1584711267124" duration="24469000" />
       <workItem from="1584831178318" duration="955000" />
       <workItem from="1584832631512" duration="3572000" />
-      <workItem from="1584877980943" duration="33485000" />
+      <workItem from="1584877980943" duration="38248000" />
+      <workItem from="1584989075400" duration="7025000" />
+      <workItem from="1584996318420" duration="8978000" />
+      <workItem from="1585005323430" duration="2661000" />
+      <workItem from="1585053934998" duration="776000" />
+      <workItem from="1585074092375" duration="8939000" />
+      <workItem from="1585083765747" duration="10882000" />
+      <workItem from="1585095103402" duration="1051000" />
+      <workItem from="1585138005472" duration="2464000" />
+      <workItem from="1585140491746" duration="6947000" />
     </task>
     <servers />
   </component>
@@ -162,18 +174,26 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4668" y="178" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461229835" />
-    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1584918043857">
+    <state x="4492" y="301" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585003354271">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584918043857" />
-    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1584894014184">
+    <state x="4492" y="301" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585003354271" />
+    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1585141220097">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584894014184" />
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1584893219386">
+    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585141220097" />
+    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585078264038">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584893219386" />
+    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585078264038" />
+    <state x="4467" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585147271504">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4467" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585147271504" />
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1585078180221">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585078180221" />
     <state x="4601" y="386" key="#com.jetbrains.php.refactoring.move.PhpMoveClassDialog#0" timestamp="1584712039657">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
@@ -182,65 +202,81 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4579" y="261" key="#com.jetbrains.php.refactoring.pullPush.pullUp.PhpPullUpDialog#0/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584716151663" />
-    <state x="4580" y="274" key="FileChooserDialogImpl" timestamp="1584712038465">
+    <state x="4580" y="274" key="FileChooserDialogImpl" timestamp="1584921192554">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4580" y="274" key="FileChooserDialogImpl/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584712038465" />
-    <state width="1293" height="201" key="GridCell.Tab.0.bottom" timestamp="1584916565503">
+    <state x="4580" y="274" key="FileChooserDialogImpl/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584921192554" />
+    <state width="1273" height="395" key="GridCell.Tab.0.bottom" timestamp="1585002526883">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="201" key="GridCell.Tab.0.bottom/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584916565503" />
-    <state width="1293" height="201" key="GridCell.Tab.0.center" timestamp="1584916565503">
+    <state width="1273" height="395" key="GridCell.Tab.0.bottom/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585002526883" />
+    <state width="1273" height="395" key="GridCell.Tab.0.center" timestamp="1585002526883">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="201" key="GridCell.Tab.0.center/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584916565503" />
-    <state width="1293" height="201" key="GridCell.Tab.0.left" timestamp="1584916565503">
+    <state width="1273" height="395" key="GridCell.Tab.0.center/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585002526883" />
+    <state width="1273" height="395" key="GridCell.Tab.0.left" timestamp="1585002526883">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="201" key="GridCell.Tab.0.left/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584916565503" />
-    <state width="1293" height="201" key="GridCell.Tab.0.right" timestamp="1584916565503">
+    <state width="1273" height="395" key="GridCell.Tab.0.left/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585002526883" />
+    <state width="1273" height="395" key="GridCell.Tab.0.right" timestamp="1585002526883">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1293" height="201" key="GridCell.Tab.0.right/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584916565503" />
+    <state width="1273" height="395" key="GridCell.Tab.0.right/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585002526883" />
     <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1584461390546">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state width="196" height="457" key="HiddenNamespacesPopup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461390546" />
-    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1584917560143">
+    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1585138146907">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584917560143" />
-    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1584917718786">
+    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585138146907" />
+    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1585143691167">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584917718786" />
-    <state x="4354" y="146" key="SettingsEditor" timestamp="1584878984539">
+    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585143691167" />
+    <state x="4192" y="74" key="SettingsEditor" timestamp="1584996344406">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4354" y="146" key="SettingsEditor/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584878984539" />
+    <state x="4192" y="74" key="SettingsEditor/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584996344406" />
     <state x="4699" y="409" width="326" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1584885642329">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4699" y="409" width="326" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584885642329" />
-    <state x="4105" y="52" width="851" height="704" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1584899475988">
+    <state x="4667" y="378" width="381" height="283" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog" timestamp="1585000296152">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4105" y="52" width="851" height="704" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584899475988" />
-    <state x="5153" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1584878132827">
+    <state x="4667" y="378" width="381" height="283" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585000296152" />
+    <state x="4545" y="293" width="510" height="449" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1585095470769">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="5153" y="343" key="com.intellij.ide.util.TipDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584878132827" />
+    <state x="4545" y="293" width="510" height="449" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585095470769" />
+    <state x="4105" y="52" width="851" height="704" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1585093184372">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4105" y="52" width="851" height="704" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585093184372" />
+    <state x="4981" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1585140515867">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4981" y="343" key="com.intellij.ide.util.TipDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585140515867" />
     <state x="4519" y="214" key="com.jetbrains.php.test.PhpNewTestDialog" timestamp="1584918010711">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4519" y="214" key="com.jetbrains.php.test.PhpNewTestDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584918010711" />
+    <state x="182" y="245" width="2713" height="1338" key="dock-window-1" timestamp="1585005365603">
+      <screen x="0" y="0" width="3072" height="1688" />
+    </state>
+    <state x="182" y="245" width="2713" height="1338" key="dock-window-1/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585005365603" />
     <state x="4541" y="153" key="refactoring.ChangeSignatureDialog" timestamp="1584895790948">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4541" y="153" key="refactoring.ChangeSignatureDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584895790948" />
-    <state x="4463" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1584890929305">
+    <state x="4372" y="237" key="run.anything.popup" timestamp="1585001964667">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4463" y="225" width="672" height="678" key="search.everywhere.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584890929305" />
+    <state x="4372" y="237" key="run.anything.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585001964667" />
+    <state x="4463" y="225" width="840" height="678" key="search.everywhere.popup" timestamp="1585147089250">
+      <screen x="3840" y="0" width="1920" height="1040" />
+    </state>
+    <state x="4463" y="225" width="840" height="678" key="search.everywhere.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585147089250" />
   </component>
 </project>

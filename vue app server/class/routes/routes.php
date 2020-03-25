@@ -2,6 +2,7 @@
 
 namespace RoutesMNG {
 
+    use language\Serverlanguage;
     use Phroute\Phroute\Dispatcher;
     use Phroute\Phroute\Exception\HttpMethodNotAllowedException;
     use Phroute\Phroute\Exception\HttpRouteNotFoundException;
@@ -15,26 +16,51 @@ namespace RoutesMNG {
 
     final class RouteManager
     {
+        private $routeMessageAfterExecuted;
         private RouteCollector $routeManager;
         private static ?RouteManager $instance = null;
         protected array $routesList = [];
+        protected Page $defaultPage;
+
+        private bool $executed;
 
         public function __construct()
         {
             $this->routeManager = new RouteCollector();
+            $this->executed = false;
         }
 
+        public function getRouteResponse(){
+            if($this->executed) {
+                return $this->routeMessageAfterExecuted;
+            }
+            return "Route doesnt has content";
+
+        }
+
+
+        public function getDefaultPage(){
+            return $this->defaultPage;
+        }
+        public function setDefaultPage(Page $defaultPage){
+            $this->defaultPage = $defaultPage;
+        }
         public function getActivePage()
         {
              $activePage = array_filter($this->routesList, fn(Route $index) => $index->getPage()->isActive());
 
-            return $activePage ? array_shift($activePage)->getPage() : new \page_error() ;
+            if(!empty($activePage)){
+                return  array_shift($activePage)->getPage();
+            }
+
+            $this->getDefaultPage()->setActivePage();
+            return  $this->getDefaultPage();
+
+
         }
-
-
-        public function initializeRoute(array $array):void
+        public function initializeRoute(array $array,Page $defaultPage):void
         {
-
+            $this->setDefaultPage($defaultPage);
             foreach ($array as $index) {
                 if ($index instanceof Route) {
                     $this->routesList[] = $index;
@@ -51,7 +77,7 @@ namespace RoutesMNG {
 
         public function mapRoute(): void
         {
-            echo "Allowed routes" . PHP_EOL;
+            echo Serverlanguage::getInstance()->importandServerMessage("route.map");
             foreach ($this->routesList as $index) {
                 echo $index . PHP_EOL;
             }
@@ -60,21 +86,17 @@ namespace RoutesMNG {
 
         public function executeRoute(): void
         {
-
             $requestMETHOD = $_SERVER['REQUEST_METHOD'];
             $requestURI = $_SERVER['REQUEST_URI'];
-            //valide url
-              preg_match('/(^\/[^&]*)/',$requestURI,$requestURI);
-            //do poprawienia dodanie menadżera wyjscia
             try {
                 $dispatcher = new Dispatcher($this->routeManager->getData());
-                $dispatcher->dispatch($requestMETHOD, parse_url($requestURI[0], PHP_URL_PATH));
+              $this->routeMessageAfterExecuted =   $dispatcher->dispatch($requestMETHOD, parse_url($requestURI)["path"]);
+              $this->executed = true;
             } catch (HttpRouteNotFoundException  $e) {
-                header($e->getMessage());
-                serverMessage::send("Error", serverMessage::errorMessage());
+                $this->routeMessageAfterExecuted = ["info"=>"Page doesnt exist"];
             } catch (HttpMethodNotAllowedException $e) {
-                header($e->getMessage());
-                serverMessage::send("Error", serverMessage::errorMessage());
+
+                $this->routeMessageAfterExecuted = ["Info"=>"Method {$requestMETHOD} isn't allowed to this route"];
             }
         }
 

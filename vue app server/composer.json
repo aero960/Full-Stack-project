@@ -7,20 +7,45 @@
     "license": "",
     "autoload": {
         "classmap":
-           ["class//routes//routescomposite.php",
-            "class//serverMessage.php",
-             "class//routes//parameters.php",
-            "class//page.php",
-             "class//authentication/userschema.php",
-            "class//webpages//register.php",
-             "class//webpages//404_page.php",
-            "class//events.php",
-             "class//database//tableManager.php",
-            "class//contentconverter.php",
-            "class//routes//routes.php",
-            "class//routes//concentrate.php",
-             "class//database//database.php",
-            "class//database//tableBuilder.php"],
+           ["class/decorators/decorator.authenticate.php",
+             "class/decorators/decorator.parameters.php",
+
+
+            "class/authentication/permmisionchecker.php",
+             "class/authentication/userschema.php",
+             "class/authentication/authentication.php",
+
+            "class/serverMessage/avaiablelanguages.php",
+             "class/serverMessage/serverlanguage.php",
+             "class/serverMessage/builders.php",
+
+             "class/database/database.php",
+              "class/database/mechanic.php",
+             "class/database/querymechanic.php",
+
+             "class/routes/concentrate.php",
+             "class/routes/pageparametersschema.php",
+             "class/routes/parameters.php",
+             "class/routes/routes.php",
+             "class/routes/routescomposite.php",
+
+             "class/webpages/404_page.php",
+             "class/webpages/login.php",
+             "class/webpages/register.php",
+             "class/webpages/page.php",
+             "class/webpages/testpremmision.php",
+
+             "class/contentconverter.php",
+             "class/events.php",
+
+
+             "helper/Helper.php",
+             "test/test.php"
+
+
+
+
+           ],
 
         "files": ["helper/Helper.php","test/test.php"]
     },
@@ -35,4 +60,8 @@
       "ext-pdo": "*",
         "fzaninotto/faker": "^1.9"
     }
+  ,
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  }
 }

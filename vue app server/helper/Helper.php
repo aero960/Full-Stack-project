@@ -81,7 +81,7 @@ namespace Helper {
         //need configure composer included path or set include paths
         public static function getIniConfiguration($name,$obj = false)
         {
-            $iniData = parse_ini_file(stream_resolve_include_path($name . ".ini"));
+            $iniData = parse_ini_file(stream_resolve_include_path($name . '.ini'));
             return ($obj) ? (object)$iniData : $iniData;
 
         }

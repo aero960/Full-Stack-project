@@ -1,8 +1,9 @@
 <?php
 
 
-namespace routesComposite{
+namespace routesComposite {
 
+    use language\Serverlanguage;
     use Phroute\Phroute\RouteCollector;
     use RoutesMNG\Parameters;
     use WebpageMNG\ContextCreator;
@@ -19,6 +20,7 @@ namespace routesComposite{
     {
 
         protected Route $instance;
+
         public function __construct(Route $instance)
         {
             $this->instance = $instance;
@@ -26,10 +28,9 @@ namespace routesComposite{
 
         public function action()
         {
-            $this->instance->getParametersHandler()->setRoute(func_get_args());
-            return ($this->instance->getPage() instanceof ContextCreator) ?
-                $this->instance->getPage()->getContext() :
-                "Page doesent has context";
+            $this->instance->getParametersHandler()->setRouteParameters(func_get_args());
+            if ($this->instance->getPage() instanceof ContextCreator)
+                $this->instance->getPage()->setActivePage();
         }
 
     }
@@ -42,7 +43,8 @@ namespace routesComposite{
         {
             Parent::__construct($instance);
         }
-        public function permission(RouteCollector $routeManager) : void
+
+        public function permission(RouteCollector $routeManager): void
         {
             $routeManager->{strtolower($this->instance->getData()->method)}
             ($this->instance->getData()->path, [$this, 'action']);
@@ -58,19 +60,22 @@ namespace routesComposite{
             $this->setFilter($filter);
 
         }
+
         private $filter = null;
+
         public function setFilter(callable $method)
         {
             $this->filter = $method;
         }
 
-        public function permission(RouteCollector $routeManager) : void
+        public function permission(RouteCollector $routeManager): void
         {
             $uniqID = uniqid('FILTERERS:', true);
             $routeManager->filter($uniqID, $this->filter);
             $routeManager->{strtolower($this->instance->getData()->method)}
             ($this->instance->getData()->path, [$this, 'action'], ['before' => $uniqID]);
         }
+
 
     }
 
@@ -87,16 +92,20 @@ namespace routesComposite{
         public Page $page;
         protected RouteType $compositeType;
         protected Parameters $parametersHandler;
-        public function __construct(string $method, string $path, Page $page,Parameters $parametersHandler)
+
+        public function __construct(string $method, string $path, Page $page, Parameters $parametersHandler)
         {
             $this->method = $method;
             $this->path = $path;
             $this->page = $page;
             $this->parametersHandler = $parametersHandler;
         }
-        public function getParametersHandler(){
+
+        public function getParametersHandler()
+        {
             return $this->parametersHandler;
         }
+
         public function setPermission(RouteCollector $routeManager): void
         {
             $this->compositeType->permission($routeManager);
@@ -106,9 +115,10 @@ namespace routesComposite{
         public function action()
         {
             return $this->compositeType->action();
-    }
+        }
 
-        public function getPage(){
+        public function getPage()
+        {
             return $this->page;
         }
 
@@ -124,7 +134,6 @@ namespace routesComposite{
 
 
     }
-
 
 
 }
