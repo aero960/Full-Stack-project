@@ -13,8 +13,9 @@ namespace converter{
 
         public function getContent(){
             echo "<pre>";
-          print_r($this->content);
-          echo "</pre>";
+         return  json_encode($this->content, JSON_PRETTY_PRINT);
+            echo "</pre>";
+
         }
     }
 

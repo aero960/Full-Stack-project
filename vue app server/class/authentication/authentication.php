@@ -1,26 +1,43 @@
 <?php
 
+
 namespace authentication {
 
-
-    use Exception;
+    use DateTime;
     use Firebase\JWT\JWT;
+    use Exception;
     use Helper\Helper;
 
+    abstract class Permmision
+    {
+        const ADMIN = 3;
+        const PREMIUM = 2;
+        const NORMAL = 1;
+        const GUEST = 0;
+    }
 
 
     class Authentication
     {
         private static ?authentication $instance = null;
         protected AuthenticationSchema $currentyUser;
-        protected array $core;
         protected $token;
         protected $key;
         protected bool  $Authenticated;
+
+
         public function __construct()
         {
-            $this->core = [];
+
             $this->Authenticated = false;
+
+            $this->TokenInitialize();
+            //nastepne zmiany
+            $this->currentyUser = AuthenticationSchema::createGuest();
+        }
+
+        private function TokenInitialize()
+        {
             $configs = Helper::getIniConfiguration("jwt");
             $this->key = $configs["key"];
             $this->token = [
@@ -30,17 +47,14 @@ namespace authentication {
                 "aud" => $configs["aud"],
                 //not before claim
                 "nbf" => $configs["nbf"],
-                "exp" => time() + 300
-            ];
-
-
-            $this->currentyUser = new AuthenticationSchema(["username"=>"Guest",
-               "password"=> AuthenticationSchema::UNKNOW,
-               "email"=> AuthenticationSchema::UNKNOW,
-                "id"=>AuthenticationSchema::UNKNOW,
-                "permission"=>AuthenticationSchema::NONEPREMMISION]);
+                "exp" => time() + $configs["exp"]];
         }
 
+
+        public function getKey()
+        {
+            return $this->key;
+        }
         public function assignCurrentyUser(AuthenticationSchema $user)
         {
             $this->currentyUser = $user;
@@ -55,22 +69,23 @@ namespace authentication {
 
         public function AuthenticateUser()
         {
-            if (filter_has_var(INPUT_SERVER, "HTTP_WWW_AUTHENTICATE")) {
-                try {
-                    $info = JWT::decode($_SERVER["HTTP_WWW_AUTHENTICATE"], $this->key, array('HS256'));
+            try {
+                if (filter_has_var(INPUT_SERVER, "HTTP_WWW_AUTHENTICATE")) {
+                    $info = JWT::decode(apache_request_headers()["WWW-Authenticate"], $this->getKey(), array('HS256'));
+                    $this->token = $info;
                     if ($info->exp >= time()) {
-                        $this->currentyUser = new AuthenticationSchema($info->data);
-                        $this->Authenticated = true;
+
+                        $this->assignCurrentyUser(new AuthenticationSchema($info->data));
                     }
-                } catch (Exception $e) {
-                    $this->Authenticated = false;
                 }
+            } catch (Exception $e) {
+                return null;
             }
         }
 
         public function getCurrentyUser()
         {
-                return $this->currentyUser;
+            return $this->currentyUser;
         }
 
         public function isAuthenticated()
@@ -80,14 +95,9 @@ namespace authentication {
 
         public function createToken(AuthenticationSchema $userData)
         {
-            $this->token["data"] = [AuthenticationSchema::USERNAME => $userData->getUsername(),
-                AuthenticationSchema::PASSWORD => $userData->getPassword(),
-                AuthenticationSchema::EMAIL => $userData->getEmail(),
-                AuthenticationSchema::ID => $userData->getId(),
-                AuthenticationSchema::PERMMISION => $userData->getPermission()];
-
+            //Tutaj musiałem coś zmieniać
+            $this->token["data"] = $userData->toIterate();
             return JWT::encode($this->token, $this->key);
-
         }
 
     }

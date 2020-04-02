@@ -1,6 +1,8 @@
 <?php
 
 use Helper\Helper;
+use language\Serverlanguage;
+use RoutesMNG\RouteManager;
 
 
 class Database
@@ -13,12 +15,17 @@ class Database
     public function __construct()
     {
         $this->databaseInitializeInfo = Helper::getIniConfiguration("db");
-        $this->db = new PDO("mysql:host={$this->databaseInitializeInfo["host"]};dbname={$this->databaseInitializeInfo["name"]}",
-            $this->databaseInitializeInfo["user"], $this->databaseInitializeInfo['password']);
-        $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        try{
+            $this->db = new PDO("mysql:host={$this->databaseInitializeInfo["host"]};dbname={$this->databaseInitializeInfo["name"]}",
+                $this->databaseInitializeInfo["user"], $this->databaseInitializeInfo['password']);
+            $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }catch(Exception $e){
+            header('HTTP/1.0 404 Not Found');
+            echo Serverlanguage::getInstance()->GetMessage("database.error");
+         exit;
+        }
     }
-
     public function getDatabase()
     {
         return $this->db;

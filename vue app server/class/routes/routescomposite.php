@@ -7,18 +7,16 @@ namespace routesComposite {
     use Phroute\Phroute\RouteCollector;
     use RoutesMNG\Parameters;
     use WebpageMNG\ContextCreator;
+    use WebpageMNG\Element;
     use WebpageMNG\Page;
 
     interface RouteType
     {
         public function action();
-
         public function permission(RouteCollector $routeManager);
     }
-
-    abstract class RouteActionBuilder
+    abstract class RouteActionBuilder implements RouteType
     {
-
         protected Route $instance;
 
         public function __construct(Route $instance)
@@ -28,15 +26,14 @@ namespace routesComposite {
 
         public function action()
         {
-            $this->instance->getParametersHandler()->setRouteParameters(func_get_args());
-            if ($this->instance->getPage() instanceof ContextCreator)
-                $this->instance->getPage()->setActivePage();
+            $this->instance->getParameters()->setRouteParameters(func_get_args());
+            $this->instance->getElement()->ExtensionData();
+            $this->instance->setActiveElement();
+            return "Routes is exectued";
         }
 
     }
-
-
-    class  NormalRouteComposite extends RouteActionBuilder implements RouteType
+    class  NormalRouteComposite extends RouteActionBuilder
     {
 
         public function __construct(Route $instance)
@@ -51,27 +48,28 @@ namespace routesComposite {
         }
     }
 
-    class  PermissionRouteComposite extends RouteActionBuilder implements RouteType
+    class  PermissionRouteComposite extends RouteActionBuilder
     {
-        public function __construct(Route $instance, callable $filter)
+        public function __construct(Route $instance, array $filter)
         {
             Parent::__construct($instance);
-
             $this->setFilter($filter);
-
         }
-
-        private $filter = null;
-
-        public function setFilter(callable $method)
+        private array $filter ;
+        public function setFilter(array $method)
         {
             $this->filter = $method;
+        }
+        public function permissionList(){
+           foreach ($this->filter as $index)
+              if(($index)())
+                  return ($index)();
         }
 
         public function permission(RouteCollector $routeManager): void
         {
             $uniqID = uniqid('FILTERERS:', true);
-            $routeManager->filter($uniqID, $this->filter);
+            $routeManager->filter($uniqID, [$this, 'permissionList']);
             $routeManager->{strtolower($this->instance->getData()->method)}
             ($this->instance->getData()->path, [$this, 'action'], ['before' => $uniqID]);
         }
@@ -89,39 +87,40 @@ namespace routesComposite {
 
         private string $method;
         private string $path;
-        public Page $page;
+        public Element $element;
         protected RouteType $compositeType;
         protected Parameters $parametersHandler;
 
-        public function __construct(string $method, string $path, Page $page, Parameters $parametersHandler)
+        public function __construct(string $method, string $path, Element $element, Parameters $parametersHandler)
         {
             $this->method = $method;
             $this->path = $path;
-            $this->page = $page;
+            $this->element = $element;
             $this->parametersHandler = $parametersHandler;
         }
 
-        public function getParametersHandler()
-        {
-            return $this->parametersHandler;
+        public function getElement(){
+            return $this->element;
         }
 
+        public function getParameters(){
+              return  $this->parametersHandler;
+        }
+        public function isAcitveElement(){
+          return  $this->element->isActive();
+        }
         public function setPermission(RouteCollector $routeManager): void
         {
             $this->compositeType->permission($routeManager);
         }
-
-        // wyswietlanie czynnosci zachodzacych w danym rout
         public function action()
         {
             return $this->compositeType->action();
         }
+        public function setActiveElement(){
 
-        public function getPage()
-        {
-            return $this->page;
+          $this->element->setActiveElement();
         }
-
         public function getData()
         {
             return (object)['method' => $this->method, 'path' => $this->path];

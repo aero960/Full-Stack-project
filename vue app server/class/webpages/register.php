@@ -2,34 +2,43 @@
 
 
 use authentication\Authentication;
+
 use language\Serverlanguage;
 use RoutesMNG\Parameters;
 use WebpageMNG\Page;
 
 
-class RegisterPage extends Page
+class Register extends Page
 {
     private RegisterGenerator $userRegisterManagment;
+    private bool $registerSuccesfully =false;
     public function __construct(Parameters $parameters = null)
     {
+        Parent::__construct();
         $this->parameters = new RegisterParameters($parameters);
     }
-    protected function Initialize()
+    protected function Initialize()  :void
     {
             $this->userRegisterManagment = new RegisterGenerator();
-            $this->userRegisterManagment->Register( $this->parameters->getParameter(RegisterParameters::USERNAME),
+            if( $this->userRegisterManagment->Register( $this->parameters->getParameter(RegisterParameters::USERNAME),
                 $this->parameters->getParameter(RegisterParameters::PASSWORD),
-                $this->parameters->getParameter(RegisterParameters::EMAIL));
-            Authentication::getInstance()->assignCurrentyUser($this->userRegisterManagment->getData());
+                $this->parameters->getParameter(RegisterParameters::EMAIL))){
+                $this->registerSuccesfully = true;
+                Authentication::getInstance()->assignCurrentyUser($this->userRegisterManagment->getData());
+            }
     }
-
-
     protected function pageContent()
     {
-            $this->Initialize();
-             return ["Info" => Serverlanguage::getInstance()->GetMessage("RegisterPage.createUser"),
-                 "UserInfo" => Authentication::getInstance()->getCurrentyUser()->getUsername(),
-                     "Token"=> Authentication::getInstance()->createToken(Authentication::getInstance()->getCurrentyUser())];
-
+        $this->Initialize();
+        if($this->registerSuccesfully){
+            $token = Authentication::getInstance()->createToken(Authentication::getInstance()->getCurrentyUser());
+            return ["Info" => Serverlanguage::getInstance()->GetMessage("RegisterPage.createUser"),
+                "UserInfo" => Authentication::getInstance()->getCurrentyUser()->toIterate(),
+                "Token"=> $token];
+        }
+        return ["info"=>Serverlanguage::getInstance()->GetMessage("duplicate.exist")];
     }
+
+
+
 }

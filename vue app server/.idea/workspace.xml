@@ -2,20 +2,49 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e63cab0d-8c51-402d-a85a-8a1ea697d139" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vue app server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vue app server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/database/postmanaging.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/database/shortcutaction.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/database/tagmanaging.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/database/usermanaging.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/database/viewquery.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/decorators/decorator.element.owner.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/elementeditor/item.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/elementeditor/itemschemas.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/webpages/postcreate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/webpages/postdelete.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/webpages/postpublish.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/webpages/postupdate.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/class/webpages/postviewer.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/middleware.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/routes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/class/page.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/authentication/authentication.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/authentication/authentication.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/authentication/permmisionchecker.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/authentication/permmisionchecker.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/authentication/userschema.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/authentication/userschema.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/contentconverter.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/contentconverter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/database/database.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/database/database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/database/mechanic.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/database/mechanic.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/database/querymechanic.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/decorators/decorator.authenticate.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/decorators/decorator.authenticate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/decorators/decorator.parameters.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/decorators/decorator.parameters.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/events.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/events.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/routes/concentrate.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/routes/concentrate.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/routes/pageparametersschema.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/routes/pageparametersschema.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/routes/parameters.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/routes/parameters.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/routes/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/routes/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/routes/routescomposite.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/routes/routescomposite.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/serverMessage/avaiablelanguages.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/serverMessage/avaiablelanguages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/webpages/404_page.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/webpages/404_page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/webpages/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/webpages/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/webpages/page.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/webpages/page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/webpages/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/class/webpages/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/class/webpages/testpremmision.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration/jwt.ini" beforeDir="false" afterPath="$PROJECT_DIR$/configuration/jwt.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration/languages/english.ini" beforeDir="false" afterPath="$PROJECT_DIR$/configuration/languages/english.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration/languages/polish.ini" beforeDir="false" afterPath="$PROJECT_DIR$/configuration/languages/polish.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration/languages/server.ini" beforeDir="false" afterPath="$PROJECT_DIR$/configuration/languages/server.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue app/configuration/loaders.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue app/configuration/loaders.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../vue app/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue app/vueapp/application/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/../vue app/vueapp/application/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue app/vueapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../vue app/vueapp/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue app/vueapp/object/helloworldvue.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue app/vueapp/object/test.pug" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +89,27 @@
         <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
         <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
         <item name="rWKlUeAAgN: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="post: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="rWKlUeAAgN: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="post_tag: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="rWKlUeAAgN: schema" type="76f4a085:MysqlImplModel$Schema" />
+        <item name="tags: table" type="285a2a93:MysqlImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="MySQL - rWKlUeAAgN@remotemysql.com" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="rWKlUeAAgN: schema" type="76f4a085:MysqlImplModel$Schema" />
         <item name="users: table" type="285a2a93:MysqlImplModel$Table" />
       </path>
     </expand>
@@ -94,7 +144,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -118,7 +168,7 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:MySQL - rWKlUeAAgN@remotemysql.com" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@3df5c029" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="com.intellij.database.console.session.MessageBusSession@2271a1f2" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -154,7 +204,19 @@
       <workItem from="1585083765747" duration="10882000" />
       <workItem from="1585095103402" duration="1051000" />
       <workItem from="1585138005472" duration="2464000" />
-      <workItem from="1585140491746" duration="6947000" />
+      <workItem from="1585140491746" duration="12664000" />
+      <workItem from="1585256389485" duration="640000" />
+      <workItem from="1585336617159" duration="18460000" />
+      <workItem from="1585390004867" duration="2553000" />
+      <workItem from="1585420312319" duration="10701000" />
+      <workItem from="1585483216322" duration="2085000" />
+      <workItem from="1585509145695" duration="13579000" />
+      <workItem from="1585581667632" duration="9299000" />
+      <workItem from="1585651065586" duration="889000" />
+      <workItem from="1585654112636" duration="23636000" />
+      <workItem from="1585738953517" duration="24721000" />
+      <workItem from="1585823083829" duration="9758000" />
+      <workItem from="1585836734229" duration="8031000" />
     </task>
     <servers />
   </component>
@@ -178,22 +240,22 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4492" y="301" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585003354271" />
-    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1585141220097">
+    <state x="4605" y="236" width="492" height="778" key="#com.intellij.ide.util.MemberChooser" timestamp="1585748121718">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4605" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585141220097" />
-    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585078264038">
+    <state x="4605" y="236" width="492" height="778" key="#com.intellij.ide.util.MemberChooser/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585748121718" />
+    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585746182603">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585078264038" />
-    <state x="4467" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585147271504">
+    <state x="4737" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585746182603" />
+    <state x="4467" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585746415375">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4467" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585147271504" />
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1585078180221">
+    <state x="4467" y="204" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585746415375" />
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1585755104063">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585078180221" />
+    <state x="4713" y="278" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585755104063" />
     <state x="4601" y="386" key="#com.jetbrains.php.refactoring.move.PhpMoveClassDialog#0" timestamp="1584712039657">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
@@ -202,62 +264,62 @@
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4579" y="261" key="#com.jetbrains.php.refactoring.pullPush.pullUp.PhpPullUpDialog#0/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584716151663" />
-    <state x="4580" y="274" key="FileChooserDialogImpl" timestamp="1584921192554">
+    <state x="4580" y="274" key="FileChooserDialogImpl" timestamp="1585483474823">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4580" y="274" key="FileChooserDialogImpl/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584921192554" />
-    <state width="1273" height="395" key="GridCell.Tab.0.bottom" timestamp="1585002526883">
+    <state x="4580" y="274" key="FileChooserDialogImpl/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585483474823" />
+    <state width="1273" height="332" key="GridCell.Tab.0.bottom" timestamp="1585829146893">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1273" height="395" key="GridCell.Tab.0.bottom/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585002526883" />
-    <state width="1273" height="395" key="GridCell.Tab.0.center" timestamp="1585002526883">
+    <state width="1273" height="332" key="GridCell.Tab.0.bottom/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585829146893" />
+    <state width="1273" height="332" key="GridCell.Tab.0.center" timestamp="1585829146893">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1273" height="395" key="GridCell.Tab.0.center/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585002526883" />
-    <state width="1273" height="395" key="GridCell.Tab.0.left" timestamp="1585002526883">
+    <state width="1273" height="332" key="GridCell.Tab.0.center/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585829146893" />
+    <state width="1273" height="332" key="GridCell.Tab.0.left" timestamp="1585829146893">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1273" height="395" key="GridCell.Tab.0.left/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585002526883" />
-    <state width="1273" height="395" key="GridCell.Tab.0.right" timestamp="1585002526883">
+    <state width="1273" height="332" key="GridCell.Tab.0.left/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585829146893" />
+    <state width="1273" height="332" key="GridCell.Tab.0.right" timestamp="1585829146893">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state width="1273" height="395" key="GridCell.Tab.0.right/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585002526883" />
+    <state width="1273" height="332" key="GridCell.Tab.0.right/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585829146893" />
     <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1584461390546">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state width="196" height="457" key="HiddenNamespacesPopup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584461390546" />
-    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1585138146907">
+    <state x="4813" y="337" key="NewPhpClassDialog" timestamp="1585748739872">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585138146907" />
-    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1585143691167">
+    <state x="4813" y="337" key="NewPhpClassDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585748739872" />
+    <state x="5114" y="446" key="NewPhpFileDialog" timestamp="1585840229812">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585143691167" />
-    <state x="4192" y="74" key="SettingsEditor" timestamp="1584996344406">
+    <state x="5114" y="446" key="NewPhpFileDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585840229812" />
+    <state x="4192" y="74" key="SettingsEditor" timestamp="1585483499342">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4192" y="74" key="SettingsEditor/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584996344406" />
+    <state x="4192" y="74" key="SettingsEditor/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585483499342" />
     <state x="4699" y="409" width="326" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1584885642329">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4699" y="409" width="326" height="235" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584885642329" />
-    <state x="4667" y="378" width="381" height="283" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog" timestamp="1585000296152">
+    <state x="4667" y="378" width="381" height="283" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog" timestamp="1585839489600">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4667" y="378" width="381" height="283" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585000296152" />
-    <state x="4545" y="293" width="510" height="449" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1585095470769">
+    <state x="4667" y="378" width="381" height="283" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585839489600" />
+    <state x="4545" y="293" width="510" height="445" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog" timestamp="1585594257778">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4545" y="293" width="510" height="449" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585095470769" />
+    <state x="4545" y="293" width="510" height="445" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585594257778" />
     <state x="4105" y="52" width="851" height="704" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1585093184372">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
     <state x="4105" y="52" width="851" height="704" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585093184372" />
-    <state x="4981" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1585140515867">
+    <state x="4981" y="343" key="com.intellij.ide.util.TipDialog" timestamp="1585836734262">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4981" y="343" key="com.intellij.ide.util.TipDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585140515867" />
+    <state x="4981" y="343" key="com.intellij.ide.util.TipDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585836734262" />
     <state x="4519" y="214" key="com.jetbrains.php.test.PhpNewTestDialog" timestamp="1584918010711">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
@@ -266,17 +328,17 @@
       <screen x="0" y="0" width="3072" height="1688" />
     </state>
     <state x="182" y="245" width="2713" height="1338" key="dock-window-1/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585005365603" />
-    <state x="4541" y="153" key="refactoring.ChangeSignatureDialog" timestamp="1584895790948">
+    <state x="4541" y="79" key="refactoring.ChangeSignatureDialog" timestamp="1585590951744">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4541" y="153" key="refactoring.ChangeSignatureDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1584895790948" />
-    <state x="4372" y="237" key="run.anything.popup" timestamp="1585001964667">
+    <state x="4541" y="79" key="refactoring.ChangeSignatureDialog/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585590951744" />
+    <state x="4372" y="237" key="run.anything.popup" timestamp="1585843002021">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4372" y="237" key="run.anything.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585001964667" />
-    <state x="4463" y="225" width="840" height="678" key="search.everywhere.popup" timestamp="1585147089250">
+    <state x="4372" y="237" key="run.anything.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585843002021" />
+    <state x="4463" y="225" width="840" height="678" key="search.everywhere.popup" timestamp="1585841671586">
       <screen x="3840" y="0" width="1920" height="1040" />
     </state>
-    <state x="4463" y="225" width="840" height="678" key="search.everywhere.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585147089250" />
+    <state x="4463" y="225" width="840" height="678" key="search.everywhere.popup/0.0.3072.1688/3840.0.1920.1040@3840.0.1920.1040" timestamp="1585841671586" />
   </component>
 </project>

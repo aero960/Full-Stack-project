@@ -34,7 +34,6 @@ class LanguageEnglish extends LanguagerBuilder implements Languager
         return 'Error';
     }
 }
-
 class ServerDefault extends LanguagerBuilder implements Languager
 {
 

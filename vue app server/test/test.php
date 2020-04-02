@@ -1,53 +1,66 @@
 <?php
 
-
 use authentication\Authentication;
-use Firebase\JWT\JWT;
+use converter\contentConverter;
 use language\Serverlanguage;
 use RoutesMNG\NormalRoute;
 use RoutesMNG\Parameters;
 use RoutesMNG\PermissionRoute;
+use RoutesMNG\RouteListManagment;
 use RoutesMNG\RouteManager;
-use ServerMNG\serverMessage;
-use WebpageMNG\testpremmision;
-
+use WebpageMNG\PostCreate;
+use WebpageMNG\PostDelete;
+use WebpageMNG\PostPublish;
+use WebpageMNG\PostUpdate;
 
 function functionToTest()
 {
 
     //inne jezyki jeszcze nie sa stworzone
     Serverlanguage::getInstance()->changeLanguage(AvaiableLanguages::ENG);
-
-
-
     Authentication::getInstance()->AuthenticateUser();
-
-
-
-
+    $cleandData = new FullFilter($_REQUEST);
+    $cleandData->cleanData();
     //dodac obiekt autentykacja
     $paraHandler = new Parameters();
+    $paraHandler->setRequestParameters($cleandData->getValidData());
 
-
-    $paraHandler->setRequestParameters($_REQUEST);
-    $pageRegister = new AuthenticateDecorator(new ParametersDecorator(new RegisterPage($paraHandler)));
-    $pageLogin = new AuthenticateDecorator(new ParametersDecorator(new LoginPage($paraHandler)));
-    $premmisionTest = new ParametersDecorator(new testpremmision($paraHandler));
+    $pageRegister = new AuthenticateDecorator(new ParametersDecorator(new Register($paraHandler)));
+    $pageLogin = new AuthenticateDecorator(new ParametersDecorator(new Login($paraHandler)));
+    $updateProfile = new ParametersDecorator(new Updateprofile($paraHandler));
+    $updatePosts = new ParametersDecorator(new PostOwnerDecorator(new PostUpdate($paraHandler)));
+    $creatPosts = new ParametersDecorator(new PostCreate($paraHandler));
+    $deletePosts = new ParametersDecorator(new PostOwnerDecorator(new PostDelete($paraHandler)));
+    $showPosts = new ParametersDecorator(new PostView($paraHandler));
+    $publishPosts = new ParametersDecorator(new PostPublish($paraHandler));
     $routeDefault = new page_error();
 
-
+    //route section
     $register = new NormalRoute("POST", "register", $pageRegister, $paraHandler);
-    $login = new NormalRoute("POST","login",$pageLogin,$paraHandler);
-    $premmision = new PermissionRoute("GET","example",$premmisionTest,$paraHandler,["PermissionChecker","checkNormalUserAuth"]);
+    $login = new NormalRoute("POST", "login", $pageLogin, $paraHandler);
+    $updateProfile = new PermissionRoute("POST", "updateprofile", $updateProfile, $paraHandler);
+    $createPostRoute = new PermissionRoute("POST", "createpost", $creatPosts, $paraHandler, [[PermissionChecker::CHECKER, PermissionChecker::ADMINAUTH]]);
+    $updatePostRoute = new PermissionRoute("POST", "updatepost/{postid:a}", $updatePosts, $paraHandler,
+        [[PermissionChecker::CHECKER, PermissionChecker::ADMINAUTH]]);
+    $deletePostsRoute = new PermissionRoute("POST", "delete/{postid:a}", $deletePosts, $paraHandler,
+        [[PermissionChecker::CHECKER, PermissionChecker::ADMINAUTH]]);
+    $showPostsRoute = new NormalRoute("GET", "showposts", $showPosts, $paraHandler);
+    $publishPosts = new PermissionRoute("POST","publish/{postid:a}",$publishPosts,$paraHandler);
 
-
-
-    RouteManager::getInstance()->initializeRoute([$register,$login,$premmision],$routeDefault);
-
+    RouteManager::getInstance()->initializeRoute(new RouteListManagment([
+        $login,
+        $register,
+        $updateProfile,
+        $createPostRoute,
+        $updatePostRoute,
+        $deletePostsRoute,
+        $showPostsRoute,
+        $publishPosts]), $routeDefault);
     RouteManager::getInstance()->executeRoute();
 
-  print_r(RouteManager::getInstance()->getActivePage()->getContext());
 
+
+   echo (new contentConverter(RouteManager::getInstance()->getActivePage()->getContext()))->getContent();
 
     // $content = new \converter\contentConverter();
     //  $content->getContent();

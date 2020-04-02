@@ -9,7 +9,14 @@
         "classmap":
            ["class/decorators/decorator.authenticate.php",
              "class/decorators/decorator.parameters.php",
+             "class/decorators/decorator.Query.php",
+              "class/decorators/decorator.element.owner.php",
 
+              "class/elementeditor/item.php",
+             "class/elementeditor/itemschemas.php",
+
+             "class/filters/concentratefilters.php",
+             "class/filters/filters.php",
 
             "class/authentication/permmisionchecker.php",
              "class/authentication/userschema.php",
@@ -21,7 +28,11 @@
 
              "class/database/database.php",
               "class/database/mechanic.php",
-             "class/database/querymechanic.php",
+             "class/database/usermanaging.php",
+              "class/database/shortcutaction.php",
+             "class/database/viewquery.php",
+            "class/database/postmanaging.php",
+            "class/database/tagmanaging.php",
 
              "class/routes/concentrate.php",
              "class/routes/pageparametersschema.php",
@@ -33,7 +44,12 @@
              "class/webpages/login.php",
              "class/webpages/register.php",
              "class/webpages/page.php",
-             "class/webpages/testpremmision.php",
+             "class/webpages/updateprofile.php",
+            "class/webpages/postcreate.php",
+             "class/webpages/postupdate.php",
+             "class/webpages/postdelete.php",
+             "class/webpages/postviewer.php",
+              "class/webpages/postpublish.php",
 
              "class/contentconverter.php",
              "class/events.php",
@@ -58,7 +74,8 @@
         "ext-json": "*",
         "firebase/php-jwt": "^5.1",
       "ext-pdo": "*",
-        "fzaninotto/faker": "^1.9"
+        "fzaninotto/faker": "^1.9",
+      "ext-apache": "*"
     }
   ,
   "require-dev": {

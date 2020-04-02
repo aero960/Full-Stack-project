@@ -21,6 +21,7 @@ class Parameters
         } catch (Exception $e) {
             echo "{$e}";
         }
+
     }
     public function setRequestParameters(array $request)
     {
@@ -32,6 +33,7 @@ class Parameters
         } catch (Exception $e) {
             echo "{$e}";
         }
+
 
     }
 

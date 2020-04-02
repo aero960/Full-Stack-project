@@ -4,71 +4,192 @@
 namespace authentication {
 
 //Schema of users information to store users information
-    class UserSchema
+
+    use BuilderComposite;
+    use DateTime;
+
+    abstract class SchemaBuilder
     {
-        public function __construct(string $username, string $password, string $email, string $money)
+        protected $data;
+        protected function assignValue(string $value)
         {
-            $this->username = $username;
-            $this->password = $password;
-            $this->email = $email;
-            $this->money = $money;
+            return is_array($this->data) ? $this->data[$value] : $this->data->{$value};
         }
 
-        protected string $username;
-        protected string $password;
-        protected string $email;
-        protected float $money;
-
-        public function getUsername(): string
+        protected function assignDataValue( $value){
+            $value =  $this->assignValue($value);
+            try {
+                return ($value instanceof DateTime) ? $value : new DateTime($value);
+            } catch (\Exception $e) {
+                throw new \Exception("This format is not allowed");
+            }
+        }
+        public function __construct($data)
         {
-            return $this->username;
+            $this->data = $data;
         }
 
+        abstract public function toIterate() : array;
 
-        public function getPassword(): string
-        {
-            return $this->password;
-        }
-
-
-        public function getEmail(): string
-        {
-            return $this->email;
-        }
-
-        public function getMoney(): float
-        {
-            return $this->money;
-        }
 
     }
 
-    class AuthenticationSchema
+    class ResourcesSchema extends SchemaBuilder
+    {
+        private string $id;
+        private string $firstname;
+        private string $lastname;
+        private string $mobile;
+        private string $intro;
+        private string $profile;
+        private string $image;
+        private string $user;
+
+        public const ID = 'id';
+        public const FIRSTNAME = 'firstName';
+        public const LASTNAME = 'LastName';
+        public const MOBILE = 'mobile';
+        public const INTRO = 'intro';
+        public const PROFILE = 'profile';
+        public const IMAGE = 'image';
+
+        public function __construct($data)
+        {
+            SchemaBuilder::__construct($data);
+            $this->id = $this->assignValue(self::ID);
+            $this->firstname = $this->assignValue(self::FIRSTNAME);
+            $this->lastname = $this->assignValue(self::LASTNAME);
+            $this->mobile = $this->assignValue(self::MOBILE);
+            $this->intro = $this->assignValue(self::INTRO);
+            $this->profile = $this->assignValue(self::PROFILE);
+            $this->image = $this->assignValue(self::IMAGE);
+        }
+
+        public function getUser()
+        {
+            return $this->user;
+        }
+
+        public function getId(): string
+        {
+            return $this->id;
+        }
+
+        public function getFirstname(): string
+        {
+            return $this->firstname;
+        }
+
+        public function getLastname(): string
+        {
+            return $this->lastname;
+        }
+
+        public function getMobile(): string
+        {
+            return $this->mobile;
+        }
+
+        public function getIntro(): string
+        {
+            return $this->intro;
+        }
+
+        public function getProfile(): string
+        {
+            return $this->profile;
+        }
+
+        public function getImage(): string
+        {
+            return $this->image;
+        }
+
+        public function toIterate() : array
+        {
+            return [self::FIRSTNAME => $this->getFirstname(),
+                self::LASTNAME => $this->getLastname(),
+                self::MOBILE => $this->getMobile(),
+                self::ID => $this->getId(),
+                self::INTRO => $this->getIntro(),
+                self::PROFILE => $this->getProfile(),
+                self::IMAGE => $this->getImage()];
+        }
+    }
+
+
+    class AuthenticationSchema extends SchemaBuilder
     {
         const USERNAME = "username";
         const PASSWORD = "password";
         const EMAIL = "email";
         const ID = "id";
         const PERMMISION = "permission";
-
-        const NONEPREMMISION = 0;
+        const REGISTEREDAT = 'registeredAt';
+        const LASTLOGIN = 'lastLogin';
         const UNKNOW = "unknow";
 
-        public function __construct($data)
-        {
-            $this->username = is_array($data) ? $data[self::USERNAME]  : $data->{self::USERNAME};
-            $this->password =  is_array($data) ?  $data[self::PASSWORD] : $data->{self::PASSWORD};
-            $this->email = is_array($data) ? $data[self::EMAIL] : $data->{self::EMAIL};
-            $this->id =  is_array($data) ? $data[self::ID] : $data->{self::ID};
-            $this->permission = is_array($data) ? $data[self::PERMMISION] : $data->{self::PERMMISION};
-        }
-
+        protected ResourcesSchema $resources;
         protected string $id;
         protected string $username;
         protected string $password;
         protected string $email;
         protected string $permission;
+        protected DateTime $registeredAt;
+        protected DateTime $lastLogin;
 
+        public function __construct($data)
+        {
+            // duzo zmian
+
+            SchemaBuilder::__construct($data);
+            $this->username = $this->assignValue(self::USERNAME);
+            $this->password = $this->assignValue(self::PASSWORD);
+            $this->email = $this->assignValue(self::EMAIL);
+            $this->id = $this->assignValue(self::ID);
+            $this->permission = $this->assignValue(self::PERMMISION);
+            $this->registeredAt = $this->assignDataValue(self::REGISTEREDAT);
+            $this->lastLogin = $this->assignDataValue(self::LASTLOGIN);
+        }
+
+        public static function createGuest(){
+           return new AuthenticationSchema(["username" => "Guest",
+               "password" => AuthenticationSchema::UNKNOW,
+               "email" => AuthenticationSchema::UNKNOW,
+               "id" => AuthenticationSchema::UNKNOW,
+               "permission" => Permmision::GUEST,
+               "registeredAt"=> new DateTime(),
+               "lastLogin"=> new DateTime()]);
+        }
+
+
+        public function AssingResources(ResourcesSchema $user)
+        {
+            $this->resources = $user;
+        }
+
+        public function GetResouces()
+        {
+
+            return $this->resources;
+        }
+
+        private function idCollision()
+        {
+            return ($this->data['user_id']) ? $this->data['user_id'] : $this->data['id'];
+        }
+
+
+
+        public function getRegisteredDate()
+        {
+            return $this->registeredAt;
+        }
+
+        public function loginTime()
+        {
+            return $this->lastLogin;
+        }
 
         public function getPermission()
         {
@@ -96,5 +217,15 @@ namespace authentication {
             return $this->id;
         }
 
+        public function toIterate() : array
+        {
+            return [self::USERNAME => $this->getUsername(),
+                self::PASSWORD => $this->getPassword(),
+                self::EMAIL => $this->getEmail(),
+                self::ID => $this->getId(),
+                self::PERMMISION => $this->getPermission(),
+                self::REGISTEREDAT => $this->getRegisteredDate()->format(BuilderComposite::DATEFORMAT),
+                self::LASTLOGIN => $this->loginTime()->format(BuilderComposite::DATEFORMAT)];
+        }
     }
 }
