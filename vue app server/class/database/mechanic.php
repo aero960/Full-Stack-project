@@ -8,21 +8,20 @@ use Helper\Helper;
 interface Composer
 {
     public function action();
-
     public function getData();
-
 }
-
 abstract class BuilderComposite
 {
     public const  DATEFORMAT = "Y-m-d H:i:s";
     public const  UPDATEDTIMEFORMAT = "y:%y,m:%m,d:%d,h:%h,m:%i,s:%s";
 
+    protected PDO $db;
+
     public function __construct()
     {
         $this->db = Database::getInstance()->getDatabase();
     }
-    protected PDO $db;
+
 
     private function checkExistId(string $searchedId, string $tableName, string $idName): bool
     {
@@ -32,12 +31,12 @@ abstract class BuilderComposite
         return $stmt->rowCount();
     }
 
-    public function getDb()
+    protected function getDb()
     {
         return $this->db;
     }
 
-    public function getRandomId(string $tableName, string $idName)
+    protected function getRandomId(string $tableName, string $idName)
     {
         $id = Helper::randomId();
         while ($this->checkExistId($id, $tableName, $idName))
@@ -45,6 +44,14 @@ abstract class BuilderComposite
         return $id;
     }
 
+    protected function checkValueExist(string $table,string $colName,string $value) : bool
+    {
+
+        $sql = "SELECT * FROM {$table}  WHERE {$colName}=:value";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["value"=>$value]);
+        return $statement->rowCount();
+    }
 }
 
 
@@ -219,9 +226,9 @@ class UserUpdateComposite extends BuilderComposite implements QueryComposite
     private string $profile;
     private string $image;
 
-    public function __construct($instance, $id, string $firstname, string $lastname, string $mobile, string $intro, string $profile, string $image)
+    public function __construct( $id, string $firstname, string $lastname, string $mobile, string $intro, string $profile, string $image)
     {
-        BuilderComposite::__construct($instance);
+        BuilderComposite::__construct();
         $this->id = $id;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
@@ -300,7 +307,7 @@ class PostPublisher extends PostComposite {
 
     protected function postAction()
     {
-       return  (new PostShortcut($this->postId, $this->publish))->action();
+       return  (new PublishCurrentyPost($this->postId,$this->publish))->action();
     }
 
 

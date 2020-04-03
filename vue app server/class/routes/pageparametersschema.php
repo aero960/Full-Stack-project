@@ -6,10 +6,7 @@ use RoutesMNG\Parameters;
 interface ValidateParameters
 {
     public function checkValidParameters(): bool;
-
     public function getParameter(string $parameter);
-
-
 }
 
 class AllParametersType{
@@ -41,32 +38,27 @@ abstract class PageParametersSchema implements ValidateParameters
 
     public function __construct(Parameters $parameters)
     {
-
         $this->fullParameters = $parameters;
     }
 
-    public function getParameter(string $parameter)
-    {
-        return $this->combineParameters($parameter);
-    }
 
-    private function combineParameters(string $parameterValue)
+
+    public function getParameter(string $parameterValue)
     {
         forEach ([$this->fullParameters->getRotueParameters(),
                      $this->fullParameters->getRequestParameters()] as $index => $value) {
-
             if (array_key_exists($parameterValue, $value))
                 return $value[$parameterValue];
         }
     }
-
     abstract public function checkValidParameters(): bool;
 }
 
 class NoParameters extends PageParametersSchema
 {
-    public function __construct()
+    public function __construct(Parameters $parameters)
     {
+        Parent::__construct($parameters);
     }
 
     public function checkValidParameters(): bool
@@ -157,6 +149,7 @@ class PostParameters extends PageParametersSchema
     public const TITLE = 'post_title';
     public const CONTENT = 'post_content';
     public const TAGS = 'tags';
+
     public function checkValidParameters(): bool
     {
         return filter_has_var(INPUT_POST, self::TITLE) &&
@@ -171,5 +164,20 @@ class PostPublishParameters extends PageParametersSchema
     {
         return filter_has_var(INPUT_POST, self::PUBLISH);
 
+    }
+}
+class PostViewerParameters extends PageParametersSchema
+{
+    public const SHOWALL = 'showall';
+
+    public function __construct(Parameters $parameters)
+    {
+        Parent::__construct($parameters);
+    }
+
+    public function checkValidParameters(): bool
+    {
+
+        return filter_has_var(INPUT_GET,self::SHOWALL,);
     }
 }

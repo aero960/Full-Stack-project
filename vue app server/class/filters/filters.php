@@ -11,6 +11,7 @@ abstract class filterBuilder implements cleaner{
 
     public function cleanData(): bool
     {
+
         return true;
     }
     abstract public function getValidData();

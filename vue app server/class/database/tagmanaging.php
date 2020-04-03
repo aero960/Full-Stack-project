@@ -1,14 +1,68 @@
 <?php
 
+
+
+
 interface tagHandler
 {
-
     function Initialize();
-
     function TagAction();
-
 }
-class TagsRemoveEXT extends ShortcutBuilder implements Shortcut
+
+
+class TagsRemoveEXT extends BuilderComposite implements FastAction
+{
+    private string $postId;
+    public function __construct(string $postId)
+    {
+        parent::__construct();
+        $this->postId = $postId;
+    }
+    private function getRealtedTags()
+    {
+        $sql = "SELECT pt_tag_id FROM post_tag WHERE pt_post_id=:id";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["id" => $this->postId]);
+
+        return $statement->fetchAll();
+
+    }
+    private function getTagsToDelete()
+    {
+        $tagList = $this->getRealtedTags();
+        $tagsToDelete = [];
+        foreach($tagList as $index){
+            $sql = "SELECT * FROM post_tag WHERE pt_tag_id=:id";
+           $statement = $this->getDb()->prepare($sql);
+           $statement->execute(["id"=>$index->pt_tag_id]);
+           if( $statement->rowCount() <= 1)
+               $tagsToDelete[] = $index;
+        }
+     return $tagsToDelete;
+    }
+    private function removeAllConnections(){
+            $sql = 'DELETE FROM post_tag WHERE pt_post_id=:id';
+            $statement = $this->getDb()->prepare($sql);
+            $statement->execute(["id" => $this->postId]);
+    }
+    public function removeTag()
+    {
+
+        foreach ($this->getTagsToDelete() as $index){
+            $sql = 'DELETE FROM tags WHERE id_tag=:id';
+            $statement = $this->getDb()->prepare($sql);
+            $statement->execute(["id" => $index->pt_tag_id]);
+        }
+        $this->removeAllConnections();
+        return true;
+    }
+
+    public function getFastActionResponse()
+    {
+        return true;
+    }
+}
+class TagsShowEXT extends BuilderComposite implements FastAction
 {
     private string $postId;
 
@@ -16,40 +70,6 @@ class TagsRemoveEXT extends ShortcutBuilder implements Shortcut
     {
         parent::__construct();
         $this->postId = $postId;
-    }
-
-    public function removeTag(string $name)
-    {
-        if (!$this->checkExistTag($name))
-            return false;
-        $sql = 'DELETE FROM  tags WHERE tag_title=:name';
-        $statement = $this->getDb()->prepare($sql);
-        $statement->execute(["name" => $name]);
-        return true;
-    }
-
-    private function checkExistTag(string $name)
-    {
-        $sql = 'SELECT tag_title FROM tags WHERE tag_title=:title';
-        $statement = $this->getDb()->prepare($sql);
-        $statement->execute(["title" => $name]);
-        return ($statement->rowCount() > 0) ? true : false;
-    }
-
-    public function action()
-    {
-        return true;
-    }
-}
-
-class TagsShowEXT extends ShortcutBuilder implements Shortcut
-{
-    private string $postId;
-
-    public function __construct(string $postId)
-    {
-        parent::__construct();
-
     }
 
     public function getTags()
@@ -61,14 +81,14 @@ class TagsShowEXT extends ShortcutBuilder implements Shortcut
         return $statement->fetchAll();
     }
 
-    public function action()
+    public function getFastActionResponse()
     {
-       return $this->getTags();
+        return $this->getTags();
     }
-
 }
 
-class TagsAddEXT extends BuilderComposite implements Composer
+
+class TagsAddEXT extends BuilderComposite implements FastAction
 {
     private array $data;
     private string $tagId;
@@ -112,10 +132,10 @@ class TagsAddEXT extends BuilderComposite implements Composer
     private function addTag()
     {
         foreach ($this->data as $index) {
-            if (!$this->checkExistTag($index)){
+            if (!$this->checkExistTag($index)) {
                 $id = $this->createTag($index);
                 $this->createdTagList[] = ["tag_title" => $index, "id" => $id];
-            }else{
+            } else {
 
                 $this->createdTagList[] = ["tag_title" => $index, "id" => $this->getTagByTitle($index)->id_tag];
             }
@@ -131,15 +151,10 @@ class TagsAddEXT extends BuilderComposite implements Composer
         $statement->execute(["title" => $name]);
         return ($statement->rowCount() > 0) ? true : false;
     }
-
-    public function action()
+    public function getFastActionResponse()
     {
         $this->addTag();
-    }
-
-    public function getData()
-    {
-        return $this->createdTagList;
+        return  $this->createdTagList;
     }
 }
 

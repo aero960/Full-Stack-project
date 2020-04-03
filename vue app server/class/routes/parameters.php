@@ -6,35 +6,19 @@ use Exception;
 use language\Serverlanguage;
 
 
-
 class Parameters
 {
     protected array $parametersRoute = [];
     protected array $parametersRequest = [];
+
     public function setRouteParameters(array $route)
     {
-        try {
-            if (empty($this->parametersRoute))
-                $this->parametersRoute = $route;
-            else
-                throw new Exception(Serverlanguage::getInstance()->GetMessage("parameters.initialize.error"));
-        } catch (Exception $e) {
-            echo "{$e}";
-        }
-
+        $this->parametersRoute = $route;
     }
+
     public function setRequestParameters(array $request)
     {
-        try {
-            if (empty($this->parametersRequest))
-                $this->parametersRequest = $request;
-            else
-                throw new Exception(Serverlanguage::getInstance()->GetMessage("parameters.initialize.error"));
-        } catch (Exception $e) {
-            echo "{$e}";
-        }
-
-
+        $this->parametersRequest = $request;
     }
 
     public function getRotueParameters()
@@ -47,12 +31,6 @@ class Parameters
         return $this->parametersRequest;
     }
 
-    public function getAllParameters()
-    {
-        return (object)[
-            Serverlanguage::getInstance()->importandServerMessage("parameters.request") => $this->parametersRequest,
-            Serverlanguage::getInstance()->importandServerMessage("parameters.route") => $this->parametersRoute];
-    }
 }
 
 

@@ -118,7 +118,7 @@ class UpdateGenerator extends QueryComposer {
         QueryComposer::__construct();
     }
     public function updateUser($id,string $firstname,string $lastname,string $mobile,string $intro,string $profile,string $image){
-        $this->fetcherComposite = new QueryDecoratorUserSchema(new UserUpdateComposite($this, $id,$firstname,$lastname,$mobile,$intro,$profile,$image));
+        $this->fetcherComposite = new QueryDecoratorUserSchema(new UserUpdateComposite( $id,$firstname,$lastname,$mobile,$intro,$profile,$image));
         $this->execute();
     }
 

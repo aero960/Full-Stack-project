@@ -40,7 +40,6 @@ class PostUpdate extends Page
         $this->postManagment->PostUpdate(Authentication::getInstance()->getCurrentyUser()->getId(),
             $this->parameters->getParameter(PostParameters::TITLE),
             $this->parameters->getParameter(PostParameters::CONTENT),
-            $this->getActualItem('postid')->getValue()
-        );
+            $this->getActualItem('postid')->getValue());
     }
 }

@@ -5,6 +5,7 @@ namespace WebpageMNG;
 
 
 use authentication\Authentication;
+use NoParameters;
 use PostCreator;
 use PostItem;
 use PostModificator;
@@ -16,20 +17,22 @@ use RoutesMNG\Parameters;
 
 class PostDelete extends Page
 {
-    private PostModificator $postManagment;
+    private PostRemoveEXT $postManagment;
 
     public function __construct(Parameters $parameters = null)
     {
         Parent::__construct();
-        $this->parameters = new PostParameters($parameters);
+        $this->parameters = new NoParameters($parameters);
     }
 
     protected function pageContent()
     {
         $this->Initialize();
+
         return ['info' => ["Usunięto post: " . $this->postManagment->getPostBeforeDelete()->getTitle()],
                 'dane'=>$this->postManagment->getPostBeforeDelete()->toIterate()];
     }
+
     public function ExtensionData()
     {
         $this->addActualItem(new PostItem("postid",$this->parameters->getParameter(0)));

@@ -5,13 +5,15 @@ use WebpageMNG\Element;
 use WebpageMNG\Page;
 
 
+
+
+
 class ParametersDecorator extends Element
 {
     private Page $page;
 
     public function __construct(Page $element)
     {
-
         Element::__construct();
         $this->page = $element;
     }

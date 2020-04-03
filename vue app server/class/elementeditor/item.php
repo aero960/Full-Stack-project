@@ -21,23 +21,50 @@ abstract class Item
     {
         return $this->name;
     }
-    abstract public function checkValidOwner();
-    abstract  public function checkItemExist();
-
-
 
 }
-class PostItem extends Item {
 
+interface ItemSecurity{
+     public function CheckValidOwner();
+      public function CheckItemExist();
+}
 
-    public function checkValidOwner()
+interface Privater extends ItemSecurity{
+    public function CheckPrivatePost();
+}
+
+class PrivatePost extends  Item implements Privater{
+
+    private Item $item;
+    public function __construct(Item $item)
     {
-        return   (new OwnerShortcut(Authentication::getInstance()->getCurrentyUser()->getId(),$this->getValue()))->action();
+        $this->item = $item;
     }
 
-    public function checkItemExist()
+    public function CheckValidOwner()
+    {
+     return   $this->item->CheckValidOwner();
+    }
+    public function CheckItemExist()
+    {
+      return $this->item->CheckItemExist();
+    }
+    public function CheckPrivatePost(){
+        return (new PrivatePostComposite(Authentication::getInstance()->getCurrentyUser()->getId(),$this->item->getValue()))->action();
+    }
+}
+
+class PostItem extends Item implements  itemSecurity{
+
+
+    public function CheckValidOwner()
+    {
+        return   (new OwnerComposite(Authentication::getInstance()->getCurrentyUser()->getId(),$this->getValue()))->action();
+    }
+
+    public function CheckItemExist()
     {
 
-        return (new ItemExistShortcut($this->getValue()))->action();
+        return (new ItemExistComposite($this->getValue()))->action();
     }
 }

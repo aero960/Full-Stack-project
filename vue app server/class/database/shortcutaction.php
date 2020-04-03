@@ -7,39 +7,36 @@ interface Shortcut
     public function action();
 }
 
-abstract class ShortcutBuilder
-{
 
-    protected PDO $db;
+class PrivatePostComposite extends  BuilderComposite implements Shortcut{
 
-    public function __construct()
+    private string $userId;
+    private string $postId;
+    public function __construct($userId,$postId)
     {
-        $this->db = Database::getInstance()->getDatabase();
+        parent::__construct();
+        $this->userId = $userId;
+        $this->postId = $postId;
+    }
+    private function checkPrivatePost(){
+            $sql = "SELECT post_published FROM post WHERE  post_id=:id";
+            $statement =  $this->getDb()->prepare($sql);
+            $statement->execute(["id"=>$this->postId]);
+            return !$statement->fetch()->post_published;
+
+
+
     }
 
-    private function checkExistId(string $searchedId, string $tableName, string $idName): bool
-    {
-        $sql = "SELECT {$idName} FROM {$tableName} u WHERE {$idName} = :id";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute(["id" => $searchedId]);
-        return $stmt->rowCount();
-    }
 
-    public function getDb()
+    public function action()
     {
-        return $this->db;
-    }
-
-    public function getRandomId(string $tableName, string $idName)
-    {
-        $id = Helper::randomId();
-        while ($this->checkExistId($id, $tableName, $idName))
-            $id = Helper::randomId();
-        return $id;
+       return $this->checkPrivatePost();
     }
 }
 
-class OwnerShortcut extends ShortcutBuilder implements Shortcut
+
+class OwnerComposite extends BuilderComposite implements Shortcut
 {
     private string $userId;
     private string $itemId;
@@ -62,13 +59,13 @@ class OwnerShortcut extends ShortcutBuilder implements Shortcut
     }
 }
 
-class ItemExistShortcut extends ShortcutBuilder implements Shortcut
+class ItemExistComposite extends BuilderComposite implements Shortcut
 {
     private string $postId;
 
     public function __construct(string $postId)
     {
-        shortcutBuilder::__construct();
+        BuilderComposite::__construct();
         $this->postId = $postId;
     }
 
@@ -83,7 +80,7 @@ class ItemExistShortcut extends ShortcutBuilder implements Shortcut
     }
 }
 
-class GetUserById extends  ShortcutBuilder implements Shortcut {
+class GetUserById extends  BuilderComposite implements Shortcut {
     private string $userId;
     public function __construct(string $userId)
     {
@@ -100,14 +97,14 @@ class GetUserById extends  ShortcutBuilder implements Shortcut {
     }
 }
 
-class PostShortcut extends ShortcutBuilder implements Shortcut
+class PublishCurrentyPost extends BuilderComposite implements Shortcut
 {
     private bool $publish;
     private string $postId;
 
     public function __construct(string $postId, bool $publish)
     {
-        shortcutBuilder::__construct();
+        BuilderComposite::__construct();
         $this->postId = $postId;
         $this->publish = $publish;
     }

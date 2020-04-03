@@ -18,16 +18,21 @@ class PermissionChecker {
            }
            return null;
     }
-
     public static function checkAdminUserAuth(){
-
         $permission =   Authentication::getInstance()->getCurrentyUser()->getPermission();
         if($permission < Permmision::ADMIN){
             return ["info"=> Serverlanguage::getInstance()->GetMessage("noactiveadmin")];
         }
         return null;
     }
+    public static function checkAdminUserAuthBOOL(){
+        $permission =   Authentication::getInstance()->getCurrentyUser()->getPermission();
+        return !($permission < Permmision::ADMIN);
+    }
 
-
+    public static function checkNormalUserAuthBOOL(){
+        $permission =   Authentication::getInstance()->getCurrentyUser()->getPermission();
+        return !($permission < Permmision::NORMAL);
+    }
 
 }

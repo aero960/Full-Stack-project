@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 abstract class PostModificator extends QueryComposer
 {
     public function __construct()
@@ -15,11 +12,10 @@ abstract class PostModificator extends QueryComposer
     }
 }
 
-
 class PostCreateEXT extends PostModificator implements tagHandler
 {
-    protected Composer $tagManaging;
-    protected $tagData;
+    protected FastAction $tagManaging;
+    protected  string $tagData;
 
     public function __construct()
     {
@@ -30,13 +26,9 @@ class PostCreateEXT extends PostModificator implements tagHandler
         $this->fetcherComposite = new PostQueryDecorator(new PostCreator( $userid, $title, $content));
         $this->execute();
 
+
         $this->tagData = $tagData;
         $this->TagAction();
-    }
-
-
-    function getCreatedTag(){
-           return $this->tagManaging->getData();
     }
     function Initialize()
     {
@@ -46,7 +38,7 @@ class PostCreateEXT extends PostModificator implements tagHandler
     function TagAction()
     {
         $this->Initialize();
-        $this->tagManaging->action();
+        $this->tagManaging->getFastActionResponse();
     }
 }
 
@@ -67,6 +59,8 @@ class PostPublishEXT extends PostModificator
         return parent::getData();
     }
 }
+
+
 
 class PostUpdateEXT extends PostModificator
 {
@@ -94,11 +88,7 @@ class PostUpdateEXT extends PostModificator
         $this->execute();
     }
 
-
-
 }
-
-
 class PostRemoveEXT extends PostModificator
 {
     public function __construct()
@@ -108,17 +98,15 @@ class PostRemoveEXT extends PostModificator
 
     private PostSchema $postBeforeDelete;
 
-    public function getPostBeforeDelete()
+    public function getPostBeforeDelete() : PostSchema
     {
         return $this->postBeforeDelete;
     }
-
-
     public function PostRemove(string $id)
     {
         $this->fetcherComposite = new PostQueryDecorator(new PostDeleter( $id));
         $this->postBeforeDelete = $this->fetcherComposite->fetchData();
-
+        (new TagsRemoveEXT($this->postBeforeDelete->getPostId()))->getFastActionResponse();
         $this->execute();
     }
 }

@@ -8,27 +8,44 @@ use WebpageMNG\Page;
 
 class PostView extends Page
 {
-
     private ViewQuery $showPosts;
-    private PostModificator $postManagment;
 
     public function __construct(Parameters $parameters = null)
     {
         Parent::__construct();
-        $this->parameters = new NoParameters();
+        $this->parameters = new PostViewerParameters($parameters);
     }
+
     protected function pageContent()
     {
         $this->Initialize();
-        $arrayOfPost = array_filter($this->showPosts->getView(), fn($index) => $index[1]->getPublished());
-        return empty($arrayOfPost) ? ["info" => Serverlanguage::getInstance()->GetMessage("doesent.published.posts")] : $arrayOfPost;
+        $category = $this->parameters->getParameter("category");
+        if (isset($category)) {
+            $posts = (new CategoryShowEXT($this->parameters->getParameter("category")))->getFastActionResponse();
+
+            if (!empty($posts)) {
+                $data = [];
+                foreach ($posts as $index) {
+                    $post = new PostSchema($index);
+
+                    $data[] = ["info" => "posty z kategori {$category}",
+                        "content" => $post->toIterate(),
+                        "comments" => (new ShowCommetoRealtedToPostEXT($post->getPostId()))->getFastActionResponse()];
+                }
+                return $data;
+            }
+
+            return ["info" => "Kategoria : " . $this->parameters->getParameter("category") . " nie posiada wpisow"];
+        }
     }
+
     protected function Initialize(): void
     {
+
+        /*
         if (Authentication::getInstance()->isAuthenticated())
             $this->showPosts = new ShowUserPost(Authentication::getInstance()->getCurrentyUser()->getId());
-        else
             $this->showPosts = new ShowAllPost();
-
+        */
     }
 }

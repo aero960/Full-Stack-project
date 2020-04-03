@@ -11,25 +11,42 @@ use PageParametersSchema;
 use RoutesMNG\Parameters;
 use ValidateParameters;
 
-interface Fabric{
+interface Fabric
+{
     public function getContext();
-    }
-interface ElementInterface {
+}
+
+interface FabricActioner
+{
+    public function getValues(string $name);
+    public function getAction();
+}
+
+interface ElementInterface
+{
     public function setActiveElement();
+
     public function isActive();
 }
 
-abstract class Element implements ElementInterface,Fabric{
+abstract class Element implements ElementInterface, Fabric
+{
     protected $context;
     protected bool $active;
 
     abstract protected function createContext();
-     public function ExtensionData(){}
+
+    public function ExtensionData()
+    {
+    }
+
     public function __construct()
     {
         $this->active = false;
     }
-    public function setActiveElement(){
+
+    public function setActiveElement()
+    {
         $this->active = true;
     }
 
@@ -37,32 +54,41 @@ abstract class Element implements ElementInterface,Fabric{
     {
         return $this->active;
     }
-    public function getContext(){
+
+    public function getContext()
+    {
         $this->createContext();
         return $this->context;
     }
+
+    private array $items = [];
+
+    public function getActualItem($name): Item
+    {
+        foreach ($this->items as $index) {
+            if ($index->getName() == $name) {
+                return $index;
+            }
+        }
+    }
+
+    public function addActualItem(Item $actualItem)
+    {
+        $this->items[] = $actualItem;
+    }
+
 }
 
 abstract class Page extends Element
 {
     protected ValidateParameters $parameters;
-    private array $items = [];
-    public function getActualItem($name): Item
-    {
-       foreach($this->items as $index){
-           if($index->getName() == $name){
-               return $index;
-           }
-       }
-    }
-    public function addActualItem(Item $actualItem)
-    {
-       $this->items[] = $actualItem;
-    }
-    abstract protected function pageContent();
-    abstract protected function Initialize() :void;
 
-    public function checkValidParameters(){
+    abstract protected function pageContent();
+
+    abstract protected function Initialize(): void;
+
+    public function checkValidParameters()
+    {
         return $this->parameters->checkValidParameters();
     }
 
@@ -72,8 +98,6 @@ abstract class Page extends Element
             $this->context = $this->pageContent();
         }
     }
-
-
 
 
 }

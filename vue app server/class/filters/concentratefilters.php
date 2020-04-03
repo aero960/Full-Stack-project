@@ -12,9 +12,8 @@ class FullFilter extends filterBuilder
 
     public function checkValues($name,$value){
         $filtered = true;
-
-        if(AllParametersType::EMAIL == $name){
-            $filtered =   filter_var($value,FILTER_VALIDATE_EMAIL);
+        if(FastActionEXT::COMMENT_ADD_CONTENT == $name){
+            $filtered =  strlen($value)  < 250 ;
         }
         return $filtered;
     }
@@ -29,15 +28,17 @@ class FullFilter extends filterBuilder
                 }*/
             $cleanedArray = [];
         foreach ($this->data as $name => $index) {
-            $index = trim(htmlspecialchars($index),'_\n\t\r\0\ \x0B');
-            $namePara = trim(htmlspecialchars($name),'_\n\t\r\0\ \x0B');
-            if(!$this->checkValues($namePara,$index))
+            $index = strtolower(trim(htmlspecialchars($index),'_\n\ \x0B'));
+
+
+            $namePara = trim(htmlspecialchars($name),'_\n\ \x0B');
+          if(!$this->checkValues($namePara,$index))
             {
                 echo "Dane sa niewlasciwe";
                 exit();
             }
 
-            $this->cleandedData[$namePara] = $index;
+            $this->cleandedData[$name] = $index;
         }
         return true;
     }

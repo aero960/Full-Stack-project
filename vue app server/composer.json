@@ -11,6 +11,10 @@
              "class/decorators/decorator.parameters.php",
              "class/decorators/decorator.Query.php",
               "class/decorators/decorator.element.owner.php",
+              "class/decorators/decorator.private.post.php",
+
+             "class/fastactions/fastactions.php",
+            "class/fastactions/decorators.php",
 
               "class/elementeditor/item.php",
              "class/elementeditor/itemschemas.php",
@@ -21,6 +25,7 @@
             "class/authentication/permmisionchecker.php",
              "class/authentication/userschema.php",
              "class/authentication/authentication.php",
+
 
             "class/serverMessage/avaiablelanguages.php",
              "class/serverMessage/serverlanguage.php",
@@ -33,12 +38,15 @@
              "class/database/viewquery.php",
             "class/database/postmanaging.php",
             "class/database/tagmanaging.php",
+            "class/database/categorymanaging.php",
+            "class/database/commentmanaging.php",
 
              "class/routes/concentrate.php",
              "class/routes/pageparametersschema.php",
              "class/routes/parameters.php",
              "class/routes/routes.php",
              "class/routes/routescomposite.php",
+
 
              "class/webpages/404_page.php",
              "class/webpages/login.php",
@@ -50,7 +58,7 @@
              "class/webpages/postdelete.php",
              "class/webpages/postviewer.php",
               "class/webpages/postpublish.php",
-
+              "class/webpages/postspecificview.php",
              "class/contentconverter.php",
              "class/events.php",
 

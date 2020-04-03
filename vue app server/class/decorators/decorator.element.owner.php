@@ -6,11 +6,8 @@ use WebpageMNG\Element;
 use WebpageMNG\Page;
 
 
-class PostOwnerDecorator extends Page
-{
-
+abstract class PageDecoratorBuilder extends Page{
     private Page $page;
-
     public function __construct(Page $element)
     {
         Parent::__construct();
@@ -26,20 +23,6 @@ class PostOwnerDecorator extends Page
     {
         $this->page->ExtensionData();
     }
-
-    protected function pageContent()
-    {
-
-        if ($this->page->getActualItem('postid')->checkItemExist()) {
-            if (($this->page->getActualItem('postid')->checkValidOwner() || PermissionChecker::checkAdminUserAuth())) {
-                return $this->page->pageContent();
-            }
-            return ["info" => Serverlanguage::getInstance()->GetMessage('noownerpost')];
-        }
-        return ["info" => Serverlanguage::getInstance()->GetMessage('postdoesntexist')];
-
-    }
-
     protected function Initialize(): void
     {
 
@@ -61,7 +44,69 @@ class PostOwnerDecorator extends Page
 
         return $this->page->checkValidParameters();
     }
+
+
+
 }
+
+
+
+
+
+class PostOwnerDecorator extends PageDecoratorBuilder
+{
+    private Page $page;
+    public function __construct(Page $element)
+    {
+        parent::__construct($element);
+        $this->page = $element;
+    }
+    protected function pageContent()
+    {
+        if ($this->page->getActualItem('postid')->CheckItemExist()) {
+            if (($this->page->getActualItem('postid')->CheckValidOwner() || PermissionChecker::checkAdminUserAuth())) {
+                return $this->page->pageContent();
+            }
+            return ["info" => Serverlanguage::getInstance()->GetMessage('noownerpost')];
+        }
+        return ["info" => Serverlanguage::getInstance()->GetMessage('postdoesntexist')];
+
+    }
+
+}
+
+
+
+class PrivatePostOwner extends PageDecoratorBuilder
+{
+    private Page $page;
+
+    public function __construct(Page $element)
+    {
+        Parent::__construct($element);
+        $this->page = $element;
+    }
+
+    protected function pageContent()
+    {
+        $checker = new PrivatePost($this->page->getActualItem('postid'));
+        if ($checker->CheckItemExist()){
+            if($checker->CheckPrivatePost()){
+                if (($this->page->getActualItem('postid')->CheckValidOwner() || PermissionChecker::checkAdminUserAuthBOOL())){
+                    return $this->page->pageContent();
+                }
+                return ["info" => Serverlanguage::getInstance()->GetMessage('noownerpost')];
+            }
+            return $this->page->pageContent();
+        }
+        return ["info" => Serverlanguage::getInstance()->GetMessage('postdoesntexist')];
+
+    }
+
+}
+
+
+
 
 
 

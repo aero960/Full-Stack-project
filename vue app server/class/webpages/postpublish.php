@@ -15,6 +15,7 @@ use PostPublishEXT;
 use PostPublishParameters;
 use PostUpdateEXT;
 use RoutesMNG\Parameters;
+use TagsShowEXT;
 
 
 class PostPublish extends Page
@@ -30,23 +31,19 @@ class PostPublish extends Page
     protected function pageContent()
     {
         $this->Initialize();
-        $data = $this->postManagment->getData();
-        $data->assignUserById($data->getUserId());
-        $infoMsg = ($data->getPublished()) ? "Opublikowano post " : "Zmieniono Status na prywatny, postu o nazwie ";
-        return ["info" => "{$infoMsg}  postu o nazwie {$this->postManagment->getData()->getTitle()}",
-            "data" => [$data->getUser()->getUsername(),
-                $data->getContent(),
-                $data->getPublished()]
+        $infoMsg = ($this->postManagment->getData()->getPublished()) ? "Opublikowano post" : "Zmieniono Status na prywatny,";
+        return ["info" => "{$infoMsg} o nazwie {$this->postManagment->getData()->getTitle()}",
+            "data" => ["content"=>  $this->postManagment->getData()->getContent(),
+               "published"=> $this->postManagment->getData()->getPublished()]
         ];
     }
-
     public function ExtensionData()
     {
         $this->addActualItem(new PostItem("postid", $this->parameters->getParameter(0)));
     }
-
     protected function Initialize(): void
     {
+
         $this->postManagment = new PostPublishEXT();
         $this->postManagment->PublishPost($this->getActualItem("postid")->getValue(),
             $this->parameters->getParameter(PostPublishParameters::PUBLISH));

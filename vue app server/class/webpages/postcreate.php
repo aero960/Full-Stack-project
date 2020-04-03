@@ -24,10 +24,9 @@ class PostCreate extends Page
     protected function pageContent()
     {
         $this->Initialize();
-
         return ['info'=>[
             $this->postManagment->getData()->toIterate(),
-            'tags'=> array_column($this->postManagment->getCreatedTag(),"tag_title")
+            'tags'=> array_column((new \TagsShowEXT($this->postManagment->getData()->getPostId()))->getTags(),"tag_title")
         ]];
     }
 
