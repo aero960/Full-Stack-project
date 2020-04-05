@@ -1,11 +1,12 @@
 #PHP SERVER 
 ![Image description](https://previews.123rf.com/images/lefttime/lefttime1708/lefttime170800006/83489654-route-location-icon-three-map-pin-sign-and-road-journey-symbol-one-color-vector-illustration-isolate.jpg)
 
-###Authentication 
+###Authentication 🛣
 - **HEADER**:  ```WWW-Authenticate``` 
     - example
         ```eyJ0eXAiOiJKV1QiLCJhbGc...tDN7n3APpGXCJcly6B4-2NqoBVHanqqmAak```
-##Routes lists 
+##Routes lists 	
+#### **User routes** 🚀
 ___
 -  ```login```
    - [ ] `username` - string 
@@ -23,6 +24,8 @@ ___
    - [ ] `intro` - string 
    - [ ] `profile` - string 
    - [ ] `image` - string      
+   
+#### **Posts routes** 🚄
 ___      
 -  ```createpost```
    - [ ] `post_title` - string 
@@ -50,7 +53,7 @@ ___
     - [ ] `category` `get param` - string 
     - [ ] `page` `get param` - int
 
-
+#### **Fast actions** 🚨
 ___
 -  ```fastaction/{action}```
     - [ ] `createcategory` 
