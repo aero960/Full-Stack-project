@@ -4,42 +4,23 @@ use language\Serverlanguage;
 use WebpageMNG\Element;
 use WebpageMNG\Page;
 
-
-
-
-
-class ParametersDecorator extends Element
+class ParametersDecorator extends PageDecoratorBuilder
 {
-    private Page $page;
-
-    public function __construct(Page $element)
+    public function __construct(Page $page)
     {
-        Element::__construct();
-        $this->page = $element;
-    }
-    public function ExtensionData()
-    {
-        $this->page->ExtensionData();
+        parent::__construct();
+        $this->page = $page;
     }
 
-    public function pageContent()
+    protected function pageContent()
     {
-        if ($this->page->checkValidParameters())
-            return $this->page->getContext();
-        return ["info" => Serverlanguage::getInstance()->GetMessage("parameters.decorator")];
+        $this->Initialize();
+        if ($this->page->checkValidParameters()) {
+            return $this->page->pageContent();
+        }
+        $this->outputController->setDataSuccess(false);
+        $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage("p.n.p"));
+        return $this->outputController->getView();
     }
 
-    public function isActive()
-    {
-        return $this->page->isActive();
-    }
-
-    public function setActiveElement()
-    {
-        $this->page->setActiveElement();
-    }
-    protected function createContext()
-    {
-        $this->context = $this->pageContent();
-    }
 }

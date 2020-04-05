@@ -54,6 +54,6 @@ class QueryDecoratorUserSchema implements QueryComposite{
 
     function fetchData() : ResourcesSchema
     {
-        return new ResourcesSchema($this->composer->fetchData()) ;
+        return new ResourcesSchema($this->composer->fetchData());
     }
 }

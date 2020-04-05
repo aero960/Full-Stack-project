@@ -96,6 +96,7 @@ namespace authentication {
         public function createToken(AuthenticationSchema $userData)
         {
             //Tutaj musiałem coś zmieniać
+
             $this->token["data"] = $userData->toIterate();
             return JWT::encode($this->token, $this->key);
         }

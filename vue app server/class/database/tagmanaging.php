@@ -1,23 +1,59 @@
 <?php
 
 
-
-
 interface tagHandler
 {
     function Initialize();
+
     function TagAction();
+}
+
+
+class TagsUpdaterEXT extends BuilderComposite implements FastAction
+{
+
+    private string $postId;
+    private $data;
+
+    public function __construct(string $postId, $data = [])
+    {
+
+        parent::__construct();
+        $this->postId = $postId;
+        if (!empty($data)) {
+
+            if (is_array($data))
+                $this->data = array_unique($data);
+            else
+                $this->data = array_unique(preg_split("/,|\./", $data));
+        }
+
+    }
+    private function updatePostTag()
+    {
+            (new TagsRemoveEXT($this->postId))->getFastActionResponse();
+            (new TagsAddEXT($this->data, $this->postId))->getFastActionResponse();
+        return true;
+    }
+
+
+    public function getFastActionResponse()
+    {
+        return $this->updatePostTag();
+    }
 }
 
 
 class TagsRemoveEXT extends BuilderComposite implements FastAction
 {
     private string $postId;
+
     public function __construct(string $postId)
     {
         parent::__construct();
         $this->postId = $postId;
     }
+
     private function getRealtedTags()
     {
         $sql = "SELECT pt_tag_id FROM post_tag WHERE pt_post_id=:id";
@@ -25,30 +61,32 @@ class TagsRemoveEXT extends BuilderComposite implements FastAction
         $statement->execute(["id" => $this->postId]);
 
         return $statement->fetchAll();
-
     }
+
     private function getTagsToDelete()
     {
         $tagList = $this->getRealtedTags();
         $tagsToDelete = [];
-        foreach($tagList as $index){
+        foreach ($tagList as $index) {
             $sql = "SELECT * FROM post_tag WHERE pt_tag_id=:id";
-           $statement = $this->getDb()->prepare($sql);
-           $statement->execute(["id"=>$index->pt_tag_id]);
-           if( $statement->rowCount() <= 1)
-               $tagsToDelete[] = $index;
-        }
-     return $tagsToDelete;
-    }
-    private function removeAllConnections(){
-            $sql = 'DELETE FROM post_tag WHERE pt_post_id=:id';
             $statement = $this->getDb()->prepare($sql);
-            $statement->execute(["id" => $this->postId]);
+            $statement->execute(["id" => $index->pt_tag_id]);
+            if ($statement->rowCount() <= 1)
+                $tagsToDelete[] = $index;
+        }
+        return $tagsToDelete;
     }
+
+    private function removeAllConnections()
+    {
+        $sql = 'DELETE FROM post_tag WHERE pt_post_id=:id';
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["id" => $this->postId]);
+    }
+
     public function removeTag()
     {
-
-        foreach ($this->getTagsToDelete() as $index){
+        foreach ($this->getTagsToDelete() as $index) {
             $sql = 'DELETE FROM tags WHERE id_tag=:id';
             $statement = $this->getDb()->prepare($sql);
             $statement->execute(["id" => $index->pt_tag_id]);
@@ -59,9 +97,10 @@ class TagsRemoveEXT extends BuilderComposite implements FastAction
 
     public function getFastActionResponse()
     {
-        return true;
+        return $this->removeTag();
     }
 }
+
 class TagsShowEXT extends BuilderComposite implements FastAction
 {
     private string $postId;
@@ -151,10 +190,11 @@ class TagsAddEXT extends BuilderComposite implements FastAction
         $statement->execute(["title" => $name]);
         return ($statement->rowCount() > 0) ? true : false;
     }
+
     public function getFastActionResponse()
     {
         $this->addTag();
-        return  $this->createdTagList;
+        return $this->createdTagList;
     }
 }
 

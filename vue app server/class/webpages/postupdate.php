@@ -8,7 +8,8 @@ use BuilderComposite;
 use DateTime;
 
 
-
+use Error;
+use language\Serverlanguage;
 use PostItem;
 use PostModificator;
 use PostParameters;
@@ -25,21 +26,26 @@ class PostUpdate extends Page
         Parent::__construct();
         $this->parameters = new PostParameters($parameters);
     }
-    protected function pageContent()
-    {
-        $this->Initialize();
-        return ["info"=>$this->postManagment->getData()->toIterate()];
-    }
+
     public function ExtensionData()
     {
-            $this->addActualItem(new PostItem("postid",$this->parameters->getParameter(0)));
+        $this->addActualItem(new PostItem("postid", $this->parameters->getParameter(0)));
     }
+
     protected function Initialize(): void
     {
-        $this->postManagment = new PostUpdateEXT();
-        $this->postManagment->PostUpdate(Authentication::getInstance()->getCurrentyUser()->getId(),
-            $this->parameters->getParameter(PostParameters::TITLE),
-            $this->parameters->getParameter(PostParameters::CONTENT),
-            $this->getActualItem('postid')->getValue());
+            $this->postManagment = new PostUpdateEXT();
+            $this->postManagment->PostUpdate(Authentication::getInstance()->getCurrentyUser()->getId(),
+                $this->parameters->getParameter(PostParameters::TITLE),
+                $this->parameters->getParameter(PostParameters::CONTENT),
+                $this->getActualItem('postid')->getValue(),
+                $this->parameters->getParameter(PostParameters::TAGS));
+
+            $this->outputController->setDataSuccess(true);
+            $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage("p.u"));
+            $this->outputController->setContent(["postdata" => $this->postManagment->getData()->toIterate()]);
+
+
+
     }
 }

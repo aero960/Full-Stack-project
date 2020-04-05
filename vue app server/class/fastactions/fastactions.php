@@ -1,6 +1,7 @@
 <?php
 
 use authentication\Authentication;
+use authentication\AuthenticationSchema;
 use RoutesMNG\Parameters;
 use WebpageMNG\Element;
 use WebpageMNG\Fabric;
@@ -10,15 +11,18 @@ use WebpageMNG\Page;
 
 class FastActionEXT extends Page implements FabricActioner
 {
-    public const CATEGORY_ADD_TITLE = "title";
+    public const CATEGORY_ADD_TITLE = "title_category";
     public const CATEGORY_ADD_CONTENT = "content_category";
 
     public const CATEGORY_CONNECT_POSTID = "postid";
-    public const CATEGORY_CONNECT_NAME_CATEGORY = "categoryname";
+    public const CATEGORY_CONNECT_NAME_CATEGORY = "category_name";
 
     public const COMMENT_ADD_TITLE = "title";
     public const COMMENT_ADD_CONTENT = "content_comment";
     public const COMMENT_ADD_POSTID = "postid";
+
+    public const COMMENT_REMOVE_ID = "comment_id";
+    public const COMMENT_REMOVE_SPAM = "spam";
 
     private Fabric $action;
 
@@ -26,12 +30,6 @@ class FastActionEXT extends Page implements FabricActioner
     {
         parent::__construct();
         $this->parameters = new NoParameters($parameters);
-    }
-
-    protected function pageContent()
-    {
-        $this->Initialize();
-        return $this->action->getContext();
     }
 
     public function ExtensionData()
@@ -42,6 +40,8 @@ class FastActionEXT extends Page implements FabricActioner
     protected function Initialize(): void
     {
         $this->action = new ChooseAction($this);
+        $this->outputController->setInfo(true);
+        $this->outputController->setInfo($this->action->getContext());
     }
 
     public function getValues(string $name)
@@ -84,14 +84,28 @@ class ChooseAction implements Fabric
                     $this->fabricCreator->getValues(FastActionEXT::CATEGORY_CONNECT_POSTID)));
                 break;
             }
-            case "addcomment":
+            case "createsubcomment":{
+
+            }
+            case "createcomment":
             {
+                //do zmiany
+                if (!Authentication::getInstance()->isAuthenticated())
+                    (new CreateGuest($this->fabricCreator->getValues(AuthenticationSchema::USERNAME)))->action();
                 $this->obj = new ItemExistFA(new AddCommentToPostEXT($this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_TITLE),
                     $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_CONTENT),
                     $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_POSTID),
                     Authentication::getInstance()->getCurrentyUser()->getId()),
-
                     $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_POSTID));
+                break;
+            }
+
+            case "deletecomment":
+            {
+                $this->obj = new AuthenticateAdminOrOwnerFA(
+                    new RemoveCommentFromPostEXT($this->fabricCreator->getValues(FastActionEXT::COMMENT_REMOVE_ID),
+                        $this->fabricCreator->getValues(FastActionEXT::COMMENT_REMOVE_SPAM)),
+                    $this->fabricCreator->getValues(FastActionEXT::COMMENT_REMOVE_ID));
                 break;
             }
         }
@@ -99,19 +113,17 @@ class ChooseAction implements Fabric
 
     public static function getMapActions()
     {
-        return ["createcategory", "connectcategory"];
+        return ["createcategory", "connectcategory", "createcomment", "deletecomment"];
     }
 
     public function getContext()
     {
-        $this->createAction();
-
-        if (isset($this->obj)) {
-
-            return $this->obj->getFastActionResponse();
+        try {
+            $this->createAction();
+        } catch (TypeError $e) {
+            $this->obj = new DefaultAction();
         }
-        return ["info" => "to nie jest prawidlowa akcja",
-            "tip" => self::getMapActions()];
+        return $this->obj->getFastActionResponse();
     }
 }
 

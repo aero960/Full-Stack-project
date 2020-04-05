@@ -2,6 +2,7 @@
 
 namespace RoutesMNG {
 
+    use Exception;
     use Iterator;
     use language\Serverlanguage;
     use Phroute\Phroute\Dispatcher;
@@ -30,7 +31,7 @@ namespace RoutesMNG {
         {
             foreach($routesList as $index){
                 if (!($index instanceof Route))
-                    throw new \Exception(Serverlanguage::getInstance()->importandServerMessage("route.require"));
+                    throw new Exception(Serverlanguage::getInstance()->importandServerMessage("route.require"));
             }
 
             $this->routesList = $routesList;

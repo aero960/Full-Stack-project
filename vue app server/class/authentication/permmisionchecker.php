@@ -14,14 +14,14 @@ class PermissionChecker {
     public static function checkNormalUserAuth(){
            $permission =   Authentication::getInstance()->getCurrentyUser()->getPermission();
            if($permission < Permmision::NORMAL){
-               return ["info"=> Serverlanguage::getInstance()->GetMessage("noactivepage")];
+               return ["info"=> Serverlanguage::getInstance()->GetMessage("a.n.l")];
            }
            return null;
     }
     public static function checkAdminUserAuth(){
         $permission =   Authentication::getInstance()->getCurrentyUser()->getPermission();
         if($permission < Permmision::ADMIN){
-            return ["info"=> Serverlanguage::getInstance()->GetMessage("noactiveadmin")];
+            return ["info"=> Serverlanguage::getInstance()->GetMessage("a.n.a")];
         }
         return null;
     }

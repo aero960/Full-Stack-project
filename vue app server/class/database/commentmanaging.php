@@ -19,16 +19,98 @@ class ShowCommetoRealtedToPostEXT extends BuilderComposite implements FastAction
                 INNER JOIN comments
                 ON comment_id=cp_comment_id WHERE post_id=:id";
         $statement = $this->getDb()->prepare($sql);
-        $statement->execute(["id"=>$this->postId]);
+        $statement->execute(["id" => $this->postId]);
         return $statement->fetchAll();
     }
+
     public function getFastActionResponse()
     {
-            return $this->getComments();
+        return $this->getComments();
     }
 
 }
 
+class RemoveCommentFromPostEXT extends BuilderComposite implements FastAction
+{
+
+    private string $commentId;
+    private bool $spam;
+
+    public function __construct(string $commentId, bool $spam)
+    {
+        parent::__construct();
+        $this->commentId = $commentId;
+        $this->spam = $spam;
+    }
+
+    public static function deleteAllRealetedComment(string $postId){
+            $sql = "SELECT cp_comment_id as id FROM comment_post WHERE cp_post_id=:id";
+            $statement = Database::getInstance()->getDatabase()->prepare($sql);
+        $statement->execute(["id"=>$postId]);
+        $commentsToDelete = $statement->fetchAll();
+           array_walk($commentsToDelete,function($index){
+               (new RemoveCommentFromPostEXT($index->id,0))->getFastActionResponse();
+           });
+    }
+
+    private function deleteConnection()
+    {
+        $sql = "DELETE FROM comment_post WHERE cp_comment_id=:id";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["id" => $this->commentId]);
+    }
+
+    private function deleteComment()
+    {
+        $sql = "DELETE FROM comments WHERE comment_id=:id";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["id" => $this->commentId]);
+    }
+
+    private function changeAtSpam()
+    {
+        $sql = "UPDATE comments SET comment_title=:title,comment_content=:content WHERE comment_id=:id";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["id" => $this->commentId, "title" => "spam", "content" => "spam"]);
+    }
+
+    private function getUserByComment()
+    {
+        $sql = "SELECT user_id FROM comments WHERE comment_id=:id";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["id" => $this->commentId]);
+        return $statement->fetch()->user_id;
+    }
+
+    private function punishUser()
+    {
+        $this->changeAtSpam();
+        (new PunishUser($this->getUserByComment(), "spam"))->action();
+    }
+
+    public function getFastActionResponse()
+    {
+        if ($this->spam) {
+            $this->punishUser();
+            return ["info" => "Punish user: {$this->getUserByComment()}"];
+        }
+        $id = $this->getUserByComment();
+        $this->deleteComment();
+        $this->deleteConnection();
+        return ["info" => "usunieto post uzytkownik {$id} o id {$this->commentId}"];
+    }
+}
+
+
+class AddSubCommentEXT extends BuilderComposite implements FastAction{
+
+
+    public function getFastActionResponse()
+    {
+
+
+    }
+}
 
 class AddCommentToPostEXT extends BuilderComposite implements FastAction
 {
@@ -75,10 +157,11 @@ class AddCommentToPostEXT extends BuilderComposite implements FastAction
         $statement = $this->getDb()->prepare($sql);
         $statement->execute(["postId" => $this->postId, "commentId" => $this->currentyId]);
     }
+
     public function getFastActionResponse()
     {
         $this->addComment();
         $this->connectWithPost();
-        return ["info" => "created comment to post {$this->postId} with comment id {$this->currentyId}"];
+        return "created comment to post {$this->postId} with comment id {$this->currentyId}";
     }
 }

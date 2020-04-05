@@ -3,6 +3,10 @@
 namespace Helper {
 
 
+    use Exception;
+    use Faker\Factory;
+    use SplFixedArray;
+
     function cors()
     {
 
@@ -21,7 +25,7 @@ namespace Helper {
     {
         public static function randomId(){
 
-            $Faker  =\Faker\Factory::create();
+            $Faker  = Factory::create();
                $number =  $Faker->randomNumber();
                $letter = [];
                     for($i =0; $i< 5;$i++ ){
@@ -55,7 +59,7 @@ namespace Helper {
         //Add element to Spl Fixed Array
         //array will increase size by 1
         //and last element will be new item
-        public static function addElementToArray(\SplFixedArray $array,$element){
+        public static function addElementToArray(SplFixedArray $array, $element){
             $length = $array->getSize();
             $array->setSize($length);
             $array[$length -1] = $element;
@@ -73,12 +77,12 @@ namespace Helper {
         //Example allowProperties ["name" => value]
         public static function getterConfig(array $allowsProperty,$name, $class )
         {
-            return (property_exists($class,$name)) ? $class->{$name}: new \Exception(`Value of ${class} not exisit or isn't accesable`);
+            return (property_exists($class,$name)) ? $class->{$name}: new Exception(`Value of ${class} not exisit or isn't accesable`);
         }
         //set easier way allowed property
         public static function setterConfig(array $allowsProperty,$name,$value,string $class )
         {
-            $allowsProperty[$name] =  (property_exists($class,$name)) ? $value : new \Exception(`Value of ${class} not exisit or isn't accesable`);
+            $allowsProperty[$name] =  (property_exists($class,$name)) ? $value : new Exception(`Value of ${class} not exisit or isn't accesable`);
         }
         public static function dataOutputCreator( $data,array &$array){
 

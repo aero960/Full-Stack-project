@@ -25,8 +25,6 @@ class PostCreateEXT extends PostModificator implements tagHandler
     {
         $this->fetcherComposite = new PostQueryDecorator(new PostCreator( $userid, $title, $content));
         $this->execute();
-
-
         $this->tagData = $tagData;
         $this->TagAction();
     }
@@ -53,6 +51,9 @@ class PostPublishEXT extends PostModificator
     {
         $this->fetcherComposite = new PostQueryDecorator(new PostPublisher( $postId,$publish));
         $this->execute();
+
+
+
     }
     public function getData(): PostSchema
     {
@@ -79,11 +80,13 @@ class PostUpdateEXT extends PostModificator
             throw new Exception("Object must contains updating fetcher composit");
         }
     }
-    public function PostUpdate(string $userid, string $title, string $content, string $postId)
+    public function PostUpdate(string $userid, string $title, string $content, string $postId,$tagData = "")
     {
         $updater = new PostUpdater( $userid, $title, $content, $postId);
         $this->lastUpdate = $updater->lastLogin;
         $this->fetcherComposite = new PostQueryDecorator($updater);
+var_dump("test");
+        (new TagsUpdaterEXT($postId,$tagData))->getFastActionResponse();
 
         $this->execute();
     }
@@ -102,11 +105,16 @@ class PostRemoveEXT extends PostModificator
     {
         return $this->postBeforeDelete;
     }
+
+
+
+
     public function PostRemove(string $id)
     {
         $this->fetcherComposite = new PostQueryDecorator(new PostDeleter( $id));
         $this->postBeforeDelete = $this->fetcherComposite->fetchData();
         (new TagsRemoveEXT($this->postBeforeDelete->getPostId()))->getFastActionResponse();
-        $this->execute();
+        RemoveCommentFromPostEXT::deleteAllRealetedComment($id);
+        return $this->execute();
     }
 }

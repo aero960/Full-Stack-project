@@ -1,32 +1,18 @@
 <?php
 
-use authentication\Authentication;
+
 use language\Serverlanguage;
-use WebpageMNG\Element;
+
 use WebpageMNG\Page;
 
 
-abstract class PageDecoratorBuilder extends Page{
-    private Page $page;
-    public function __construct(Page $element)
-    {
-        Parent::__construct();
-        $this->page = $element;
-    }
-
-    protected function createContext()
-    {
-        $this->context = $this->pageContent();
-    }
+abstract class PageDecoratorBuilder extends Page
+{
+    protected Page $page;
 
     public function ExtensionData()
     {
         $this->page->ExtensionData();
-    }
-    protected function Initialize(): void
-    {
-
-        $this->page->Initialize();
     }
 
     public function isActive()
@@ -41,67 +27,67 @@ abstract class PageDecoratorBuilder extends Page{
 
     public function checkValidParameters()
     {
-
         return $this->page->checkValidParameters();
     }
-
-
-
 }
-
-
-
-
 
 class PostOwnerDecorator extends PageDecoratorBuilder
 {
-    private Page $page;
+
     public function __construct(Page $element)
     {
-        parent::__construct($element);
+        parent::__construct();
         $this->page = $element;
     }
+
     protected function pageContent()
     {
         if ($this->page->getActualItem('postid')->CheckItemExist()) {
+
             if (($this->page->getActualItem('postid')->CheckValidOwner() || PermissionChecker::checkAdminUserAuth())) {
                 return $this->page->pageContent();
             }
-            return ["info" => Serverlanguage::getInstance()->GetMessage('noownerpost')];
+                $this->outputController->setDataSuccess(false);
+                $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage('p.n.o'));
+        } else {
+            $this->outputController->setDataSuccess(false);
+            $this->outputController->setInfo(sprintf(Serverlanguage::getInstance()->GetMessage('p.n.e'),
+                $this->page->getActualItem("postid")->getValue()));
         }
-        return ["info" => Serverlanguage::getInstance()->GetMessage('postdoesntexist')];
-
+        return $this->outputController->getView();
     }
-
 }
-
-
-
 class PrivatePostOwner extends PageDecoratorBuilder
 {
-    private Page $page;
-
     public function __construct(Page $element)
     {
-        Parent::__construct($element);
+        Parent::__construct();
         $this->page = $element;
     }
 
     protected function pageContent()
     {
         $checker = new PrivatePost($this->page->getActualItem('postid'));
-        if ($checker->CheckItemExist()){
-            if($checker->CheckPrivatePost()){
-                if (($this->page->getActualItem('postid')->CheckValidOwner() || PermissionChecker::checkAdminUserAuthBOOL())){
+        if ($checker->CheckItemExist()) {
+            if ($checker->CheckPrivatePost()) {
+                if (($this->page->getActualItem('postid')->CheckValidOwner() || PermissionChecker::checkAdminUserAuthBOOL())) {
                     return $this->page->pageContent();
                 }
-                return ["info" => Serverlanguage::getInstance()->GetMessage('noownerpost')];
+                $this->outputController->setDataSuccess(false);
+                $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage('p.n.o'));
+            }else{
+                $this->outputController->setDataSuccess(false);
+                $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage('p.n.o'));
             }
-            return $this->page->pageContent();
-        }
-        return ["info" => Serverlanguage::getInstance()->GetMessage('postdoesntexist')];
 
+
+        }else
+        $this->outputController->setDataSuccess(false);
+        $this->outputController->setInfo(sprintf(Serverlanguage::getInstance()->GetMessage('p.n.e'),
+            $this->page->getActualItem("postid")->getValue()));
+        return $this->outputController->getView();
     }
+
 
 }
 

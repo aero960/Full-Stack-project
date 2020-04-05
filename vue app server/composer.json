@@ -1,91 +1,90 @@
 {
-    "name":"composer/test",
-    "description": "composer test app",
-    "keywords": ["test"],
-    "type": "project",
-    "version": "0.0.3",
-    "license": "",
-    "autoload": {
-        "classmap":
-           ["class/decorators/decorator.authenticate.php",
-             "class/decorators/decorator.parameters.php",
-             "class/decorators/decorator.Query.php",
-              "class/decorators/decorator.element.owner.php",
-              "class/decorators/decorator.private.post.php",
+  "name": "composer/test",
+  "description": "composer test app",
+  "keywords": [
+    "test"
+  ],
+  "type": "project",
+  "version": "0.0.3",
+  "license": "",
+  "autoload": {
+    "classmap": [
+      "class/decorators/decorator.authenticate.php",
+      "class/decorators/decorator.parameters.php",
+      "class/decorators/decorator.Query.php",
+      "class/decorators/decorator.element.owner.php",
+      "class/decorators/decorator.private.post.php",
 
-             "class/fastactions/fastactions.php",
-            "class/fastactions/decorators.php",
+      "class/fastactions/fastactions.php",
+      "class/fastactions/decorators.php",
 
-              "class/elementeditor/item.php",
-             "class/elementeditor/itemschemas.php",
+      "class/elementeditor/item.php",
+      "class/elementeditor/itemschemas.php",
 
-             "class/filters/concentratefilters.php",
-             "class/filters/filters.php",
+      "class/filters/concentratefilters.php",
+      "class/filters/filters.php",
 
-            "class/authentication/permmisionchecker.php",
-             "class/authentication/userschema.php",
-             "class/authentication/authentication.php",
+      "class/authentication/permmisionchecker.php",
+      "class/authentication/userschema.php",
+      "class/authentication/authentication.php",
 
+      "class/serverMessage/avaiablelanguages.php",
+      "class/serverMessage/serverlanguage.php",
+      "class/serverMessage/builders.php",
 
-            "class/serverMessage/avaiablelanguages.php",
-             "class/serverMessage/serverlanguage.php",
-             "class/serverMessage/builders.php",
+      "class/database/database.php",
+      "class/database/mechanic.php",
+      "class/database/usermanaging.php",
+      "class/database/shortcutaction.php",
+      "class/database/viewquery.php",
+      "class/database/postmanaging.php",
+      "class/database/tagmanaging.php",
+      "class/database/categorymanaging.php",
+      "class/database/commentmanaging.php",
 
-             "class/database/database.php",
-              "class/database/mechanic.php",
-             "class/database/usermanaging.php",
-              "class/database/shortcutaction.php",
-             "class/database/viewquery.php",
-            "class/database/postmanaging.php",
-            "class/database/tagmanaging.php",
-            "class/database/categorymanaging.php",
-            "class/database/commentmanaging.php",
+      "class/routes/concentrate.php",
+      "class/routes/pageparametersschema.php",
+      "class/routes/parameters.php",
+      "class/routes/routes.php",
+      "class/routes/routescomposite.php",
 
-             "class/routes/concentrate.php",
-             "class/routes/pageparametersschema.php",
-             "class/routes/parameters.php",
-             "class/routes/routes.php",
-             "class/routes/routescomposite.php",
+      "class/webpages/404_page.php",
+      "class/webpages/login.php",
+      "class/webpages/register.php",
+      "class/webpages/page.php",
+      "class/webpages/updateprofile.php",
+      "class/webpages/postcreate.php",
+      "class/webpages/postupdate.php",
+      "class/webpages/postdelete.php",
+      "class/webpages/postviewer.php",
+      "class/webpages/postpublish.php",
+      "class/webpages/postspecificview.php",
+      "class/webpages/output/outputcontroller.php",
 
-
-             "class/webpages/404_page.php",
-             "class/webpages/login.php",
-             "class/webpages/register.php",
-             "class/webpages/page.php",
-             "class/webpages/updateprofile.php",
-            "class/webpages/postcreate.php",
-             "class/webpages/postupdate.php",
-             "class/webpages/postdelete.php",
-             "class/webpages/postviewer.php",
-              "class/webpages/postpublish.php",
-              "class/webpages/postspecificview.php",
-             "class/contentconverter.php",
-             "class/events.php",
-
-
-             "helper/Helper.php",
-             "test/test.php"
-
-
-
-
-           ],
-
-        "files": ["helper/Helper.php","test/test.php"]
-    },
-    "include-path":  ["configuration/"],
-
-    "scripts": {},
-    "require": {
-        "phroute/phroute": "^2.1",
-        "sabre/event": "5",
-        "ext-json": "*",
-        "firebase/php-jwt": "^5.1",
-      "ext-pdo": "*",
-        "fzaninotto/faker": "^1.9",
-      "ext-apache": "*"
-    }
-  ,
+      "class/contentconverter.php",
+      "class/events.php",
+      "helper/Helper.php",
+      "test/test.php"
+    ],
+    "files": [
+      "helper/Helper.php",
+      "test/test.php"
+    ]
+  },
+  "include-path": [
+    "configuration/"
+  ],
+  "scripts": {},
+  "require": {
+    "phroute/phroute": "^2.1",
+    "sabre/event": "5",
+    "ext-json": "*",
+    "firebase/php-jwt": "^5.1",
+    "ext-pdo": "*",
+    "fzaninotto/faker": "^1.9",
+    "ext-apache": "*",
+    "ext-ctype": "*"
+  },
   "require-dev": {
     "roave/security-advisories": "dev-master"
   }

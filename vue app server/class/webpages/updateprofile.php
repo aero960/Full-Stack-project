@@ -2,8 +2,9 @@
 
 use authentication\Authentication;
 use RoutesMNG\Parameters;
+use WebpageMNG\Page;
 
-class Updateprofile extends \WebpageMNG\Page
+class Updateprofile extends Page
 {
     private UpdateGenerator $userUpdateManagment;
 
@@ -19,12 +20,12 @@ class Updateprofile extends \WebpageMNG\Page
         $resources = Authentication::getInstance()->getCurrentyUser()->GetResouces();
         $currentUser = Authentication::getInstance()->getCurrentyUser();
         return ["info" => "Zaktualizowales swoje dane: {$currentUser->getUsername()}",
-                "data"=> $resources->toIterate()];
+                "data"=> $resources->toIterate(),
+                "image"=> "<img alt='user img' src='{$resources->getImage()}' />"];
     }
 
     protected function Initialize(): void
     {
-
         $this->userUpdateManagment = new UpdateGenerator();
         //testowo
         $this->userUpdateManagment->updateUser(Authentication::getInstance()->getCurrentyUser()->getId(),

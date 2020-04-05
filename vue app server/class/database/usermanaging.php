@@ -86,7 +86,9 @@ class RegisterGenerator extends QueryComposer
 class LoginGenerator extends QueryComposer
 {
 
-    private DateTime $lastLogin;
+    protected DateTime $lastLogin;
+
+
     public function __construct()
     {
         QueryComposer::__construct();
@@ -96,9 +98,11 @@ class LoginGenerator extends QueryComposer
     {
         $composite = new UserLoginComposite($this, $username,  $password,  $email);
         $this->fetcherComposite =  new AuthenticationQueryDecorator($composite);
-        $result = $this->execute();
-        $this->lastLogin = $composite->lastLogin;
-       return $result;
+        return $this->execute();
+    }
+    public function setLastLogin(DateTime $lastLogin): void
+    {
+        $this->lastLogin = $lastLogin;
     }
     public function getLastLogin() {
 

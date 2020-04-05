@@ -144,13 +144,15 @@ class UserLoginComposite extends BuilderComposite implements QueryComposite
     private string $email;
     public DateTime $lastLogin;
     private string $id;
+    private LoginGenerator $instance;
 
     public function __construct($instance, string $username, string $password, string $email)
     {
-        BuilderComposite::__construct($instance);
+        BuilderComposite::__construct();
         $this->username = $username;
         $this->password = $password;
         $this->email = $email;
+        $this->instance = $instance;
     }
 
     private function getLastLoginBeforeUpdate()
@@ -163,6 +165,7 @@ class UserLoginComposite extends BuilderComposite implements QueryComposite
         } catch (Exception $e) {
             $this->lastLogin = new DateTime();
         }
+        $this->instance->setLastLogin($this->lastLogin);
     }
 
     private function updateLastLogin()

@@ -25,7 +25,9 @@ class AllParametersType{
     public const PROFILE = 'profile';
     public const IMAGE = 'image';
 
-
+    public const PAGE = 'page';
+    public const CATEGORY = 'category';
+    public const USER = 'user';
 
 
 }

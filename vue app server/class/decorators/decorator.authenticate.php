@@ -6,41 +6,25 @@ use WebpageMNG\Element;
 use WebpageMNG\Page;
 
 
+class AuthenticateDecorator extends PageDecoratorBuilder
+{
 
 
-class AuthenticateDecorator extends Element {
-
-    private Element $element;
-    private $type = 1;
-    public function __construct(Element $element,bool $letUserEnter = false)
+    public function __construct(Page $page)
     {
-        Element::__construct();
-        $this->element = $element;
-    }
-
-    public function ExtensionData()
-    {
-       $this->element->ExtensionData();
+        parent::__construct();
+        $this->page = $page;
     }
 
     protected function pageContent()
     {
-        if (!Authentication::getInstance()->isAuthenticated()){
-          return  $this->element->getContext();
+        $this->Initialize();
+        if (!Authentication::getInstance()->isAuthenticated()) {
+            return $this->page->pageContent();
         }
-        return ["Info"=> Serverlanguage::getInstance()->GetMessage("logged.user")];
-    }
+            $this->outputController->setDataSuccess(false);
+            $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage("u.a.a"));
+            return $this->outputController->getView();
 
-    public function isActive()
-    {
-        return $this->element->isActive();
-    }
-    public function setActiveElement()
-    {
-        $this->element->setActiveElement();
-    }
-    protected function createContext()
-    {
-       $this->context = $this->pageContent();
     }
 }

@@ -11,7 +11,6 @@ use WebpageMNG\Page;
 class Register extends Page
 {
     private RegisterGenerator $userRegisterManagment;
-    private bool $registerSuccesfully =false;
     public function __construct(Parameters $parameters = null)
     {
         Parent::__construct();
@@ -23,20 +22,22 @@ class Register extends Page
             if( $this->userRegisterManagment->Register( $this->parameters->getParameter(RegisterParameters::USERNAME),
                 $this->parameters->getParameter(RegisterParameters::PASSWORD),
                 $this->parameters->getParameter(RegisterParameters::EMAIL))){
-                $this->registerSuccesfully = true;
                 Authentication::getInstance()->assignCurrentyUser($this->userRegisterManagment->getData());
+
+                $this->outputController->setDataSuccess(true);
+
+                $this->outputController->setInfo( sprintf(Serverlanguage::getInstance()->GetMessage("r.u.s.r"),
+                    Authentication::getInstance()->getCurrentyUser()->getEmail()));
+
+                $this->outputController->setContent(["userdata"=>Authentication::getInstance()->getCurrentyUser()->toIterate()]);
+                $this->outputController->setToken(Authentication::getInstance()->createToken(Authentication::getInstance()->getCurrentyUser()));
+            }else{
+                $this->outputController->setDataSuccess(false);
+                $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage("r.u.f.r"));
             }
-    }
-    protected function pageContent()
-    {
-        $this->Initialize();
-        if($this->registerSuccesfully){
-            $token = Authentication::getInstance()->createToken(Authentication::getInstance()->getCurrentyUser());
-            return ["Info" => Serverlanguage::getInstance()->GetMessage("RegisterPage.createUser"),
-                "UserInfo" => Authentication::getInstance()->getCurrentyUser()->toIterate(),
-                "Token"=> $token];
-        }
-        return ["info"=>Serverlanguage::getInstance()->GetMessage("duplicate.exist")];
+
+
+
     }
 
 

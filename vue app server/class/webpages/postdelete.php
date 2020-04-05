@@ -5,6 +5,7 @@ namespace WebpageMNG;
 
 
 use authentication\Authentication;
+use language\Serverlanguage;
 use NoParameters;
 use PostCreator;
 use PostItem;
@@ -24,25 +25,34 @@ class PostDelete extends Page
         Parent::__construct();
         $this->parameters = new NoParameters($parameters);
     }
-
-    protected function pageContent()
-    {
-        $this->Initialize();
-
-        return ['info' => ["Usunięto post: " . $this->postManagment->getPostBeforeDelete()->getTitle()],
-                'dane'=>$this->postManagment->getPostBeforeDelete()->toIterate()];
-    }
-
     public function ExtensionData()
     {
-        $this->addActualItem(new PostItem("postid",$this->parameters->getParameter(0)));
+        $this->addActualItem(new PostItem("postid", $this->parameters->getParameter(0)));
     }
 
     protected function Initialize(): void
     {
         $this->postManagment = new PostRemoveEXT();
-        $this->postManagment->PostRemove(
-            $this->getActualItem('postid')->getValue()
-        );
+        $this->postManagment->PostRemove($this->getActualItem('postid')->getValue());
+            $this->outputController->setDataSuccess(true);
+            $this->outputController->setInfo(sprintf(Serverlanguage::getInstance()->GetMessage("p.d"),
+                $this->postManagment->getPostBeforeDelete()->getTitle()));
+            $this->outputController->setContent(["postdata"=>$this->postManagment->getPostBeforeDelete()->toIterate()]);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

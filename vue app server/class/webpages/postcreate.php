@@ -5,31 +5,25 @@ namespace WebpageMNG;
 
 
 use authentication\Authentication;
+use BuilderComposite;
+use language\Serverlanguage;
 use PostCreateEXT;
 use PostCreator;
 use PostModificator;
 
 use PostParameters;
 use RoutesMNG\Parameters;
+use TagsShowEXT;
 
 class PostCreate extends Page
 {
     private PostCreateEXT $postManagment;
+
     public function __construct(Parameters $parameters = null)
     {
         Parent::__construct();
         $this->parameters = new PostParameters($parameters);
     }
-
-    protected function pageContent()
-    {
-        $this->Initialize();
-        return ['info'=>[
-            $this->postManagment->getData()->toIterate(),
-            'tags'=> array_column((new \TagsShowEXT($this->postManagment->getData()->getPostId()))->getTags(),"tag_title")
-        ]];
-    }
-
     protected function Initialize(): void
     {
         $this->postManagment = new PostCreateEXT();
@@ -37,6 +31,16 @@ class PostCreate extends Page
             $this->parameters->getParameter(PostParameters::TITLE),
             $this->parameters->getParameter(PostParameters::CONTENT),
             $this->parameters->getParameter(PostParameters::TAGS)
-            );
+        );
+
+        $this->outputController->setDataSuccess(true);
+        $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage("p.c"));
+        $this->outputController->setContent([
+            'postdata' => $this->postManagment->getData()->toIterate(),
+            'tags' => array_column((new TagsShowEXT($this->postManagment->getData()->getPostId()))->getTags(), "tag_title")
+        ]);
+
+
+
     }
 }

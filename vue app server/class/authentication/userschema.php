@@ -7,6 +7,7 @@ namespace authentication {
 
     use BuilderComposite;
     use DateTime;
+    use Exception;
 
     abstract class SchemaBuilder
     {
@@ -20,8 +21,8 @@ namespace authentication {
             $value =  $this->assignValue($value);
             try {
                 return ($value instanceof DateTime) ? $value : new DateTime($value);
-            } catch (\Exception $e) {
-                throw new \Exception("This format is not allowed");
+            } catch (Exception $e) {
+                throw new Exception("This format is not allowed");
             }
         }
         public function __construct($data)
@@ -156,7 +157,7 @@ namespace authentication {
            return new AuthenticationSchema(["username" => "Guest",
                "password" => AuthenticationSchema::UNKNOW,
                "email" => AuthenticationSchema::UNKNOW,
-               "id" => AuthenticationSchema::UNKNOW,
+               "id" => uniqid("UNKNOW",true) ,
                "permission" => Permmision::GUEST,
                "registeredAt"=> new DateTime(),
                "lastLogin"=> new DateTime()]);
