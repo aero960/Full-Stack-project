@@ -43,6 +43,8 @@ module.exports = {
                 test: /\.s[ac]ss$/i,
                 //by webpack kompilowal css i scss musza byc uzyte te 2 loadery scss i css
                 use: ['style-loader','vue-style-loader', 'css-loader', 'sass-loader']
+
+
             }]
     }
 }

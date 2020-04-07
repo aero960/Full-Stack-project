@@ -14,7 +14,8 @@ module.exports = {plugins:[
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
             title: `${statementConfig.dir.replace("./","")} app`,
-            filename: `../index.html`
+            filename: `../index.html`,
+            template: './template.html'
         }),
         new DashboardPlugin({ port: 4000 }),
 

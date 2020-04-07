@@ -65,6 +65,8 @@ Object.assign(config,
    loaders
 );
 
+
+
 module.exports = () => {
     const projectPath =`${statementConfig.dir}/application`;
     if(!fs.existsSync(`${statementConfig.dir}`))

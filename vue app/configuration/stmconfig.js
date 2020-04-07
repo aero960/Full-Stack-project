@@ -1,6 +1,6 @@
 statementConfig = {
     //own app name
-    name: 'app',
+    name: 'bloggenerator',
     configurationFolder : "./configuration",
     rewrite: true
 };
