@@ -1,0 +1,38 @@
+<?php
+
+use authentication\Authentication;
+use authentication\Permmision;
+use language\Serverlanguage;
+
+class PermissionChecker {
+
+    const CHECKER = 'PermissionChecker';
+    const NORMALAUTH ='checkNormalUserAuth';
+    const ADMINAUTH = 'checkAdminUserAuth';
+    const POSTOWNERAUTH = 'checkPostOwner';
+
+    public static function checkNormalUserAuth(){
+           $permission =   Authentication::getInstance()->getCurrentyUser()->getPermission();
+           if($permission < Permmision::NORMAL){
+               return ["info"=> Serverlanguage::getInstance()->GetMessage("a.n.l")];
+           }
+           return null;
+    }
+    public static function checkAdminUserAuth(){
+        $permission =   Authentication::getInstance()->getCurrentyUser()->getPermission();
+        if($permission < Permmision::ADMIN){
+            return ["info"=> Serverlanguage::getInstance()->GetMessage("a.n.a")];
+        }
+        return null;
+    }
+    public static function checkAdminUserAuthBOOL(){
+        $permission =   Authentication::getInstance()->getCurrentyUser()->getPermission();
+        return !($permission < Permmision::ADMIN);
+    }
+
+    public static function checkNormalUserAuthBOOL(){
+        $permission =   Authentication::getInstance()->getCurrentyUser()->getPermission();
+        return !($permission < Permmision::NORMAL);
+    }
+
+}
