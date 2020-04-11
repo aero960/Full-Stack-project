@@ -40,21 +40,19 @@ class FastActionEXT extends Page implements FabricActioner
 
     protected function Initialize(): void
     {
+
         $this->action = new ChooseAction($this);
-    //do zmiany
-        $dataSuccess = @$this->action->getContext()['success'];
-            if (isset($dataSuccess) && $dataSuccess == false) {
-                $this->outputController->setDataSuccess(false);
-                $this->outputController->setContent($this->action->getContext()['info']);
-                return;
-            }
-        $this->outputController->setDataSuccess(true);
-        $this->outputController->setContent($this->action->getContext());
+
+        $this->outputController->setDataSuccess($this->action->getContext()->isSuccess());
+        $this->outputController->setContent($this->action->getContext()->getData());
+        //BARDZO DO ZMIANY NIE RUSZAC TEGO BO ZA CHWILE...
     }
+
     public function getValues(string $name)
     {
         return $this->parameters->getParameter($name);
     }
+
     public function getAction()
     {
         return $this->getActualItem("action")->getValue();
@@ -81,8 +79,13 @@ class ChooseAction implements Fabric
                     $this->fabricCreator->getValues(FastActionEXT::CATEGORY_ADD_CONTENT)));
                 break;
             }
+            case "addlikepost":
+            {
+
+            }
             case "connectcategory":
             {
+
                 $this->obj = new AuthenticateAdminUserFA(new AddToCategoryEXT(
                     $this->fabricCreator->getValues(FastActionEXT::CATEGORY_CONNECT_NAME_CATEGORY),
                     $this->fabricCreator->getValues(FastActionEXT::CATEGORY_CONNECT_POSTID)));
@@ -91,6 +94,11 @@ class ChooseAction implements Fabric
             case "getuserbytoken":
             {
                 $this->obj = new CheckAuthFa(new GetUserById(Authentication::getInstance()->getCurrentyUser()->getId()));
+                break;
+            }
+            case "getfulluserdata":
+            {
+                $this->obj = new CheckAuthFa(new GetFullUserData(Authentication::getInstance()->getCurrentyUser()->getId()));
                 break;
             }
             case "createcomment":
@@ -105,6 +113,11 @@ class ChooseAction implements Fabric
                     $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_POSTID));
                 break;
             }
+            case "showcategories":
+            {
+                $this->obj = new FetchListCategoriesEXT();
+                break;
+            }
             case "deletecomment":
             {
                 $this->obj = new AuthenticateAdminOrOwnerFA(
@@ -113,23 +126,28 @@ class ChooseAction implements Fabric
                     $this->fabricCreator->getValues(FastActionEXT::COMMENT_REMOVE_ID));
                 break;
             }
+
         }
     }
 
     public static function getMapActions()
     {
-        return ["createcategory", "connectcategory", "createcomment", "deletecomment", "getUserByToken"];
+        return ["createcategory", "connectcategory", "createcomment", "deletecomment", "getUserByToken", "getfulluserdata", "showcategories"];
     }
 
     public function getContext()
     {
         try {
-            $this->createAction();
 
-        } catch (TypeError $e) {
+            $this->createAction();
+            return $this->obj->getFastActionResponse();
+        } catch (Error $e) {
+
             $this->obj = new DefaultAction();
+            return $this->obj->getFastActionResponse();
         }
-        return $this->obj->getFastActionResponse();
+
+
     }
 }
 

@@ -101,7 +101,7 @@ class UpdateProfileParammeters extends PageParametersSchema
 {
 
     public const FIRSTNAME = 'firstName';
-    public const LASTNAME = 'LastName';
+    public const LASTNAME = 'lastName';
     public const MOBILE = 'mobile';
     public const INTRO = 'intro';
     public const PROFILE = 'profile';

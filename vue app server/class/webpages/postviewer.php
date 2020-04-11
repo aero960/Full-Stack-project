@@ -126,9 +126,12 @@ class PostView extends Page
 
     protected function Initialize(): void
     {
+
+
+
         $category = $this->parameters->getParameter("category");
+
         $user = $this->parameters->getParameter("user");
-        $successAction = true;
         if (isset($category)) {
             $successAction = $this->showPostCategory($category);
         } elseif (isset($user)) {
@@ -140,7 +143,6 @@ class PostView extends Page
             $successAction = $this->showAllPosts();
 
         if (!$successAction) {
-
             $this->outputController->setDataSuccess(false);
             $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage("p.n.f"));
         }

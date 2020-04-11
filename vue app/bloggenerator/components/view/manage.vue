@@ -1,14 +1,17 @@
 <template>
     <div>
-        <!--do zmiany -->
-        <router-link :to="{ name: 'AccountManage'}">Account managing</router-link>
-        <router-view name="AccountManage"></router-view>
+        <navbar/>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
+    import navbar from "./nav/navbar.vue";
     export default {
         name: "ManageView",
+        components:{
+            navbar
+        }
     }
 </script>
 

@@ -8,7 +8,7 @@ export const permissionParser = (permission) => {
         return {rang: "admin"};
     if (permission >= 4)
         return {rang: "webmaster"};
-
+    return 'none';
 
 
 

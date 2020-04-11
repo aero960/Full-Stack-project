@@ -3,7 +3,6 @@
         <p>{{$store.state.auth.message}}</p>
         <div>
             <userregisterform v-model="registerData" @submit="register"/>
-
         </div>
     </div>
 </template>

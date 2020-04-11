@@ -1,5 +1,5 @@
 <template>
-    <FormBase @submit="submit" :disabled="$v.$invalid">
+    <FormBase @submit="submit" :valid="!$v.$invalid" :btnText="'login'">
         <InputBase :type="'text'" :filterBase="$v.username" :errors="[
               {name:'required',msg:'This filed is required'},
                {name:'minLength',msg:`Minimum length is ${$v.password.$params.minLength.min}`}]">
@@ -11,7 +11,6 @@
             ]">
             Password
         </InputBase>
-        <template v-slot:btnText>Log in</template>
     </FormBase>
 </template>
 <script>
@@ -35,6 +34,7 @@
                 }
             }
         },
+
         validations: {
             username: {minLength: minLength(3), required},
             password: {minLength: minLength(3), alphaNum, required},

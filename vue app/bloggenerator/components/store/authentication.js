@@ -1,5 +1,34 @@
-import Authentication from "../../class/authentication/authentication";
+import Authentication, {AUTHENTICATION, TOKEN} from "../../class/authentication/authentication";
+import router from '../routes/webroutes.js';
 import {$http} from '../../class/fetching.js'
+
+
+export const userAuthenticationHttp = {
+    inAction: false,
+    startAction() {
+        this.inAction = true
+    },
+    endAction() {
+        this.inAction = false
+    }
+};
+
+
+const assingAccount = (commit, token, info, userdata) => {
+
+    commit('logInAuth', token);
+    commit('updateDataUser', userdata);
+    commit('updateMessage', info);
+};
+
+
+const removeAccount = (commit) => {
+    commit('logOutAuth');
+    commit('updateMessage', "You are logout");
+    localStorage.removeItem(TOKEN)
+    $http.defaults.headers.common[AUTHENTICATION] = null;
+};
+
 
 export const authenticationStore = {
         state: {
@@ -23,42 +52,49 @@ export const authenticationStore = {
         },
         actions: {
             async automaticalyLogin({commit}) {
-                let data = await Authentication.getInstance().automaticalyLogin();
+                let data = await Authentication.automaticalyLogin();
                 if (data.datasuccess) {
-                    Authentication.getInstance().assingAccount(commit,
-                        localStorage.getItem('token'),
-                        data.info,
-                        data.content.userdata);
-                }else{
+                    assingAccount(commit,
+                        localStorage.getItem(TOKEN),
+                        "Logged to account",
+                        data.content);
+                } else {
+                    removeAccount(commit);
                     commit('updateMessage', data.info);
                 }
             },
             async logIn({commit}, user) {
-                let data = await Authentication.getInstance().logIn(user.username, user.password);
+                let data = await Authentication.logIn(user.username, user.password);
                 if (data.datasuccess) {
                     if (data.content.loginSuccesfull) {
-                        Authentication.getInstance().assingAccount(commit,
+                        assingAccount(commit,
                             data.token,
                             data.info,
                             data.content.userdata)
+
+                        router.push({name: 'AccountManage'}).catch(err => {
+                        });
                     }
                 } else {
                     commit('updateMessage', data.info);
                 }
             },
-           async registerUser({commit,dispatch},user){
-             let data = await Authentication.getInstance().registerUser(user.username,user.email,user.password)
-                if(data.datasuccess){
-                    localStorage.setItem('token',data.token);
-                    setTimeout(()=> dispatch('automaticalyLogin'),5000);
+            async registerUser({commit, dispatch}, user) {
+                let data = await Authentication.registerUser(user.username, user.email, user.password)
+                if (data.datasuccess) {
+                    localStorage.setItem(TOKEN, data.token);
+                    setTimeout(() => dispatch('automaticalyLogin'), 5000);
+                    router.push({name: 'ShowAccount'}).catch(err => {
+                    });
                 }
-               commit('updateMessage', data.info);
+                commit('updateMessage', data.info);
             },
 
-
-            async logOut({commit,dispatch}) {
-              let data = await Authentication.getInstance().removeAccount(commit);
-
+            logOut({commit}) {
+                removeAccount(commit);
+                router.push({name: 'LoginUser'}).catch(err => {
+                    console.log(err)
+                });
             },
         },
         getters: {

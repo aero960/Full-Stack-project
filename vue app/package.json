@@ -49,6 +49,7 @@
     "url-loader": "^3.0.0",
     "v-mask": "^2.1.0",
     "vue": "^2.6.11",
+    "vue-async-computed": "^3.8.2",
     "vue-loader": "^15.9.0",
     "vue-resource": "^1.5.1",
     "vue-route": "^1.5.1",

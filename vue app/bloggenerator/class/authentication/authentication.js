@@ -1,12 +1,13 @@
 import {$http} from '../fetching';
 
-const params = new FormData();
+
+export const TOKEN = 'token';
+export const AUTHENTICATION = 'WWW-Authenticate';
 
 export default class Authentication {
     static #instance = null;
 
-
-    async registerUser(username, email, password) {
+    static async registerUser(username, email, password) {
         const params = new FormData();
         params.append('username', username);
         params.append('email', email);
@@ -18,37 +19,19 @@ export default class Authentication {
             .catch(error => error.response.data.data);
     }
 
-
-    async automaticalyLogin() {
-        if (localStorage.getItem('token')) {
-            $http.defaults.headers.common['WWW-Authenticate'] = localStorage.getItem('token');
-            let data = await $http.post("fastaction/getuserbytoken")
+    static async automaticalyLogin() {
+        if (localStorage.getItem(TOKEN)) {
+            $http.defaults.headers.common[AUTHENTICATION] = localStorage.getItem(TOKEN);
+            return await $http.post("fastaction/getuserbytoken")
                 .then(res => res.data.data)
                 .then((res) => res)
                 .catch(error => error.response.data.data);
-
-            return data;
         } else {
             return false;
         }
     }
 
-    removeAccount(commit) {
-        commit('logOutAuth');
-        commit('updateMessage', "You are logout");
-        localStorage.removeItem('token')
-        $http.defaults.headers.common['WWW-Authenticate'] = null;
-
-    }
-
-    assingAccount(commit, token, info, userdata) {
-        commit('logInAuth', token);
-        commit('updateDataUser', userdata);
-        commit('updateMessage', info);
-    }
-
-
-    async logIn(login, password) {
+    static async logIn(login, password) {
 
         const params = new FormData();
         params.append('username', login);
@@ -58,11 +41,10 @@ export default class Authentication {
             .then(res => res.data.data)
             .then((res) => res)
             .catch(error => error.response.data.data)
-
         if (data.datasuccess) {
             if (data.content.loginSuccesfull) {
-                localStorage.setItem('token', data.token);
-                $http.defaults.headers.common['WWW-Authenticate'] = localStorage.getItem('token');
+                localStorage.setItem(TOKEN, data.token);
+                $http.defaults.headers.common['WWW-Authenticate'] = localStorage.getItem(TOKEN);
                 return data;
             }
         }

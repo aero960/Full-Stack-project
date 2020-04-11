@@ -239,7 +239,7 @@ class UserUpdateComposite extends BuilderComposite implements QueryComposite
 
     private function updateProfile()
     {
-        $sql = 'UPDATE resources SET firstName=:firstName,LastName=:LastName,mobile=:mobile,intro=:intro,profile=:profile,image=:image,date_of_update=:dataUpdate WHERE user_id=:id';
+        $sql = 'UPDATE resources SET firstName=:firstName,LastName=:lastName,mobile=:mobile,intro=:intro,profile=:profile,image=:image,date_of_update=:dataUpdate WHERE user_id=:id';
         $statement = $this->db->prepare($sql);
         $statement->execute([UpdateProfileParammeters::FIRSTNAME => $this->firstname,
             UpdateProfileParammeters::LASTNAME => $this->lastname,

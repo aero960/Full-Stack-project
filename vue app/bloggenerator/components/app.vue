@@ -1,23 +1,18 @@
 <template>
     <main>
-        <div> there is managing of all app
-            <p>There is view</p>
             <ManageView/>
-        </div>
     </main>
 
 </template>
 
 <script>
     import ManageView from "./view/manage.vue"
+    import store from "./store/webstore";
 
     export default {
         name: "App",
         components: {ManageView},
-        created() {
 
-            this.$store.dispatch('automaticalyLogin')
-        }
     }
 </script>
 <style lang="scss">
@@ -29,21 +24,54 @@
     $valid: rgb(38, 240, 0);
     $error: rgb(255, 0, 38);
     @mixin buttonStyle{
+        font-size:15px;
         display: block;
-        width: 100%;
-        border-radius: 5px;
         padding: 5px 10px;
+        text-transform: uppercase;
+        letter-spacing: 10px;
+        border-bottom: 1px solid transparent;
+        background-color: gray;
+        &:hover{
+            transition: 0.5s;
+            border-bottom: 1px solid black;
+        }
     }
 
-    .formControl{
+    .element{
+        margin: 50px 10px;
         padding:10px;
+            position: relative;
+        &::after{
+            content: '';
+            position:absolute;
+            left:-10px;
+            top:0;
+            width:3px;
+            height:100%;
+            background-color: #AD2C1C;
+        }
+    }
+
+    .postList{
+        width:39%;
+    }
+    .currentyPost{
+        width:61%;
+    }
+
+    .dflex{
+        display:flex;
+        justify-content: space-between;
+    }
+    .formControl{
+        padding:2px;
     }
         .valid{
-            border-bottom: 3px solid   $valid;
+            border-bottom: 1px solid   $valid;
 
         }
         .error{
-            border-bottom: 3px solid $error;
+           // border-bottom: 3px solid $error;
         }
     form{
         border-radius: 5px;
@@ -52,23 +80,24 @@
     }
     button[disabled]{
        @include buttonStyle;
+
         font-size: 10px;
     }
 
     p{
-        font-size:25px;
+        padding: 5px 0px;
+        font-size:20px;
 
     }
 
     input{
-        border: 1px solid ;
+        border-bottom: 1px solid ;
         padding: 5px 10px;
         margin: 10px 0px;
-        border-radius: 5px;
-        width: 100%;
+
     }
     body {
-        font-family: 'IM Fell French Canon SC', serif;
+        font-family: 'Libre Franklin', sans-serif;
         font-size: 21px;
         padding: 10px;
     }
@@ -79,9 +108,9 @@
     }
 
     * a{
-        font-size: 30px;
+        font-size: 20px;
         text-transform: uppercase;
-       border: 1px solid black;
+
         padding: 10px;
         border-radius: 10px;
         margin:10px 0px;

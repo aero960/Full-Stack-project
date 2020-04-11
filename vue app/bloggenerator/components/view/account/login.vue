@@ -9,16 +9,19 @@
 </template>
 <script>
     import UserLoginForm from '../../forms/userloginform.vue'
-
+    import loader from "../../httphelper/loader.vue";
+    import {userAuthenticationHttp} from '../../store/authentication.js'
     export default {
         name: "Login",
         data(){
             return{
                 loginData: {}
+
             }
         },
         methods: {
             logIn() {
+
                 this.$store.dispatch('logIn',this.loginData)
             }
         },

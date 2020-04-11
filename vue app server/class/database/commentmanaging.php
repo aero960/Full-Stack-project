@@ -1,6 +1,8 @@
 <?php
 
 
+use authentication\CategorySchema;
+
 class ShowCommetoRealtedToPostEXT extends BuilderComposite implements FastAction
 {
 
@@ -23,12 +25,13 @@ class ShowCommetoRealtedToPostEXT extends BuilderComposite implements FastAction
         return $statement->fetchAll();
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse(): FastActionDelivery
     {
-        return $this->getComments();
+        return new FastActionDelivery(true, $this->getComments());
     }
 
 }
+
 
 class RemoveCommentFromPostEXT extends BuilderComposite implements FastAction
 {
@@ -43,14 +46,15 @@ class RemoveCommentFromPostEXT extends BuilderComposite implements FastAction
         $this->spam = $spam;
     }
 
-    public static function deleteAllRealetedComment(string $postId){
-            $sql = "SELECT cp_comment_id as id FROM comment_post WHERE cp_post_id=:id";
-            $statement = Database::getInstance()->getDatabase()->prepare($sql);
-        $statement->execute(["id"=>$postId]);
+    public static function deleteAllRealetedComment(string $postId)
+    {
+        $sql = "SELECT cp_comment_id as id FROM comment_post WHERE cp_post_id=:id";
+        $statement = Database::getInstance()->getDatabase()->prepare($sql);
+        $statement->execute(["id" => $postId]);
         $commentsToDelete = $statement->fetchAll();
-           array_walk($commentsToDelete,function($index){
-               (new RemoveCommentFromPostEXT($index->id,0))->getFastActionResponse();
-           });
+        array_walk($commentsToDelete, function ($index) {
+            (new RemoveCommentFromPostEXT($index->id, 0))->getFastActionResponse();
+        });
     }
 
     private function deleteConnection()
@@ -88,24 +92,26 @@ class RemoveCommentFromPostEXT extends BuilderComposite implements FastAction
         (new PunishUser($this->getUserByComment(), "spam"))->action();
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse(): FastActionDelivery
     {
         if ($this->spam) {
             $this->punishUser();
-            return ["info" => "Punish user: {$this->getUserByComment()}"];
+            return new FastActionDelivery(true, [FastActionDelivery::INFO => "Punish user: {$this->getUserByComment()}"]);
         }
         $id = $this->getUserByComment();
         $this->deleteComment();
         $this->deleteConnection();
-        return ["info" => "usunieto post uzytkownik {$id} o id {$this->commentId}"];
+        return new FastActionDelivery(true, [FastActionDelivery::INFO => "usunieto post uzytkownik {$id} o id {$this->commentId}"]);
+
     }
 }
 
 
-class AddSubCommentEXT extends BuilderComposite implements FastAction{
+class AddSubCommentEXT extends BuilderComposite implements FastAction
+{
 
 
-    public function getFastActionResponse()
+    public function getFastActionResponse(): FastActionDelivery
     {
 
 
@@ -158,10 +164,11 @@ class AddCommentToPostEXT extends BuilderComposite implements FastAction
         $statement->execute(["postId" => $this->postId, "commentId" => $this->currentyId]);
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse(): FastActionDelivery
     {
         $this->addComment();
         $this->connectWithPost();
-        return "created comment to post {$this->postId} with comment id {$this->currentyId}";
+        return new FastActionDelivery(true, "created comment to post {$this->postId} with comment id {$this->currentyId}");
+
     }
 }

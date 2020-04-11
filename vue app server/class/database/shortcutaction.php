@@ -1,6 +1,8 @@
 <?php
 
 use authentication\AuthenticationSchema;
+use authentication\CategorySchema;
+use authentication\ResourcesSchema;
 use Helper\Helper;
 
 interface Shortcut
@@ -149,7 +151,7 @@ class UserExist extends BuilderComposite implements Shortcut
 
     public function action()
     {
-       return  $this->checkUserExist();
+        return $this->checkUserExist();
     }
 }
 
@@ -207,7 +209,75 @@ class ItemExistComposite extends BuilderComposite implements Shortcut
     }
 }
 
-class GetUserById extends BuilderComposite implements Shortcut, \FastAction
+class GetFullUserData extends BuilderComposite implements Shortcut, FastAction
+{
+
+    private string $id;
+
+    public function __construct(string $id)
+    {
+        parent::__construct();
+        $this->id = $id;
+    }
+
+    private function getResourcesData()
+    {
+
+        $sql = "Select * FROM resources WHERE user_id=:id";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["id" => $this->id]);
+        return $statement->fetch();
+    }
+
+    public function action()
+    {
+        return $this->getResourcesData();
+    }
+
+    public function getFastActionResponse(): FastActionDelivery
+    {
+        return new FastActionDelivery(true, (new ResourcesSchema($this->getResourcesData()))->toIterate());
+    }
+}
+
+class FetchListCategoriesEXT extends BuilderComposite implements FastAction
+{
+
+    public function __construct()
+    {
+        parent::__construct();
+
+
+    }
+
+    private function getCategory()
+    {
+
+        $sql = "SELECT * FROM category";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute();
+        return $statement->fetchAll();
+    }
+
+    private function parseToSchema()
+    {
+        $notFilteres = $this->getCategory();
+
+        array_map(function ($index) {
+            return new CategorySchema($index);
+        }, $notFilteres);
+        return $notFilteres;
+    }
+
+    public function getFastActionResponse(): FastActionDelivery
+    {
+
+        return new FastActionDelivery(true, $this->parseToSchema());
+    }
+}
+
+
+class GetUserById extends BuilderComposite implements Shortcut, FastAction
 {
     private string $userId;
 
@@ -217,7 +287,8 @@ class GetUserById extends BuilderComposite implements Shortcut, \FastAction
         $this->userId = $userId;
     }
 
-    private function getUser(){
+    private function getUser()
+    {
         $sql = "SELECT u.* FROM users u WHERE id=:id";
         $statement = $this->getDb()->prepare($sql);
         $statement->execute(["id" => $this->userId]);
@@ -229,13 +300,61 @@ class GetUserById extends BuilderComposite implements Shortcut, \FastAction
         return $this->getUser()->fetch();
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse(): FastActionDelivery
     {
-        return  ["userdata" => (new AuthenticationSchema($this->getUser()->fetch()))->toIterate()];
+
+        return new FastActionDelivery(true, (new AuthenticationSchema($this->getUser()->fetch()))->toIterate());
+
     }
 }
 
+class PostAddLikeEXT extends BuilderComposite implements FastAction
+{
 
+    private string $userId;
+    private string $postId;
+
+    public function __construct(string $userId, string $postId)
+    {
+        parent::__construct();
+        $this->postId = $postId;
+        $this->userId = $userId;
+    }
+
+    private function addLike()
+    {
+        $sql = "INSERT INTO post_user_like SET user_id=:user,post_id=:post";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["user" => $this->userId, "post" => $this->postId]);
+    }
+
+    private function checkUserAddLike(): bool
+    {
+        $sql = "SELECT * FROM post_user_like WHERE post_id=:post AND user_id=:user";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["user" => $this->userId, "post" => $this->postId]);
+        return $statement->rowCount() > 0;
+    }
+
+    public function getFastActionResponse(): FastActionDelivery
+    {
+        if (!$this->checkUserAddLike()) {
+            $this->addLike();
+            return new FastActionDelivery(false, [FastActionDelivery::INFO => "A like has been added"]);
+        }
+        return new FastActionDelivery(false, [FastActionDelivery::INFO => "like has already been added"]);
+    }
+}
+
+class PostRemoveLikeEXT extends BuilderComposite implements FastAction
+{
+
+
+    public function getFastActionResponse(): FastActionDelivery
+    {
+        // TODO: Implement getFastActionResponse() method.
+    }
+}
 
 
 class PublishCurrentyPost extends BuilderComposite implements Shortcut

@@ -97,14 +97,14 @@ abstract class Page extends Element
 
     protected function pageContent()
     {
-      try {
+    //  try {
             $this->Initialize();
             return $this->outputController->getView();
-    } catch (Error $e) {
+  /*  } catch (Error $e) {
             $this->outputController->setDataSuccess(false);
             $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage("u.e"));
             return $this->outputController->getView();
-        }
+        }*/
     }
 
 

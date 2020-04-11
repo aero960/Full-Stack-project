@@ -1,6 +1,7 @@
 <?php
 
 use authentication\Authentication;
+use language\Serverlanguage;
 use RoutesMNG\Parameters;
 use WebpageMNG\Page;
 
@@ -14,20 +15,9 @@ class Updateprofile extends Page
         $this->parameters = new UpdateProfileParammeters($parameters);
     }
 
-    protected function pageContent()
-    {
-        $this->Initialize();
-        $resources = Authentication::getInstance()->getCurrentyUser()->GetResouces();
-        $currentUser = Authentication::getInstance()->getCurrentyUser();
-        return ["info" => "Zaktualizowales swoje dane: {$currentUser->getUsername()}",
-                "data"=> $resources->toIterate(),
-                "image"=> "<img alt='user img' src='{$resources->getImage()}' />"];
-    }
-
     protected function Initialize(): void
     {
         $this->userUpdateManagment = new UpdateGenerator();
-        //testowo
         $this->userUpdateManagment->updateUser(Authentication::getInstance()->getCurrentyUser()->getId(),
             $this->parameters->getParameter(UpdateProfileParammeters::FIRSTNAME),
             $this->parameters->getParameter(UpdateProfileParammeters::LASTNAME),
@@ -35,6 +25,14 @@ class Updateprofile extends Page
             $this->parameters->getParameter(UpdateProfileParammeters::INTRO),
             $this->parameters->getParameter(UpdateProfileParammeters::PROFILE),
             $this->parameters->getParameter(UpdateProfileParammeters::IMAGE));
+
+
         Authentication::getInstance()->getCurrentyUser()->AssingResources($this->userUpdateManagment->getData());
+
+        $this->outputController->setDataSuccess('true');
+        $this->outputController->setInfo(sprintf(Serverlanguage::getInstance()->GetMessage("u.s.u"), Authentication::getInstance()->getCurrentyUser()->getUsername()));
+        $this->outputController->setContent(Authentication::getInstance()->getCurrentyUser()->GetResouces()->toIterate());
+
+
     }
 }

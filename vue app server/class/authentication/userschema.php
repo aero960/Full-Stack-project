@@ -12,27 +12,66 @@ namespace authentication {
     abstract class SchemaBuilder
     {
         protected $data;
+
         protected function assignValue(string $value)
         {
             return is_array($this->data) ? $this->data[$value] : $this->data->{$value};
         }
 
-        protected function assignDataValue( $value){
-            $value =  $this->assignValue($value);
+        protected function assignDataValue($value)
+        {
+            $value = $this->assignValue($value);
             try {
                 return ($value instanceof DateTime) ? $value : new DateTime($value);
             } catch (Exception $e) {
                 throw new Exception("This format is not allowed");
             }
         }
+
         public function __construct($data)
         {
             $this->data = $data;
         }
 
-        abstract public function toIterate() : array;
+        abstract public function toIterate(): array;
 
 
+    }
+
+
+    class CategorySchema extends SchemaBuilder
+    {
+
+        public const TITLE = 'category_title';
+        public const CONTENT = 'category_content';
+        private string $title;
+
+
+        private string $content;
+
+
+        public function __construct($data)
+        {
+            parent::__construct($data);
+            $this->title = $this->assignValue(self::TITLE);
+            $this->content = $this->assignValue(self::CONTENT);
+        }
+
+        public function getTitle()
+        {
+            return $this->title;
+        }
+
+        public function getContent()
+        {
+            return $this->content;
+        }
+
+        public function toIterate(): array
+        {
+            return [self::CONTENT => $this->content,
+                self::TITLE => $this->title];
+        }
     }
 
     class ResourcesSchema extends SchemaBuilder
@@ -46,9 +85,9 @@ namespace authentication {
         private string $image;
         private string $user;
 
-        public const ID = 'id';
+        public const ID = 'resources_id';
         public const FIRSTNAME = 'firstName';
-        public const LASTNAME = 'LastName';
+        public const LASTNAME = 'lastName';
         public const MOBILE = 'mobile';
         public const INTRO = 'intro';
         public const PROFILE = 'profile';
@@ -106,7 +145,7 @@ namespace authentication {
             return $this->image;
         }
 
-        public function toIterate() : array
+        public function toIterate(): array
         {
             return [self::FIRSTNAME => $this->getFirstname(),
                 self::LASTNAME => $this->getLastname(),
@@ -153,14 +192,15 @@ namespace authentication {
             $this->lastLogin = $this->assignDataValue(self::LASTLOGIN);
         }
 
-        public static function createGuest(){
-           return new AuthenticationSchema(["username" => "Guest",
-               "password" => AuthenticationSchema::UNKNOW,
-               "email" => AuthenticationSchema::UNKNOW,
-               "id" => uniqid("UNKNOW",true) ,
-               "permission" => Permmision::GUEST,
-               "registeredAt"=> new DateTime(),
-               "lastLogin"=> new DateTime()]);
+        public static function createGuest()
+        {
+            return new AuthenticationSchema(["username" => "Guest",
+                "password" => AuthenticationSchema::UNKNOW,
+                "email" => AuthenticationSchema::UNKNOW,
+                "id" => uniqid("UNKNOW", true),
+                "permission" => Permmision::GUEST,
+                "registeredAt" => new DateTime(),
+                "lastLogin" => new DateTime()]);
         }
 
 
@@ -179,7 +219,6 @@ namespace authentication {
         {
             return ($this->data['user_id']) ? $this->data['user_id'] : $this->data['id'];
         }
-
 
 
         public function getRegisteredDate()
@@ -218,7 +257,7 @@ namespace authentication {
             return $this->id;
         }
 
-        public function toIterate() : array
+        public function toIterate(): array
         {
             return [self::USERNAME => $this->getUsername(),
                 self::PASSWORD => $this->getPassword(),

@@ -37,9 +37,10 @@ class TagsUpdaterEXT extends BuilderComposite implements FastAction
     }
 
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
-        return $this->updatePostTag();
+        return      new FastActionDelivery(true,$this->updatePostTag());
+
     }
 }
 
@@ -95,9 +96,10 @@ class TagsRemoveEXT extends BuilderComposite implements FastAction
         return true;
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
-        return $this->removeTag();
+        return new FastActionDelivery(true,$this->removeTag())  ;
+
     }
 }
 
@@ -120,9 +122,9 @@ class TagsShowEXT extends BuilderComposite implements FastAction
         return $statement->fetchAll();
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
-        return $this->getTags();
+        return new FastActionDelivery(true,$this->getTags());
     }
 }
 
@@ -191,10 +193,11 @@ class TagsAddEXT extends BuilderComposite implements FastAction
         return ($statement->rowCount() > 0) ? true : false;
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
         $this->addTag();
-        return $this->createdTagList;
+        return new FastActionDelivery(true,$this->createdTagList);
+
     }
 }
 

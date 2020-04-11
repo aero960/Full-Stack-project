@@ -11,16 +11,19 @@ class AuthenticateAdminOrOwnerFA implements FastAction
         $this->commentId = $commentId;
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
         $comment = new CommentItem("post", $this->commentId);
         if ($comment->CheckItemExist()) {
             if ($comment->CheckValidOwner() || PermissionChecker::checkAdminUserAuthBOOL()) {
-                return $this->action->getFastActionResponse();
+                return new FastActionDelivery(true,$this->action->getFastActionResponse());
+
             }
-            return ["success"=>false,"info" => "You need to be owner of comment to delete"];
+            return new FastActionDelivery(false,[FastActionDelivery::INFO => "You need to be owner of comment to delete"]);
+
         }
-        return ["success"=>false,"info" => "Item doesnt exist"];
+        new FastActionDelivery(false,[FastActionDelivery::INFO => "Item doesnt exist"]);
+
     }
 }
 
@@ -36,19 +39,20 @@ class ItemExistFA implements FastAction
         $this->postId = $postId;
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
 
         $post = new PrivatePost(new PostItem("post", $this->postId));
         if ($post->CheckItemExist()) {
             if ($post->CheckPrivatePost()) {
                 if ($post->CheckValidOwner())
-                    return $this->action->getFastActionResponse();
-                return ["success"=>false,"info" => "post is private"];
+                   return $this->action->getFastActionResponse();
+                new FastActionDelivery(false,[FastActionDelivery::INFO  => "post is private"]);
             } else
                 return $this->action->getFastActionResponse();
         }
-        return ["success"=>false,"info" => "post doesnt exist"];
+        return new FastActionDelivery(false,[FastActionDelivery::INFO  => "post doesnt exist"]);
+
     }
 
 }
@@ -64,12 +68,12 @@ class CheckAuthFa implements FastAction
         $this->action = $action;
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
         if (PermissionChecker::checkNormalUserAuthBOOL()) {
-            return $this->action->getFastActionResponse();
+            return  $this->action->getFastActionResponse();
         }
-        return ["success"=>false,"info" => "You are not logged"];
+       return new FastActionDelivery(false,[FastActionDelivery::INFO  => "You are not logged"]);
     }
 }
 
@@ -83,12 +87,13 @@ class AuthenticateAdminUserFA implements FastAction
         $this->action = $action;
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse(): FastActionDelivery
     {
         if (PermissionChecker::checkAdminUserAuthBOOL()) {
             return $this->action->getFastActionResponse();
         }
-        return ["success"=>false,"info" => "You need admin permissions"];
+        return new FastActionDelivery(false, [FastActionDelivery::INFO  => "You need admin permissions"]);
+
 
     }
 }

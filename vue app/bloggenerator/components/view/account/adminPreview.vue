@@ -1,5 +1,9 @@
 <template>
-    <div :class="getStatus" :style="{color:getColor}"> {{getStatus}}</div>
+    <div>
+
+        <div :class="getStatus"> Account type : {{getStatus}}</div>
+    </div>
+
 </template>
 
 <script>
@@ -8,11 +12,8 @@
     export default {
         name: "AdminPreview",
         computed: {
-            getColor() {
-                return permissionParser(this.$store.state.auth.userData.permission).color
-            },
             getStatus() {
-                return permissionParser(this.$store.state.auth.userData.permission).rang
+                return permissionParser(this.$store.state.auth.userData.permission).rang;
             }
         }
     }
@@ -21,17 +22,17 @@
 <style scoped lang="scss">
 
 
-    $premium : #bcab06;
+    $premium: #bcab06;
     $normal: #6aa1ff;
-    $admin : #ff213f;
-    $webmaster : #5cbc00;
+    $admin: #ff213f;
+    $webmaster: #a80c81;
     .normal {
         background-color: $normal;
         color: complement($normal);
         padding: 10px;
         text-transform: lowercase;
         text-align: center;
-        width:100px;
+        width: 100px;
     }
 
     .premium {
@@ -54,7 +55,7 @@
 
     .webmaster {
 
-        color: invert($webmaster);
+        color: $webmaster;
         padding: 10px;
         border-radius: 10px;
         border: 3px solid invert($webmaster);
@@ -63,11 +64,12 @@
         text-align: center;
         letter-spacing: 15px;
         font-family: 'Courgette', cursive;
-        &:hover{
-            background-color: invert($webmaster);
-            color: $webmaster;
-            border: 3px solid $webmaster;
-            transition: 1s;
+
+        &:hover {
+            color: complement($webmaster);
+            border: 3px solid transparent;
+
+            transition: 0.5s;
         }
     }
 

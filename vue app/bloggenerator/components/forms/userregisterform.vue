@@ -1,5 +1,5 @@
 <template>
-    <FormBase @submit="submit" :disabled="this.$v.$invalid">
+    <FormBase @submit="submit" :valid="!$v.$invalid" :btnText="'Register'">
         <InputBase :type="'text'" :filterBase="$v.username" :errors="[
             {name:'required',msg:'This filed is required'},]">
             Username
@@ -14,7 +14,7 @@
             {name:'minLength',msg:`Minimum length is ${$v.password.$params.minLength.min}`}]">
             Password
         </InputBase>
-        <template v-slot:btnText>Register</template>
+
     </FormBase>
 </template>
 

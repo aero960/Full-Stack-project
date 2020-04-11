@@ -153,7 +153,7 @@ class PageLimiter extends ShowPosts
 {
     private int $FROM;
     private int $HowManyOnPage;
-    private int $pageNumber;
+    private int $pageNumber = 0;
     private ViewQuery $element;
 
     private int $numbersOfPage;
@@ -165,8 +165,8 @@ class PageLimiter extends ShowPosts
         $this->HowManyOnPage = $HowManyOnPage;
         $this->element = $element;
         $this->numbersOfPage = $this->getNumbersOfRow();
-        $this->pageNumber = $this->checkPageLimit($pageNumber);
 
+        $this->pageNumber = $this->checkPageLimit($pageNumber);
     }
 
     public function getInfo()
@@ -176,7 +176,8 @@ class PageLimiter extends ShowPosts
 
     private function checkPageLimit($value)
     {
-        if ($value < 0)
+
+       if ($value <= 0)
             return 0;
         if ($value > $this->numbersOfPage)
             return $this->numbersOfPage;
@@ -187,6 +188,7 @@ class PageLimiter extends ShowPosts
     {
 
         $offset = $this->pageNumber * $this->HowManyOnPage;
+
         return " LIMIT {$this->HowManyOnPage} OFFSET {$offset}";
     }
 

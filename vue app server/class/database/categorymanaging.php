@@ -1,10 +1,37 @@
 <?php
 
+use authentication\CategorySchema;
 use language\Serverlanguage;
+
+class FastActionDelivery
+{
+
+    public const INFO = 'info';
+    private bool $isSuccess;
+    private $data;
+    public function isSuccess(): bool
+    {
+        return $this->isSuccess;
+    }
+
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    public function __construct(bool $isSuccess, $data)
+    {
+        $this->isSuccess = $isSuccess;
+        $this->data = $data;
+    }
+
+
+}
+
 
 interface FastAction
 {
-    public function getFastActionResponse();
+    public function getFastActionResponse() : FastActionDelivery;
 }
 
 
@@ -46,10 +73,11 @@ class AddToCategoryEXT extends BuilderComposite implements FastAction
         }
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
         $this->connectWithCategory();
-        return ["info" => "połączenie postu:  {$this->postId} z kategorią {$this->categoryName}"];
+
+        return  new FastActionDelivery(true,[FastActionDelivery::INFO  => "połączenie postu:  {$this->postId} z kategorią {$this->categoryName}"]);
     }
 }
 
@@ -108,10 +136,12 @@ class CategoryShowEXT extends ShowPosts
 class DefaultAction implements FastAction
 {
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
-        return ["Action need all parameters",
-            "tip" => ChooseAction::getMapActions()];
+
+        return new FastActionDelivery(false,["Action need all parameters",
+            "tip" => ChooseAction::getMapActions()]);
+
     }
 }
 
@@ -138,9 +168,9 @@ class ShowCategoryToSpecificPostEXT extends BuilderComposite implements FastActi
     }
 
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
-        return $this->showCategoryToPost();
+        return new FastActionDelivery(true,$this->showCategoryToPost());
     }
 }
 
@@ -153,6 +183,7 @@ class AddCategoryEXT extends BuilderComposite implements FastAction
 
     public function __construct(string $title, string $content)
     {
+
         parent::__construct();
         $this->title = $title;
         $this->content = $content;
@@ -173,20 +204,22 @@ class AddCategoryEXT extends BuilderComposite implements FastAction
         $statement->execute(["title" => $this->title, "content" => $this->content, "id" => $this->id]);
     }
 
-    private function getCreatedCategory()
+    private function getCreatedCategory() : CategorySchema
     {
         $sql = "SELECT * FROM category WHERE category_title=:title";
         $statement = $this->getDb()->prepare($sql);
         $statement->execute(["title" => $this->title]);
-        return $statement->fetch();
+        return  new CategorySchema($statement->fetch());
     }
 
-    public function getFastActionResponse()
+    public function getFastActionResponse() : FastActionDelivery
     {
 
         if (!$this->checkValueExist("category", "category_title", $this->title))
             $this->addCategory();
-        return $this->getCreatedCategory();
+
+        return new FastActionDelivery(true,$this->getCreatedCategory()->toIterate());
+
 
     }
 }
