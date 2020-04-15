@@ -1,7 +1,9 @@
 <?php
 
 
+use authentication\Authentication;
 use authentication\CategorySchema;
+use authentication\CommentSchema;
 
 class ShowCommetoRealtedToPostEXT extends BuilderComposite implements FastAction
 {
@@ -12,22 +14,39 @@ class ShowCommetoRealtedToPostEXT extends BuilderComposite implements FastAction
     {
         parent::__construct();
         $this->postId = $postId;
+
     }
 
-    public function getComments()
+    private function getComments()
     {
         $sql = "SELECT comments.* FROM post INNER JOIN comment_post
                 ON cp_post_id=post_id
                 INNER JOIN comments
-                ON comment_id=cp_comment_id WHERE post_id=:id";
+                ON comment_id=cp_comment_id WHERE post_id=:id ORDER BY comment_created_at ASC ";
         $statement = $this->getDb()->prepare($sql);
         $statement->execute(["id" => $this->postId]);
         return $statement->fetchAll();
     }
 
+    private function parseToSchema()
+    {
+        $notFilteres = [] ;
+
+            foreach($this->getComments() as $value){
+                $currentyComment = new CommentSchema($value);
+
+
+
+               $notFilteres [] = ["commentdata" => $currentyComment->toIterate(),
+                    "userdata" => (new GetUserById($currentyComment->getUserId()))->getFastActionResponse()->getData()];
+
+            }
+        return $notFilteres;
+    }
+
     public function getFastActionResponse(): FastActionDelivery
     {
-        return new FastActionDelivery(true, $this->getComments());
+        return new FastActionDelivery(true, $this->parseToSchema());
     }
 
 }
@@ -161,6 +180,7 @@ class AddCommentToPostEXT extends BuilderComposite implements FastAction
                     cp_post_id=:postId,
                     cp_comment_id=:commentId";
         $statement = $this->getDb()->prepare($sql);
+
         $statement->execute(["postId" => $this->postId, "commentId" => $this->currentyId]);
     }
 

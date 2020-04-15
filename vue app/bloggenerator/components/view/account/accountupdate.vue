@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import UserUpdateForm from "../../forms/userupdateform.vue";
+    import UserUpdateForm from "../../forms/formuserupdate.vue";
     export default {
         name: "Update",
         components:{

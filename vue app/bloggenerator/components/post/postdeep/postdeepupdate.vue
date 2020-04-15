@@ -1,15 +1,13 @@
 <template>
     <div>
-
-        Teraz przegladasz fajny post
-        {{ $route.params.postId }}
-
+        Tutaj można aktualizować posty
     </div>
-
 </template>
+
 <script>
     export default {
-        name: "activepost"
+        name: "postdeepupdate",
+
     }
 </script>
 

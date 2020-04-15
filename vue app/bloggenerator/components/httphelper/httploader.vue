@@ -16,7 +16,6 @@
                 },
             }
         },
-
         watch:{
             "currentyLoader.count": ()=>{}
         },
@@ -25,7 +24,7 @@
                let number = (this.currentyLoader.count <= 3) ? this.currentyLoader.count + 1 : this.currentyLoader.count = 1
                 Vue.set(this.currentyLoader,"render",".".repeat(this.currentyLoader.count));
                 Vue.set(this.currentyLoader,'count', number);
-            }, 200)
+            }, 75)
         }
     }
 </script>

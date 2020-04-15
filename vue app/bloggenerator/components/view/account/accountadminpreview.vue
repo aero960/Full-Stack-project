@@ -13,6 +13,7 @@
         name: "AdminPreview",
         computed: {
             getStatus() {
+                console.log("test")
                 return permissionParser(this.$store.state.auth.userData.permission).rang;
             }
         }

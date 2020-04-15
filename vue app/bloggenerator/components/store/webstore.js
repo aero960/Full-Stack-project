@@ -1,8 +1,8 @@
 import Vuex from 'vuex';
 import Vue from 'vue';
-import {authenticationStore} from './authentication.js'
-import {userResourcesStore} from "./userresources.js";
-import { postStore} from "./posts";
+import {authenticationStore} from './storeauthentication.js'
+import {userResourcesStore} from "./storeuserresources.js";
+import { postStore} from "./storeposts";
 
 Vue.use(Vuex);
 

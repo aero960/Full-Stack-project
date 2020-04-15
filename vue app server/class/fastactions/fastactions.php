@@ -24,6 +24,17 @@ class FastActionEXT extends Page implements FabricActioner
     public const COMMENT_REMOVE_ID = "comment_id";
     public const COMMENT_REMOVE_SPAM = "spam";
 
+    public const ADD_LIKE_POSTID = "postid";
+    public const ADD_LIKE_USERID = "userid";
+
+    public const GET_DATA_USERID = 'userid';
+
+    public const GET_USER = 'userid';
+
+    public const REPORT_TYPE = 'type';
+    public const REPORT_MESSAGE = 'message';
+
+
     private Fabric $action;
 
 
@@ -43,8 +54,9 @@ class FastActionEXT extends Page implements FabricActioner
 
         $this->action = new ChooseAction($this);
 
-        $this->outputController->setDataSuccess($this->action->getContext()->isSuccess());
-        $this->outputController->setContent($this->action->getContext()->getData());
+        $context =$this->action->getContext();
+        $this->outputController->setDataSuccess($context->isSuccess());
+        $this->outputController->setContent($context->getData());
         //BARDZO DO ZMIANY NIE RUSZAC TEGO BO ZA CHWILE...
     }
 
@@ -63,6 +75,8 @@ class ChooseAction implements Fabric
 {
     private ?FastAction $obj;
     private FabricActioner $fabricCreator;
+    private array $mapAction;
+
 
     public function __construct(FabricActioner $fabricCreator)
     {
@@ -77,45 +91,74 @@ class ChooseAction implements Fabric
                 $this->obj = new AuthenticateAdminUserFA(new AddCategoryEXT(
                     $this->fabricCreator->getValues(FastActionEXT::CATEGORY_ADD_TITLE),
                     $this->fabricCreator->getValues(FastActionEXT::CATEGORY_ADD_CONTENT)));
+                $this->mapAction[] = "createcategory";
                 break;
             }
             case "addlikepost":
             {
-
+                $this->obj = new CheckAuthFa(
+                    new PostAddLikeEXT(Authentication::getInstance()->getCurrentyUser()->getId(),
+                        $this->fabricCreator->getValues(FastActionEXT::ADD_LIKE_POSTID)));
+                $this->mapAction[] = "addlikepost";
+                break;
             }
             case "connectcategory":
             {
-
-                $this->obj = new AuthenticateAdminUserFA(new AddToCategoryEXT(
+                $this->obj = new CheckAuthFa(new AddToCategoryEXT(
                     $this->fabricCreator->getValues(FastActionEXT::CATEGORY_CONNECT_NAME_CATEGORY),
                     $this->fabricCreator->getValues(FastActionEXT::CATEGORY_CONNECT_POSTID)));
+                $this->mapAction[] = "connectcategory";
                 break;
             }
             case "getuserbytoken":
             {
                 $this->obj = new CheckAuthFa(new GetUserById(Authentication::getInstance()->getCurrentyUser()->getId()));
+                $this->mapAction[] = "getuserbytoken";
                 break;
             }
             case "getfulluserdata":
             {
-                $this->obj = new CheckAuthFa(new GetFullUserData(Authentication::getInstance()->getCurrentyUser()->getId()));
+                $this->obj = new GetFullUserData($this->fabricCreator->getValues(FastActionEXT::GET_DATA_USERID));
+                $this->mapAction[] = "getfulluserdata";
+                break;
+            }
+            case "getuserbyid":
+            {
+                $this->obj = new GetUserById($this->fabricCreator->getValues(FastActionEXT::GET_USER));
+                $this->mapAction[] = "getuserbyid";
                 break;
             }
             case "createcomment":
             {
                 //do zmiany
-                if (!Authentication::getInstance()->isAuthenticated())
-                    (new CreateGuest($this->fabricCreator->getValues(AuthenticationSchema::USERNAME)))->action();
-                $this->obj = new ItemExistFA(new AddCommentToPostEXT($this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_TITLE),
-                    $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_CONTENT),
-                    $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_POSTID),
-                    Authentication::getInstance()->getCurrentyUser()->getId()),
-                    $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_POSTID));
+
+                    if (!Authentication::getInstance()->isAuthenticated()) {
+                        $guest = new CreateGuest($this->fabricCreator->getValues(AuthenticationSchema::USERNAME));
+                        $guest->action();
+                        Authentication::getInstance()->getCurrentyUser()->setId($guest->getCreatedID());
+                    }
+                    $this->obj = new ItemExistFA(new AddCommentToPostEXT($this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_TITLE),
+                        $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_CONTENT),
+                        $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_POSTID),
+                        Authentication::getInstance()->getCurrentyUser()->getId()),
+                        $this->fabricCreator->getValues(FastActionEXT::COMMENT_ADD_POSTID));
+
+                $this->mapAction[] = "createcomment";
+                break;
+            }
+            case "reportpost":{
+                $this->obj =  new CheckAuthFa(new ReportAddEXT(
+                    $this->fabricCreator->getValues(FastActionEXT::REPORT_TYPE),
+                    $this->fabricCreator->getValues(FastActionEXT::REPORT_MESSAGE)));
+
+                $this->mapAction[] = "reportpost";
                 break;
             }
             case "showcategories":
             {
                 $this->obj = new FetchListCategoriesEXT();
+
+                $this->mapAction[] = "showcategories";
                 break;
             }
             case "deletecomment":
@@ -124,28 +167,27 @@ class ChooseAction implements Fabric
                     new RemoveCommentFromPostEXT($this->fabricCreator->getValues(FastActionEXT::COMMENT_REMOVE_ID),
                         $this->fabricCreator->getValues(FastActionEXT::COMMENT_REMOVE_SPAM)),
                     $this->fabricCreator->getValues(FastActionEXT::COMMENT_REMOVE_ID));
+
+
+                $this->mapAction[] = "deletecomment";
                 break;
             }
 
         }
     }
 
-    public static function getMapActions()
-    {
-        return ["createcategory", "connectcategory", "createcomment", "deletecomment", "getUserByToken", "getfulluserdata", "showcategories"];
-    }
 
     public function getContext()
     {
-        try {
+        $this->createAction();
+        return $this->obj->getFastActionResponse();
+           try {
 
-            $this->createAction();
-            return $this->obj->getFastActionResponse();
         } catch (Error $e) {
 
-            $this->obj = new DefaultAction();
-            return $this->obj->getFastActionResponse();
-        }
+              $this->obj = new DefaultAction($this->mapAction);
+              return $this->obj->getFastActionResponse();
+          }
 
 
     }

@@ -44,10 +44,13 @@ class ItemExistFA implements FastAction
 
         $post = new PrivatePost(new PostItem("post", $this->postId));
         if ($post->CheckItemExist()) {
+
             if ($post->CheckPrivatePost()) {
+
                 if ($post->CheckValidOwner())
                    return $this->action->getFastActionResponse();
-                new FastActionDelivery(false,[FastActionDelivery::INFO  => "post is private"]);
+
+               return new FastActionDelivery(false,[FastActionDelivery::INFO  => "post is private"]);
             } else
                 return $this->action->getFastActionResponse();
         }

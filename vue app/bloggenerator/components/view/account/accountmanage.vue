@@ -14,8 +14,8 @@
 </template>
 
 <script>
-    import AdminPreview from "./adminPreview.vue";
-    import userLogged from "./userlogged.vue";
+    import AdminPreview from "./accountadminpreview.vue";
+    import userLogged from "./accountlogged.vue";
     export default {
         name: "Account",
         data() {

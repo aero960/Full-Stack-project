@@ -23,21 +23,81 @@ const router = new Router({
     mode: 'history',
     base: 'bloggenerator',
     routes: [
-        {        /*
+        {
+            path: '/postmanage',
+            name: 'PostManage',
+            meta: {
+                auth: AuthenticationStatus.NEED
+            },
+            component: () => import("../view/post/postmanage.vue"),
+            children:[
+                {
+                    path: 'createpost',
+                    name:"CreatePost",
+                    components:{
+                        PostAction: ()=> import('../post/postadd.vue')
+                    },
+                    meta: {
+                        auth: AuthenticationStatus.NEED
+                    },
+                },
+                {
+                    path: 'yourposts',
+                    name:"CRUDPost",
+                    meta: {
+                        auth: AuthenticationStatus.NEED
+                    },
+                    components:{
+                        PostAction: ()=> import('../post/postcrud.vue')
+                    }
+                },
+                {
+                    path: 'updatepost/:postId',
+                    name:"UpdatePost",
+                    meta: {
+                        auth: AuthenticationStatus.NEED
+                    },
+                    components:{
+                        PostAction: ()=> import('../post/postcrud.vue'),
+                        PostOperation: ()=>import('../post/postoperations.vue')
+                    }
+                }
+
+            ]
+
+        },
+        {
+                path:'/users',
+            name:'Users',
+            component: ()=> import('../view/users/usersview.vue'),
+            children:[
+                {
+                    path: ':userId',
+                    name: 'ActiveUser',
+                    components:{
+                        user: ()=> import('../view/users/usersactive.vue')
+                    },
+                }
+
+            ]
+        },
+        , {
+        /*
             * Post manage routes*/
             path: '/post',
-            name: 'PostManage',
+            name: 'Posts',
             components: {
-                default:   () => import("../view/post/post.vue"),
+                default:   () => import("../view/post/postview.vue"),
             },
             children: [
                 {
                     path: ':postId',
                     name: 'ActivePost',
                     components:{
-                        ActivePost:() => import('../view/post/activepost.vue')
+                        ActivePost:() => import('../view/post/postactivet.vue')
                     }
                 },
+
             ]
         },
         {
@@ -45,7 +105,7 @@ const router = new Router({
             * Account manage routes*/
             path: '/account',
             name: 'AccountManage',
-            component: () => import('../view/account/account.vue'),
+            component: () => import('../view/account/accountmanage.vue'),
             children: [
                 {
                     /*
@@ -53,7 +113,7 @@ const router = new Router({
                     *  */
                     path: '/login',
                     name: 'LoginUser',
-                    component: () => import('../view/account/login.vue'),
+                    component: () => import('../view/account/accountlogin.vue'),
                     meta: {
                         auth: AuthenticationStatus.BEFORE
                     }
@@ -64,7 +124,7 @@ const router = new Router({
                     *  */
                     path: '/register',
                     name: 'RegisterUser',
-                    component: () => import('../view/account/register.vue'),
+                    component: () => import('../view/account/accountregister.vue'),
                     meta: {
                         auth: AuthenticationStatus.BEFORE
                     }
@@ -76,7 +136,7 @@ const router = new Router({
                     *  */
                     path: '/updateuser',
                     name: 'UpdateUser',
-                    component: () => import('../view/account/update.vue'),
+                    component: () => import('../view/account/accountupdate.vue'),
                     meta: {
                         auth: AuthenticationStatus.NEED
                     }

@@ -1,12 +1,39 @@
 import _ from 'lodash'
 
-
 export default class DomHelper {
     static FilterAttribute;
 
     constructor() {
         this.FilterAttribute = "filterHelper";
     }
+
+
+    static smoothScroll(target, duration) {
+        let targetPosition = target
+        let startPosition = window.pageYOffset;
+        let distance = targetPosition - startPosition;
+        let startTime = null;
+
+        let animate = (currentyTime) => {
+            if (startTime === null) startTime = currentyTime;
+            let timeElapsed = currentyTime - startTime;
+            let run = ease(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) requestAnimationFrame(animate);
+        };
+
+        /*
+        * ease function to smooth scroll*/
+        let ease = (t, b, c, d) => {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
+        };
+
+        requestAnimationFrame(animate);
+    };
+
 
     static addDynamicImg(elContainer, imageUrl) {
 

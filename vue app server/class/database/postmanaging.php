@@ -106,9 +106,6 @@ class PostRemoveEXT extends PostModificator
         return $this->postBeforeDelete;
     }
 
-
-
-
     public function PostRemove(string $id)
     {
         $this->fetcherComposite = new PostQueryDecorator(new PostDeleter( $id));

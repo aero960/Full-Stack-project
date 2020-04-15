@@ -2,14 +2,13 @@
     <div>
         <p>{{$store.state.auth.message}}</p>
         <div>
-            <userregisterform v-model="registerData" @submit="register"/>
+            <userregisterform v-model="registerData" @submit="accountregister"/>
         </div>
     </div>
 </template>
 
 <script>
-
-    import userregisterform from "../../forms/userregisterform.vue";
+    import userregisterform from "../../forms/formuserregister.vue";
 
     export default {
         name: "Register",

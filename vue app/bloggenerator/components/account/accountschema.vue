@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <h1>Twoje dane</h1>
+            <h1>Informacje</h1>
             <div>Imie: {{firstName}}</div>
             <div>Nazwisko: {{lastName}}</div>
             <div>Telefon: {{mobile}}</div>
@@ -10,14 +10,14 @@
             <image-loader :img="image"></image-loader>
         </div>
         <div>
-            <h1>Twój opis</h1>
+            <h1>Opis</h1>
             {{profile}}
         </div>
 
     </div>
 </template>
 <script>
-    import ImageLoader from "../httphelper/imageloader.vue";
+    import ImageLoader from "../httphelper/httpimgloader.vue";
     export default {
         name: "AccountSchema",
         props: {

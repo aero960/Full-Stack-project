@@ -68,7 +68,9 @@ class PrivatePostOwner extends PageDecoratorBuilder
     protected function pageContent()
     {
         $checker = new PrivatePost($this->page->getActualItem('postid'));
+
         if ($checker->CheckItemExist()) {
+
             if ($checker->CheckPrivatePost()) {
                 if (($this->page->getActualItem('postid')->CheckValidOwner() || PermissionChecker::checkAdminUserAuthBOOL())) {
                     return $this->page->pageContent();
@@ -76,17 +78,16 @@ class PrivatePostOwner extends PageDecoratorBuilder
                 $this->outputController->setDataSuccess(false);
                 $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage('p.n.o'));
             }else{
-                $this->outputController->setDataSuccess(false);
-                $this->outputController->setInfo(Serverlanguage::getInstance()->GetMessage('p.n.o'));
+                return $this->page->pageContent();
             }
-
-
         }else
         $this->outputController->setDataSuccess(false);
         $this->outputController->setInfo(sprintf(Serverlanguage::getInstance()->GetMessage('p.n.e'),
             $this->page->getActualItem("postid")->getValue()));
         return $this->outputController->getView();
     }
+
+
 
 
 }

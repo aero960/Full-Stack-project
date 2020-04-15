@@ -6,7 +6,7 @@
 
 <script>
     import DomHelper from "../../class/domHelper.js";
-    import Loader from "./loader.vue";
+    import Loader from "./httploader.vue";
     import Vue from 'vue'
 
     export default {

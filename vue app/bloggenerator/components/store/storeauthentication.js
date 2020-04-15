@@ -3,17 +3,6 @@ import router from '../routes/webroutes.js';
 import {$http} from '../../class/fetching.js'
 
 
-export const userAuthenticationHttp = {
-    inAction: false,
-    startAction() {
-        this.inAction = true
-    },
-    endAction() {
-        this.inAction = false
-    }
-};
-
-
 const assingAccount = (commit, token, info, userdata) => {
 
     commit('logInAuth', token);
@@ -51,19 +40,21 @@ export const authenticationStore = {
             }
         },
         actions: {
-            async automaticalyLogin({commit}) {
+            async automaticalyLogin({commit,dispatch}) {
                 let data = await Authentication.automaticalyLogin();
                 if (data.datasuccess) {
                     assingAccount(commit,
                         localStorage.getItem(TOKEN),
                         "Logged to account",
                         data.content);
+                    dispatch('assignResources',{id:data.content.id});
                 } else {
                     removeAccount(commit);
                     commit('updateMessage', data.info);
+
                 }
             },
-            async logIn({commit}, user) {
+            async logIn({commit,dispatch}, user) {
                 let data = await Authentication.logIn(user.username, user.password);
                 if (data.datasuccess) {
                     if (data.content.loginSuccesfull) {
@@ -71,9 +62,8 @@ export const authenticationStore = {
                             data.token,
                             data.info,
                             data.content.userdata)
+                     dispatch('assignResources',{id:data.content.userdata.id});
 
-                        router.push({name: 'AccountManage'}).catch(err => {
-                        });
                     }
                 } else {
                     commit('updateMessage', data.info);
@@ -83,23 +73,26 @@ export const authenticationStore = {
                 let data = await Authentication.registerUser(user.username, user.email, user.password)
                 if (data.datasuccess) {
                     localStorage.setItem(TOKEN, data.token);
+
                     setTimeout(() => dispatch('automaticalyLogin'), 5000);
-                    router.push({name: 'ShowAccount'}).catch(err => {
-                    });
+
+                    router.push({name: 'ShowAccount'}).catch(err => {});
                 }
                 commit('updateMessage', data.info);
             },
 
             logOut({commit}) {
                 removeAccount(commit);
-                router.push({name: 'LoginUser'}).catch(err => {
-                    console.log(err)
-                });
+                window.location.reload();
+
             },
         },
         getters: {
             isLogged: (state) => {
                 return state.authenticated
+            },
+            getUserId: (state) =>{
+                return state.userData.id
             }
 
 

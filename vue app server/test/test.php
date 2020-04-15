@@ -46,7 +46,7 @@ function functionToTest()
     $updateProfile = new PermissionRoute("POST", "updateprofile", $updateProfile, $paraHandler);
     $createPostRoute = new PermissionRoute("POST", "createpost", $creatPosts, $paraHandler);
     $updatePostRoute = new PermissionRoute("POST", "updatepost/{postid:a}", $updatePosts, $paraHandler);
-    $deletePostsRoute = new PermissionRoute("POST", "delete/{postid:a}", $deletePosts, $paraHandler, [[PermissionChecker::CHECKER, PermissionChecker::ADMINAUTH]]);
+    $deletePostsRoute = new PermissionRoute("DELETE", "delete/{postid:a}", $deletePosts, $paraHandler, [[PermissionChecker::CHECKER, PermissionChecker::ADMINAUTH]]);
     $showPostsRoute = new NormalRoute("GET", "showposts", $showPosts, $paraHandler);
     $showSpecificPostsRoute = new NormalRoute("GET", "showposts/{postid:a}", $showSpecificPosts, $paraHandler);
     $publishPosts = new PermissionRoute("POST", "publish/{postid:a}", $publishPosts, $paraHandler);

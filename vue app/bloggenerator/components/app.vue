@@ -26,21 +26,30 @@
     @mixin buttonStyle{
         font-size:15px;
         display: block;
-        padding: 5px 10px;
+        padding: 10px 20px;
         text-transform: uppercase;
         letter-spacing: 10px;
         border-bottom: 1px solid transparent;
-        background-color: gray;
+        background-color: #83c1f7;
         &:hover{
             transition: 0.5s;
-            border-bottom: 1px solid black;
+            background-color: #0e65c1;
         }
     }
+    .notPublic{
+        border: solid 3px #e1b73c;
+    }
+
 
     .element{
-        margin: 50px 10px;
+        margin: 100px 10px;
         padding:10px;
             position: relative;
+        .post{
+            margin: 30px 0px;
+            padding: 10px;
+            border-left: 3px solid black;
+        }
         &::after{
             content: '';
             position:absolute;
@@ -80,7 +89,7 @@
     }
     button[disabled]{
        @include buttonStyle;
-
+        display: none;
         font-size: 10px;
     }
 

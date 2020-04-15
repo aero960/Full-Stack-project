@@ -44,7 +44,7 @@ class PostSchema extends SchemaBuilder
     }
 
     public  function assignUserById(string $userId){
-        $this->user = new AuthenticationSchema((new GetUserById($userId))->action());
+        $this->user = (new GetUserById($userId))->action();
     }
 
     public function getUser(){

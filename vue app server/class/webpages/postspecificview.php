@@ -6,8 +6,6 @@ use RoutesMNG\Parameters;
 use WebpageMNG\Page;
 
 
-
-
 class PostSpecificView extends Page
 {
 
@@ -20,22 +18,21 @@ class PostSpecificView extends Page
         $this->parameters = new NoParameters($parameters);
     }
 
-    protected function pageContent()
-    {
-        $this->Initialize();
-        return ["title" => $this->showPosts->getView()->getTitle(),
-            "content" => $this->showPosts->getView()->getContent(),
-            "published" => $this->showPosts->getView()->getPublished(),
-            "publishedAt" => $this->showPosts->getView()->getPostPublishedAt(),
-            "postId" => $this->showPosts->getView()->getPostId(),
-            (new TagsShowEXT($this->showPosts->getView()->getPostId()))->action()];
-    }
+
     public function ExtensionData()
     {
         $this->addActualItem(new PostItem("postid", $this->parameters->getParameter(0)));
     }
+
     protected function Initialize(): void
     {
+
         $this->showPosts = new ShowSpecificPost($this->getActualItem("postid")->getValue());
+
+        $this->outputController->setDataSuccess(true);
+        $this->outputController->setInfo(sprintf(Serverlanguage::getInstance()->GetMessage("p.s.g.u")));
+        $this->outputController->setContent((new PostIterator([$this->showPosts->getView()]))->current());
+
+
     }
 }

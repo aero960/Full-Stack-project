@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button> {{title}}</button>
+        <router-link :to="{name:`Posts`,query:{category: title}}"> {{title}}</router-link>
     </div>
 </template>
 

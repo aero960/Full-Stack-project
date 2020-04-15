@@ -57,7 +57,7 @@ class ShowUserPost extends ShowPosts
         parent::__construct();
         $this->userId = $userId;
         $this->sql = "SELECT p.* FROM
-             post p JOIN users u on p.user_id = u.id WHERE u.id=:id";
+             post p JOIN users u on p.user_id = u.id WHERE u.id=:id ";
     }
 
     private function showSpecificUserPosts()
@@ -158,7 +158,7 @@ class PageLimiter extends ShowPosts
 
     private int $numbersOfPage;
 
-    public function __construct(PagerLimiterInterface $element, int $pageNumber = 0, int $HowManyOnPage = 2)
+    public function __construct(PagerLimiterInterface $element, int $pageNumber = 0, int $HowManyOnPage = 7)
     {
         parent::__construct();
 
@@ -188,7 +188,6 @@ class PageLimiter extends ShowPosts
     {
 
         $offset = $this->pageNumber * $this->HowManyOnPage;
-
         return " LIMIT {$this->HowManyOnPage} OFFSET {$offset}";
     }
 
@@ -204,6 +203,7 @@ class PageLimiter extends ShowPosts
 
             $withOutFloor = $this->element->getNumbersOfRow() / $this->HowManyOnPage;
             $withFollor = floor($this->element->getNumbersOfRow() / $this->HowManyOnPage);
+
 
         return ($withOutFloor == $withFollor) ? $withFollor - 1 : $withFollor;
     }

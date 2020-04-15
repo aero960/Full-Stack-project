@@ -11,23 +11,23 @@ class PostIterator implements Iterator
 
     private array $iterate;
     private $position = 0;
+    private bool $commentShow;
 
-
-    public function __construct(array $iterate)
+    public function __construct(array $iterate,bool $commentShow = true,bool $tagsShow = true,bool $categoryShow = true,bool $userShow = true)
     {
         $this->iterate = $iterate;
-
+        $this->commentShow = $commentShow;
 
     }
 
     public function current()
     {
         $currenty = $this->iterate[$this->position];
-
         return ["postdata" => $currenty->toIterate(),
-            "tags" => (new TagsShowEXT($currenty->getPostId()))->getFastActionResponse(),
-            "category" => (new ShowCategoryToSpecificPostEXT($currenty->getPostId()))->getFastActionResponse(),
-            "comment" => (new ShowCommetoRealtedToPostEXT($currenty->getPostId()))->getFastActionResponse()
+            "tags" => (new TagsShowEXT($currenty->getPostId()))->getFastActionResponse()->getData(),
+            "category" => (new ShowCategoryToSpecificPostEXT($currenty->getPostId()))->getFastActionResponse()->getData(),
+            "comment" =>($this->commentShow) ? (new ShowCommetoRealtedToPostEXT($currenty->getPostId()))->getFastActionResponse()->getData() : 'ukryte',
+            "user"=> (new GetUserById($currenty->getUserId()))->getFastActionResponse()->getData()
          ];
     }
 
@@ -52,6 +52,7 @@ class PostIterator implements Iterator
     {
         $this->position = 0;
     }
+
 }
 
 
@@ -74,7 +75,7 @@ class PostView extends Page
             $this->outputController->setDataSuccess(true);
             $this->outputController->setInfo(sprintf(Serverlanguage::getInstance()->GetMessage("c.p.s"), $category));
             $this->outputController->setContent($pager->getInfo());
-            $this->outputController->setMulticontent(new PostIterator($posts));
+            $this->outputController->setMulticontent(new PostIterator($posts,false));
             return true;
         }
         return false;
@@ -92,7 +93,7 @@ class PostView extends Page
             $this->outputController->setDataSuccess(true);
             $this->outputController->setInfo(sprintf(Serverlanguage::getInstance()->GetMessage("u.p"), $userId));
             $this->outputController->setContent($pager->getInfo());
-            $this->outputController->setMulticontent(new PostIterator($posts));
+            $this->outputController->setMulticontent(new PostIterator($posts,false));
             return true;
         }
         return false;
@@ -113,10 +114,12 @@ class PostView extends Page
 
 
         if (!empty($posts)) {
+
             $this->outputController->setDataSuccess(true);
             $this->outputController->setInfo(sprintf(Serverlanguage::getInstance()->GetMessage("p.a.s")));
             $this->outputController->setContent($pager->getInfo());
-            $this->outputController->setMulticontent(new PostIterator($posts));
+
+            $this->outputController->setMulticontent(new PostIterator($posts,false));
             return true;
         } else {
             $this->outputController->setContent($pager->getInfo());
@@ -139,8 +142,11 @@ class PostView extends Page
             $successAction = $this->showUserCategory($user);
             else
                 $successAction = false;
-        } else
+        } else{
+
             $successAction = $this->showAllPosts();
+        }
+
 
         if (!$successAction) {
             $this->outputController->setDataSuccess(false);

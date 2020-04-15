@@ -136,11 +136,18 @@ class CategoryShowEXT extends ShowPosts
 class DefaultAction implements FastAction
 {
 
+    private array $mapActions;
+        public function __construct(array $mapActions)
+        {
+            $this->mapActions = $mapActions;
+        }
+
+
     public function getFastActionResponse() : FastActionDelivery
     {
 
         return new FastActionDelivery(false,["Action need all parameters",
-            "tip" => ChooseAction::getMapActions()]);
+            "tip" => $this->mapActions]);
 
     }
 }

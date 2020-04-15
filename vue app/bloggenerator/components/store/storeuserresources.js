@@ -3,21 +3,11 @@ import router from '../routes/webroutes.js';
 import {$http, requestHelper} from '../../class/fetching.js'
 
 
-export const userResourceHttp = {
-    inAction: false,
-    startAction() {
-        this.inAction = true
-    },
-    endAction() {
-        this.inAction = false
-    }
-};
 
 
 export const userResourcesStore = {
     state: {
         resources: {},
-        updatedResources: {},
         message: '',
         assigned: false
 
@@ -38,7 +28,7 @@ export const userResourcesStore = {
 
     },
     actions: {
-        async updateResources({commit}, resources) {
+        async updateResources({commit,dispatch}, resources) {
             let data = await UserResources.updateUserResources(
                 resources.firstName,
                 resources.lastName,
@@ -46,21 +36,19 @@ export const userResourcesStore = {
                 resources.intro,
                 resources.profile,
                 resources.image);
-            commit('setUpdatedResources', data?.content ?? "Brak danych");
             commit('updateMessage', data?.info ?? "brak informacji");
+            dispatch('assignResources');
         },
         /*
          * need set header token*/
-        async assignResources({commit, state}) {
-            if (!state.assigned) {
-                let data = await UserResources.assingResources();
+        async assignResources({commit},{id=''}='') {
+                let data = await UserResources.automaticalyAssignResources({id:id});
                 if (data.datasuccess) {
-
                     commit('setResources', data.content);
                     commit('setAssigned');
                 }else
                 commit('updateMessage', "You are not logged");
-            }
+
         },
     },
     getters: {

@@ -38,6 +38,99 @@ namespace authentication {
 
     }
 
+    class CommentSchema extends SchemaBuilder
+    {
+
+        public const CONTENT = 'comment_content';
+        public const CREATEDAT = 'comment_created_at';
+        public const ID = 'comment_id';
+        public const TITLE = 'comment_title';
+        public const ENABLE = 'enable';
+        public const REALTEDTO = 'realted_to';
+        public const USERID = 'user_id';
+
+        private string $content;
+        private DateTime $createdAt;
+        private string $id;
+        private string $title;
+        private string $enable;
+        private string $realtedTo;
+        private string $userId;
+
+
+        public function __construct($data)
+        {
+            parent::__construct($data);
+
+            $this->content = $this->assignValue(self::CONTENT);
+            $this->createdAt = $this->assignDataValue(self::CREATEDAT);
+            $this->id = $this->assignValue(self::ID);
+            $this->title = $this->assignValue(self::TITLE);
+            $this->enable = $this->assignValue(self::ENABLE);
+            $this->realtedTo = $this->assignValue(self::REALTEDTO);
+            $this->userId = $this->assignValue(self::USERID);
+
+        }
+
+
+        public function toIterate(): array
+        {
+            return [
+                self::CONTENT => $this->content,
+                self::CREATEDAT => $this->createdAt->format(BuilderComposite::DATEFORMAT),
+                self::ID => $this->id,
+                self::TITLE => $this->title,
+                self::ENABLE => $this->enable,
+                self::REALTEDTO => $this->realtedTo,
+                self::USERID => $this->userId];
+
+        }
+
+
+        public function getContent(): string
+        {
+            return $this->content;
+        }
+
+
+        public function getCreatedAt(): DateTime
+        {
+            return $this->createdAt;
+        }
+
+
+        public function getId(): string
+        {
+            return $this->id;
+        }
+
+
+        public function getTitle(): string
+        {
+            return $this->title;
+        }
+
+
+        public function getEnable(): string
+        {
+            return $this->enable;
+        }
+
+
+        public function getRealtedTo(): string
+        {
+            return $this->realtedTo;
+        }
+
+
+        public function getUserId(): string
+        {
+            return $this->userId;
+        }
+
+
+    }
+
 
     class CategorySchema extends SchemaBuilder
     {
@@ -168,6 +261,7 @@ namespace authentication {
         const REGISTEREDAT = 'registeredAt';
         const LASTLOGIN = 'lastLogin';
         const UNKNOW = "unknow";
+        const NORMAL = 'normal';
 
         protected ResourcesSchema $resources;
         protected string $id;
@@ -192,12 +286,13 @@ namespace authentication {
             $this->lastLogin = $this->assignDataValue(self::LASTLOGIN);
         }
 
-        public static function createGuest()
+        public static function createGuest(string $id = AuthenticationSchema::UNKNOW,string $username = AuthenticationSchema::UNKNOW)
         {
-            return new AuthenticationSchema(["username" => "Guest",
+
+            return new AuthenticationSchema(["username" => $username,
                 "password" => AuthenticationSchema::UNKNOW,
                 "email" => AuthenticationSchema::UNKNOW,
-                "id" => uniqid("UNKNOW", true),
+                "id" => $id,
                 "permission" => Permmision::GUEST,
                 "registeredAt" => new DateTime(),
                 "lastLogin" => new DateTime()]);
@@ -241,6 +336,10 @@ namespace authentication {
             return $this->username;
         }
 
+        public function setUsername($value){
+            if($this->username === self::UNKNOW)
+            $this->username = $value;
+        }
         public function getPassword(): string
         {
             return $this->password;
@@ -257,6 +356,10 @@ namespace authentication {
             return $this->id;
         }
 
+        public function setId($id){
+            if($this->id === self::UNKNOW)
+                $this->id = $id;
+        }
         public function toIterate(): array
         {
             return [self::USERNAME => $this->getUsername(),

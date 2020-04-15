@@ -32,12 +32,13 @@ class OutputController implements ViewQuery
 
     public function setMulticontent(Iterator $multicontent) : void
     {
+
+
         foreach ($multicontent as $key =>$index){
 
 
             $this->multicontent[] =$index;
         }
-
     }
 
     public function setToken($token)

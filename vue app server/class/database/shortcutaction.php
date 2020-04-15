@@ -4,6 +4,7 @@ use authentication\AuthenticationSchema;
 use authentication\CategorySchema;
 use authentication\ResourcesSchema;
 use Helper\Helper;
+use language\Serverlanguage;
 
 interface Shortcut
 {
@@ -117,10 +118,10 @@ class CreateGuest extends BuilderComposite implements Shortcut
 
     private function createGuest()
     {
-        $this->id = $this->getRandomId("guests", "guest_id");
+        $this->id = $this->getRandomId("guests", "guest_id") . AuthenticationSchema::UNKNOW;
         $sql = "INSERT INTO guests SET guest_id=:id,username=:username";
         $statement = $this->getDb()->prepare($sql);
-        $statement->execute(["id" => $this->id . "UNKNOW", "username" => $this->username]);
+        $statement->execute(["id" => $this->id, "username" => $this->username]);
     }
 
 
@@ -226,17 +227,19 @@ class GetFullUserData extends BuilderComposite implements Shortcut, FastAction
         $sql = "Select * FROM resources WHERE user_id=:id";
         $statement = $this->getDb()->prepare($sql);
         $statement->execute(["id" => $this->id]);
-        return $statement->fetch();
+        return $statement;
     }
 
     public function action()
     {
-        return $this->getResourcesData();
+        return $this->getResourcesData()->fetch();
     }
 
     public function getFastActionResponse(): FastActionDelivery
     {
-        return new FastActionDelivery(true, (new ResourcesSchema($this->getResourcesData()))->toIterate());
+        if ($this->getResourcesData()->rowCount() > 0)
+            return new FastActionDelivery(true, (new ResourcesSchema($this->getResourcesData()->fetch()))->toIterate());
+        return new FastActionDelivery(false, [FastActionDelivery::INFO => Serverlanguage::getInstance()->GetMessage('u.d.e')]);
     }
 }
 
@@ -287,6 +290,24 @@ class GetUserById extends BuilderComposite implements Shortcut, FastAction
         $this->userId = $userId;
     }
 
+    private function chooseType(): AuthenticationSchema
+    {
+        $type = AuthenticationSchema::UNKNOW;
+        if (preg_match("/{$type}/i", $this->userId)) {
+            return AuthenticationSchema::createGuest($this->getGuestUser()->fetch()->id, $this->getGuestUser()->fetch()->username);
+        }
+        return new AuthenticationSchema($this->getUser()->fetch());
+    }
+
+
+    private function getGuestUser()
+    {
+        $sql = "SELECT guest_id id,username  FROM guests g WHERE guest_id=:id";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["id" => $this->userId]);
+        return $statement;
+    }
+
     private function getUser()
     {
         $sql = "SELECT u.* FROM users u WHERE id=:id";
@@ -295,18 +316,58 @@ class GetUserById extends BuilderComposite implements Shortcut, FastAction
         return $statement;
     }
 
-    public function action()
+    public function action(): AuthenticationSchema
     {
-        return $this->getUser()->fetch();
+        return $this->chooseType();
     }
 
     public function getFastActionResponse(): FastActionDelivery
     {
-
-        return new FastActionDelivery(true, (new AuthenticationSchema($this->getUser()->fetch()))->toIterate());
-
+        $userData = $this->chooseType();
+        return new FastActionDelivery(true, [
+                "username" => $userData->getUsername(),
+                "email" => $userData->getEmail(),
+                "id"=>$userData->getId()]
+        );
     }
 }
+
+
+class ReportAddEXT extends BuilderComposite implements FastAction
+{
+
+    private string $type;
+    private string $message;
+    public const POST_PUNISH = 'post_punish';
+    private string $currenty_id;
+
+    public function __construct(string $type, string $message)
+    {
+        parent::__construct();
+
+        if (!in_array($type, [self::POST_PUNISH]))
+            throw new Error("type must be definied");
+
+        $this->type = $type;
+        $this->message = $message;
+    }
+
+    private function punish()
+    {
+        $this->currenty_id = $this->getRandomId('reports', 'report_id');
+        $sql = "INSERT INTO reports SET report_id=:id,type=:type,message=:msg";
+        $statement = $this->getDb()->prepare($sql);
+        $statement->execute(["id" => $this->currenty_id, "type" => $this->type, "msg" => $this->message]);
+    }
+
+    public function getFastActionResponse(): FastActionDelivery
+    {
+        $this->punish();
+        return new FastActionDelivery(true,
+            [FastActionDelivery::INFO => Serverlanguage::getInstance()->GetMessage('t.f.r')]);
+    }
+}
+
 
 class PostAddLikeEXT extends BuilderComposite implements FastAction
 {
@@ -338,11 +399,12 @@ class PostAddLikeEXT extends BuilderComposite implements FastAction
 
     public function getFastActionResponse(): FastActionDelivery
     {
+
         if (!$this->checkUserAddLike()) {
             $this->addLike();
-            return new FastActionDelivery(false, [FastActionDelivery::INFO => "A like has been added"]);
-        }
-        return new FastActionDelivery(false, [FastActionDelivery::INFO => "like has already been added"]);
+            return new FastActionDelivery(true, [FastActionDelivery::INFO => "A like has been added"]);
+        } else
+            return new FastActionDelivery(false, [FastActionDelivery::INFO => "like has already been added"]);
     }
 }
 
