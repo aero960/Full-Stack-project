@@ -53,7 +53,7 @@
             <div>
                 <button @click="switchAddCommentSection">Add comment</button>
                 <addcommentform v-if="prepareToAddButton" ref="commentForm" v-model="formData" @submit="addComment"/>
-                <button @click="showMoreComment">Pokaż wszystkie posty</button>
+                <button @click="showMoreComment">Pokaż wszystkie komentarze</button>
             </div>
 
 

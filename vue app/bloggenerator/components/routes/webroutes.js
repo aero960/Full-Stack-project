@@ -52,16 +52,27 @@ const router = new Router({
                     }
                 },
                 {
-                    path: 'updatepost/:postId',
+                    path: 'updatepost/:postIdToUpdate',
                     name:"UpdatePost",
                     meta: {
                         auth: AuthenticationStatus.NEED
                     },
                     components:{
                         PostAction: ()=> import('../post/postcrud.vue'),
-                        PostOperation: ()=>import('../post/postoperations.vue')
+                        PostOperation: ()=>import('../post/postdeep/postdeepupdate.vue')
                     }
-                }
+                },
+                {
+                    path: 'postshow/:postId',
+                    name:"PostShow",
+                    meta: {
+                        auth: AuthenticationStatus.NEED
+                    },
+                    components:{
+                        PostAction: ()=> import('../post/postcrud.vue'),
+                        PostOperation: ()=>import('../view/post/postactivet.vue')
+                    }
+                },
 
             ]
 

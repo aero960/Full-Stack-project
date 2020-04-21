@@ -70,7 +70,8 @@ export const authenticationStore = {
                 }
             },
             async registerUser({commit, dispatch}, user) {
-                let data = await Authentication.registerUser(user.username, user.email, user.password)
+                let data = await Authentication.registerUser(user.username, user.email, user.password);
+                console.log(data)
                 if (data.datasuccess) {
                     localStorage.setItem(TOKEN, data.token);
 

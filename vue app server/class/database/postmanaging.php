@@ -85,7 +85,6 @@ class PostUpdateEXT extends PostModificator
         $updater = new PostUpdater( $userid, $title, $content, $postId);
         $this->lastUpdate = $updater->lastLogin;
         $this->fetcherComposite = new PostQueryDecorator($updater);
-var_dump("test");
         (new TagsUpdaterEXT($postId,$tagData))->getFastActionResponse();
 
         $this->execute();

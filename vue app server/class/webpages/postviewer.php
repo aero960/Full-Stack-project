@@ -69,7 +69,9 @@ class PostView extends Page
         //do zmiany
         $pageNumber = $this->parameters->getParameter("page");
         $page = (isset($pageNumber)) ? $this->parameters->getParameter("page") : 0;
-        $pager = new PageLimiter(new CategoryShowEXT($category), $page);
+
+        $pager = new PageLimiter(new AuthenticationPrivateFilter(new CategoryShowEXT($category)), $page);
+
         $posts = $pager->getView();
         if (!empty($posts)) {
             $this->outputController->setDataSuccess(true);
@@ -127,11 +129,9 @@ class PostView extends Page
         return false;
     }
 
+
     protected function Initialize(): void
     {
-
-
-
         $category = $this->parameters->getParameter("category");
 
         $user = $this->parameters->getParameter("user");

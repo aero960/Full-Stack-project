@@ -13,10 +13,12 @@ export default class Authentication {
         params.append('email', email);
         params.append('password', password);
 
-        return  $http.post('accountregister.vue', params)
+
+        return  $http.post('register', params)
             .then(res => res.data.data)
             .then(res => res)
             .catch(error => error.response.data.data);
+
     }
 
     static async automaticalyLogin() {

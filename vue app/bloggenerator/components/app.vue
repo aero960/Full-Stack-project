@@ -37,7 +37,8 @@
         }
     }
     .notPublic{
-        border: solid 3px #e1b73c;
+        border: solid 3px #e10e37;
+        padding:10px;
     }
 
 
@@ -45,6 +46,7 @@
         margin: 100px 10px;
         padding:10px;
             position: relative;
+        
         .post{
             margin: 30px 0px;
             padding: 10px;

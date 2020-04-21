@@ -20,7 +20,6 @@ class AuthenticateAdminOrOwnerFA implements FastAction
 
             }
             return new FastActionDelivery(false,[FastActionDelivery::INFO => "You need to be owner of comment to delete"]);
-
         }
         new FastActionDelivery(false,[FastActionDelivery::INFO => "Item doesnt exist"]);
 

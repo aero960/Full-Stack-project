@@ -36,13 +36,16 @@ export const userResourcesStore = {
                 resources.intro,
                 resources.profile,
                 resources.image);
+
             commit('updateMessage', data?.info ?? "brak informacji");
             dispatch('assignResources');
         },
         /*
          * need set header token*/
         async assignResources({commit},{id=''}='') {
+
                 let data = await UserResources.automaticalyAssignResources({id:id});
+
                 if (data.datasuccess) {
                     commit('setResources', data.content);
                     commit('setAssigned');

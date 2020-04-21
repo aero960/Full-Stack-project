@@ -16,9 +16,6 @@
     import {InputBase, FormBase, BaseProps} from "../forms";
     export default {
         name: "ItemUpdate",
-        asyncData:{
-
-        },
         data() {
             return {
                 form: InputBase,
@@ -32,7 +29,7 @@
                     return {
                         filterBase: this.$v.currentyMessage,
                         placeholder: this.placeholder,
-                        errors: [{name: 'maxLength', msg: `Maximum length is ${this.$v.currentyMessage.$params.maxLength.max}`}],
+                        errors: [],
                     }
                 }
             }
@@ -43,6 +40,7 @@
         methods: {
             deleteCurrent() {
                 this.$emit('delete', this.index)
+                this.currentyMessage = '';
             },
             addFormUpdate() {
                 if(this.updating && !this.$v.currentyMessage.$invalid){
@@ -56,7 +54,7 @@
             InputBase
         },
         validations: {
-            currentyMessage: {type: String,maxLength:maxLength(30)}
+            currentyMessage: {type: String}
         },
         props: {
             index: {type: Number},

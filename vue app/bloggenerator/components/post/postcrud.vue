@@ -8,7 +8,10 @@
             <post-acitons v-for="(post,index) in postList" :key="index"
                           @update="updateView"
                           :post-id="post.postdata.post_id"
-                            :publish="post.postdata.post_published"
+                          :publish="post.postdata.post_published"
+                          :title="post.postdata.post_title"
+                          :creationDate="post.postdata.post_create_at"
+                          :updatedTime="post.postdata.post_updated_at"
             />
             <div v-if="!postsExits">
               <h3> Nie masz żadnego postu</h3>
@@ -42,9 +45,6 @@
             updateView(msg) {
                 this.loadPosts();
                 this.message = msg;
-                setTimeout(()=>{
-
-                })
             },
             async loadPosts() {
                 this.loading = true;
@@ -55,7 +55,6 @@
                     this.postList = []
                 }
                 this.loading = false;
-                console.log(data);
             }
         },
         components: {

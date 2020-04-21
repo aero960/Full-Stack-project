@@ -1,6 +1,5 @@
 <template>
     <div>
-
             <loader-composite v-if="currentyPost" :loading="loading">
                 <full-post-schema
                         :content="currentyPost.postdata.post_content"
@@ -14,7 +13,6 @@
                         :categories="currentyPost.category"
 
                         :comments="currentyPost.comment"
-
                 />
             </loader-composite>
         <p v-if="!currentyPost" >{{message}}</p>

@@ -59,6 +59,7 @@ class PostOwnerDecorator extends PageDecoratorBuilder
 }
 class PrivatePostOwner extends PageDecoratorBuilder
 {
+
     public function __construct(Page $element)
     {
         Parent::__construct();
@@ -68,7 +69,6 @@ class PrivatePostOwner extends PageDecoratorBuilder
     protected function pageContent()
     {
         $checker = new PrivatePost($this->page->getActualItem('postid'));
-
         if ($checker->CheckItemExist()) {
 
             if ($checker->CheckPrivatePost()) {

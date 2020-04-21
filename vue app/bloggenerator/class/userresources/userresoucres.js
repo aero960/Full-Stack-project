@@ -15,6 +15,8 @@ export default class UserResources {
     static async automaticalyAssignResources({id=''}='') {
         let params = new FormData();
         params.append('userid',id);
+
+            console.log(id)
         return  await $http.post('fastaction/getfulluserdata',params)
             .then(res => res.data.data)
             .then(res => res)
@@ -31,6 +33,7 @@ export default class UserResources {
         params.append('intro', intro);
         params.append('profile', profile);
         params.append('image', image);
+
 
         return await $http.post('updateprofile', params)
             .then(res => res.data.data)

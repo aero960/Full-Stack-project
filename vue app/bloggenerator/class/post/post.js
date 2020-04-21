@@ -31,6 +31,17 @@ export class PostManaging {
     }
 
 
+    static async UpdatePost({postId,title,content,tags}){
+        let params = new FormData();
+        params.append("post_title", title);
+        params.append("post_content", content);
+        params.append("tags", tags);
+      return  $http.post(`updatepost/${postId}`,params)
+            .then(res => res.data.data)
+            .then(res => res)
+            .catch(error => error.response.data.data)
+    }
+
     static async DeletePost({postId}) {
         return $http.delete(`delete/${postId}`)
             .then(res => res.data.data)

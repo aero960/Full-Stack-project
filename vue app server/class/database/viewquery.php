@@ -6,8 +6,6 @@ use authentication\Authentication;
 interface ViewQuery
 {
     public function getView();
-
-
 }
 
 
@@ -34,6 +32,7 @@ abstract class ViewerElement extends BuilderComposite implements PagerLimiterInt
     {
         $this->sql = $sql;
     }
+
     abstract public function getView();
 
 }
@@ -69,7 +68,7 @@ class ShowUserPost extends ShowPosts
 
     public function getView()
     {
-        return $this->convertToArraySchema( $this->showSpecificUserPosts()->fetchAll());
+        return $this->convertToArraySchema($this->showSpecificUserPosts()->fetchAll());
     }
 
     public function getNumbersOfRow(): int
@@ -112,10 +111,12 @@ class AuthenticationPrivateFilter implements PagerLimiterInterface
 {
     private PagerLimiterInterface $element;
 
+
     public function __construct(PagerLimiterInterface $element)
     {
         $this->element = $element;
     }
+
 
     private function filterData(array $data)
     {
@@ -127,17 +128,31 @@ class AuthenticationPrivateFilter implements PagerLimiterInterface
         return $public;
     }
 
+    private function OwnerFilter(array $data)
+    {
+        $owner = [];
+        foreach ($data as $index) {
+            $item = new PostItem('currenty', $index->getPostId());
+            if ($item->CheckValidOwner() || PermissionChecker::checkAdminUserAuthBOOL())
+                $owner[] = $index;
+        }
+        return $owner;
+    }
+
     public function getView()
     {
-        if (Authentication::getInstance()->isAuthenticated())
-            return $this->element->getView();
+        if (Authentication::getInstance()->isAuthenticated()) {
+            return $this->OwnerFilter($this->element->getView());
+        }
+
         return $this->filterData($this->element->getView());
     }
 
     public function getSql(): string
     {
-      return $this->element->getSql();
+        return $this->element->getSql();
     }
+
     public function setSql(string $sql): void
     {
         $this->element->setSql($sql);
@@ -145,7 +160,7 @@ class AuthenticationPrivateFilter implements PagerLimiterInterface
 
     public function getNumbersOfRow(): int
     {
-       return count($this->filterData( $this->element->getView()));
+        return count($this->filterData($this->element->getView()));
     }
 }
 
@@ -177,7 +192,7 @@ class PageLimiter extends ShowPosts
     private function checkPageLimit($value)
     {
 
-       if ($value <= 0)
+        if ($value <= 0)
             return 0;
         if ($value > $this->numbersOfPage)
             return $this->numbersOfPage;
@@ -201,8 +216,8 @@ class PageLimiter extends ShowPosts
     public function getNumbersOfRow(): int
     {
 
-            $withOutFloor = $this->element->getNumbersOfRow() / $this->HowManyOnPage;
-            $withFollor = floor($this->element->getNumbersOfRow() / $this->HowManyOnPage);
+        $withOutFloor = $this->element->getNumbersOfRow() / $this->HowManyOnPage;
+        $withFollor = floor($this->element->getNumbersOfRow() / $this->HowManyOnPage);
 
 
         return ($withOutFloor == $withFollor) ? $withFollor - 1 : $withFollor;
@@ -224,13 +239,15 @@ class ShowAllPost extends ShowPosts
         $statement->execute();
         return $statement;
     }
+
     public function getView()
     {
         return $this->convertToArraySchema($this->showAllPosts()->fetchAll());
     }
+
     public function getNumbersOfRow(): int
     {
-       return  $this->showAllPosts()->rowCount();
+        return $this->showAllPosts()->rowCount();
     }
 }
 

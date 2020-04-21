@@ -63,7 +63,7 @@ export const BaseProps = {
 };
 
 
-const ItemEditor = {
+const ItemsEditor = {
     data() {
         return {
             itemList: []
@@ -112,17 +112,19 @@ export const ButtonSure = Vue.component('SureButtonBase', {
     },
     props: {
         question: {type: String},
-        placeholder: {type:String}
+        placeholder: {type: String}
     },
     computed: {
-        getQuestion(){ `(${this.question})`}
+        getQuestion() {
+            `(${this.question})`
+        }
     },
     methods: {
-        subEvent(){
+        subEvent() {
             this.mainClick = true
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.mainClick = false
-            },3000)
+            }, 3000)
         },
         mainEvent() {
             this.$emit('click');
@@ -131,6 +133,49 @@ export const ButtonSure = Vue.component('SureButtonBase', {
         }
     }
 });
+
+
+export const ItemUpdater= Vue.component('ItemUpdater', {
+    template: `
+        <div class="formControl">
+            <label>
+                <p>
+                    <slot></slot>
+                </p>
+                <itemUpdate :updateMSG="updtingPlaceholder" :placeholder="updPlaceholder" 
+                            :item="itemList[0]"
+                            :index="0"
+                            @update="updateItem"
+                            @delete="deleteItem"
+                />
+            </label>
+        </div>`,
+    methods:{
+        vModelArray(){
+            this.filterBase.$model = this.itemList[0];
+        },
+    },
+    created() {
+        this.itemList = [this.item]
+    },
+    props:{
+        item:{default:''},
+        placeholder:{required:true}
+    },
+    computed: {
+        updPlaceholder() {
+            return "Zaktualizuj " + this.placeholder
+        },
+        updtingPlaceholder() {
+            return "Aktualizujesz " + this.placeholder
+        },
+    },
+
+    mixins: [ItemsEditor],
+
+});
+
+
 
 
 export const ItemListEditor = Vue.component('ItemListEditor', {
@@ -148,11 +193,15 @@ export const ItemListEditor = Vue.component('ItemListEditor', {
                 <itemAdd :placeholder="addNewItemPlaceholder" @addItem="addItem"/>
             </label>
         </div>`,
-    mixins: [ItemEditor],
+    mixins: [ItemsEditor],
     methods: {
         vModelArray() {
             this.filterBase.$model = this.itemList.join(",");
         }
+    },
+    created() {
+        this.itemList = this.items || [];
+        this.vModelArray();
     },
     computed: {
         updPlaceholder() {
@@ -167,7 +216,7 @@ export const ItemListEditor = Vue.component('ItemListEditor', {
     },
     props: {
         placeholder: {default: ''},
-
+        items: {type:Array}
     }
 });
 
